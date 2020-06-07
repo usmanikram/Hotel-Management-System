@@ -33,28 +33,29 @@
     <link href="css/floating-labels.css" rel="stylesheet">
 </head>
 <body>
-<form class="form-signin">
+<form class="form-signin" action="verify.php" method="post">
     <div class="text-center mb-4">
-        <img class="mb-4" src="../assets/brand/bootstrap-solid.svg" alt="" width="72" height="72">
-        <h1 class="h3 mb-3 font-weight-normal">Employee Login</h1>
-        <p>Build form controls with floating labels via the <code>:placeholder-shown</code> pseudo-element. <a href="https://caniuse.com/#feat=css-placeholder-shown">Works in latest Chrome, Safari, and Firefox.</a></p>
+        <h1 >Employee Login</h1>
+        <h4>Enter Your Credentials</h4>
+    </div>
+    <?php
+    if(isset($_GET["message"]))
+    {
+        $msg = $_GET["message"];
+        echo "<b><p style='color: red'>$msg</p></b>";
+    }
+    ?>
+    <div class="form-label-group">
+        <input type="email" name="email" class="form-control" placeholder="Email address" required autofocus>
+        <label for="email">Email address</label>
     </div>
 
     <div class="form-label-group">
-        <input type="email" id="inputEmail" class="form-control" placeholder="Email address" required autofocus>
-        <label for="inputEmail">Email address</label>
+        <input type="password" name="password" class="form-control" placeholder="Password" required>
+        <label for="password">Password</label>
     </div>
 
-    <div class="form-label-group">
-        <input type="password" id="inputPassword" class="form-control" placeholder="Password" required>
-        <label for="inputPassword">Password</label>
-    </div>
 
-    <div class="checkbox mb-3">
-        <label>
-            <input type="checkbox" value="remember-me"> Remember me
-        </label>
-    </div>
     <button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
     <p class="mt-5 mb-3 text-muted text-center">&copy; 2017-2020</p>
 </form>
