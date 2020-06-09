@@ -1,6 +1,6 @@
 <?php
+session_start();
 require_once ("config/config.php");
-
 $email = $password = "";
 if(isset($_POST['email']) && isset($_POST['password']))
 {
@@ -8,15 +8,26 @@ if(isset($_POST['email']) && isset($_POST['password']))
     $password=$_POST['password'];
 }
 
-$sql = "select * from admin where adminEmail='$email' and adminPassword='$password'";
+$sql = "select * from admin where adminEmail='$email'";
 $result= $mysqli->query($sql);
-$row = mysqli_num_rows($result);
+$row = $result->num_rows;
 
-if($row>0)
+if($row==1)
 {
-    header("Location: admin/index.php");
-}
+    $arr=$result->fetch_array();
 
+ if(password_verify($password,$arr['adminPassword'])) {
+
+     $_SESSION['name'] = $arr['adminName'];
+
+     header("Location: admin/index.php");
+ }
+ else
+     {
+         $msg= "Incorrect Password";
+         header("Location: employeelogin.php?message=$msg");
+     }
+}
 else
     {
         $msg= "Wrong Credentials";

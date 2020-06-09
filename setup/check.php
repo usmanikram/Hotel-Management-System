@@ -49,9 +49,9 @@ else {
 
     $sql = "Create Table admin 
 (
-adminName varchar(15),
+adminName varchar(20),
 adminEmail varchar(50),
-adminPassword varchar(15)
+adminPassword varchar(100)
 )";
 
     if ($mysqli->query($sql) === TRUE) {

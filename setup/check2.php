@@ -16,7 +16,7 @@ if(isset($_POST['name']) && isset($_POST['email']) && isset($_POST['password']))
     $adminname= $_POST['name'];
     $adminemail=$_POST['email'];
     $adminpassword=$_POST['password'];
-    $hash_pwd = password_hash($adminpassword,PASSWORD_DEFAULT);
+    $hash_pwd = password_hash($adminpassword,PASSWORD_BCRYPT);
 
 }
 $sql = "INSERT INTO admin (adminName, adminEmail, adminPassword)
