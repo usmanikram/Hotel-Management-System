@@ -178,10 +178,7 @@
                     </div>
                 </div>
                 <div class="form-row">
-                    <div class="form-group col-md-6">
-                        <label for="contact">Contact</label>
-                        <input type="text" class="form-control" name="empcontact" placeholder="Employee Contact Number">
-                    </div>
+
                 </div>
                 <div class="form-group">
                     <label for="address">Address</label>
@@ -207,6 +204,10 @@
                             <input type="text" class="form-control" name="empsalary" placeholder="Employee Salary">
                         </div>
                     </div>
+                    <div class="form-group col-md-6">
+                        <label for="contact">Contact</label>
+                        <input type="text" class="form-control" name="empcontact" placeholder="Employee Contact Number">
+                    </div>
                 </div>
                 <div class="form-row">
                     <div class="form-group col-md-6">
@@ -218,8 +219,24 @@
                         <input type="password" class="form-control" name="emppassword" placeholder="Employee Password">
                     </div>
                 </div>
+                <div class="form-row">
+                    <div class="form-group col-md-6">
+                        <label for="department">Department</label>
+                        <select class="form-control" name="empdepartment">
+                            <option>Security</option>
+                            <option>Management</option>
+                        </select>
+                    </div>
+                    <div class="form-group col-md-6">
+                        <label for="service">Service</label>
+                        <select class="form-control" name="empservice">
+                            <option>Cleaning</option>
+                            <option>sd</option>
+                        </select>
+                    </div>
+                </div>
 
-                <button type=submit" class="btn btn-sm btn-outline-secondary">Add Room Type</button>
+                <button type=submit" class="btn btn-sm btn-outline-secondary">Add Employee</button>
             </form>
 
         </main>

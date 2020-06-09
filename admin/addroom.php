@@ -195,7 +195,7 @@
                     </div>
                 </div>
 
-                <button type=submit" class="btn btn-sm btn-outline-secondary">Add Room Type</button>
+                <button type=submit" class="btn btn-sm btn-outline-secondary">Add Room</button>
             </form>
 
 
