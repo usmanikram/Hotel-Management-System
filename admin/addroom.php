@@ -158,34 +158,43 @@
             <form>
                 <div class="form-row">
                     <div class="form-group col-md-6">
-                        <label for="name">Name:</label>
-                        <input type="text" class="form-control" name="typename" placeholder="Room Type Name">
+                        <label for="name">Room Number:</label>
+                        <input type="number" class="form-control" name="roomnumber" placeholder="Room Number">
                     </div>
                 </div>
                 <div class="form-group">
                     <label for="details">Details</label>
-                    <input type="text" class="form-control" id="typedetails" placeholder="Room Type Details">
+                    <input type="text" class="form-control" id="roomdetails" placeholder="Room Details">
                 </div>
-                <div class="form-row">
-                    <div class="form-group col-md-6">
-                        <label for="price">Price</label>
-                        <div class="input-group mb-2">
-                            <div class="input-group-prepend">
-                                <div class="input-group-text">Rs.</div>
-                            </div>
-                            <input type="text" class="form-control" name="typeprice" placeholder="Room Type Price">
-                        </div>
-                    </div>
-                </div>
+
                 <div class="form-group">
-                    <label for="capacity">Capacity</label>
-                    <select class="form-control" name="typecapacity">
+                    <label for="capacity">Room Type</label>
+                    <select class="form-control" name="roomtype">
                         <option>1</option>
                         <option>2</option>
                         <option>3</option>
                         <option>4</option>
                     </select>
                 </div>
+                <div class="form-group">
+                    <label for="capacity">Room Status</label>
+                    <select class="form-control" name="roomstatus">
+                        <option>Available</option>
+                        <option>Not Available</option>
+                    </select>
+                </div>
+
+
+                <div class="form-row">
+                    <div class="form-group col-md-6">
+                        <label for="price">Room Image</label>
+                        <div class="input-group mb-2">
+                            <input type="file" class="form-control" name="typeprice" placeholder="Room Type Price">
+
+                        </div>
+                    </div>
+                </div>
+
                 <button type=submit" class="btn btn-sm btn-outline-secondary">Add Room Type</button>
             </form>
 

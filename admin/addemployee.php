@@ -156,34 +156,69 @@
             <form>
                 <div class="form-row">
                     <div class="form-group col-md-6">
-                        <label for="name">Name:</label>
-                        <input type="text" class="form-control" name="typename" placeholder="Room Type Name">
+                        <label for="name">Name</label>
+                        <input type="text" class="form-control" name="empname" placeholder="Employee Name">
                     </div>
-                </div>
-                <div class="form-group">
-                    <label for="details">Details</label>
-                    <input type="text" class="form-control" id="typedetails" placeholder="Room Type Details">
+                    <div class="form-group col-md-6">
+                        <label for="dob">DOB</label>
+                        <input type="text" onfocus="(this.type='date')" class="form-control" name="empdob" placeholder="Date of Birth">
+                    </div>
                 </div>
                 <div class="form-row">
                     <div class="form-group col-md-6">
-                        <label for="price">Price</label>
+                        <label for="gender">Gender</label>
+                        <select class="form-control" name="empgender">
+                            <option>Male</option>
+                            <option>Female</option>
+                        </select>
+                    </div>
+                    <div class="form-group col-md-6">
+                        <label for="cnic">CNIC</label>
+                        <input type="text" class="form-control" name="empcnic" placeholder="Citizen National Identity Card Number">
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group col-md-6">
+                        <label for="contact">Contact</label>
+                        <input type="text" class="form-control" name="empcontact" placeholder="Employee Contact Number">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="address">Address</label>
+                    <input type="text" class="form-control" name="empaddress" placeholder="Employee Address">
+                </div>
+                <div class="form-row">
+                    <div class="form-group col-md-6">
+                        <label for="dob">DOJ</label>
+                        <input type="text" onfocus="(this.type='date')" class="form-control" name="empdoj" placeholder="Date of Joining">
+                    </div>
+                    <div class="form-group col-md-6">
+                        <label for="designation">Designation</label>
+                        <input type="text" class="form-control" name="empdesignation" placeholder="Employee Designation">
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group col-md-6">
+                        <label for="salary">Salary</label>
                         <div class="input-group mb-2">
                             <div class="input-group-prepend">
                                 <div class="input-group-text">Rs.</div>
                             </div>
-                            <input type="text" class="form-control" name="typeprice" placeholder="Room Type Price">
+                            <input type="text" class="form-control" name="empsalary" placeholder="Employee Salary">
                         </div>
                     </div>
                 </div>
-                <div class="form-group">
-                    <label for="capacity">Capacity</label>
-                    <select class="form-control" name="typecapacity">
-                        <option>1</option>
-                        <option>2</option>
-                        <option>3</option>
-                        <option>4</option>
-                    </select>
+                <div class="form-row">
+                    <div class="form-group col-md-6">
+                        <label for="email">Email</label>
+                        <input type="email" class="form-control" name="empemail" placeholder="Employee Email">
+                    </div>
+                    <div class="form-group col-md-6">
+                        <label for="password">Password</label>
+                        <input type="password" class="form-control" name="emppassword" placeholder="Employee Password">
+                    </div>
                 </div>
+
                 <button type=submit" class="btn btn-sm btn-outline-secondary">Add Room Type</button>
             </form>
 

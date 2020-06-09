@@ -158,18 +158,18 @@
                 <div class="form-row">
                     <div class="form-group col-md-6">
                         <label for="name">Reservation Start Date:</label>
-                        <input type="date" class="form-control" name="startdate" placeholder="Reservation Start Date">
+                        <input type="text" onfocus="(this.type='date')" class="form-control" name="startdate" placeholder="Reservation Start Date">
                     </div>
                 </div>
                 <div class="form-row">
                     <div class="form-group col-md-6">
                         <label for="name">Reservation End Date:</label>
-                        <input type="date" class="form-control" name="enddate" placeholder="Reservation End Date">
+                        <input type="text" onfocus="(this.type='date')" class="form-control" name="enddate" placeholder="Reservation End Date">
                     </div>
                 </div>
                 <div class="form-group">
                     <label for="capacity">Room ID</label>
-                    <select class="form-control" name="typecapacity">
+                    <select class="form-control" name="roomid">
                         <option>1</option>
                         <option>2</option>
                         <option>3</option>
@@ -177,12 +177,12 @@
                     </select>
                 </div>
                 <div class="form-group">
-                    <label for="capacity">Customer ID:</label>
-                    <select class="form-control" name="typecapacity">
-                        <option>1</option>
-                        <option>2</option>
-                        <option>3</option>
-                        <option>4</option>
+                    <label for="capacity">Customer Name:</label>
+                    <select class="form-control" name="custname">
+                        <option>Ali</option>
+                        <option>Bilal</option>
+                        <option>Haider</option>
+                        <option>Jamal</option>
                     </select>
                 </div>
                 <button type=submit" class="btn btn-sm btn-outline-secondary">Add Reservation</button>

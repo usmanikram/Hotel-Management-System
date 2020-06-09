@@ -158,35 +158,58 @@
             <form>
                 <div class="form-row">
                     <div class="form-group col-md-6">
-                        <label for="name">Name:</label>
-                        <input type="text" class="form-control" name="typename" placeholder="Room Type Name">
+                        <label for="name">Name</label>
+                        <input type="text" class="form-control" name="custname" placeholder="Customer Name">
                     </div>
-                </div>
-                <div class="form-group">
-                    <label for="details">Details</label>
-                    <input type="text" class="form-control" id="typedetails" placeholder="Room Type Details">
+                    <div class="form-group col-md-6">
+                        <label for="dob">DOB</label>
+                        <input type="text" onfocus="(this.type='date')" class="form-control" name="custdob" placeholder="Date of Birth">
+                    </div>
                 </div>
                 <div class="form-row">
                     <div class="form-group col-md-6">
-                        <label for="price">Price</label>
-                        <div class="input-group mb-2">
-                            <div class="input-group-prepend">
-                                <div class="input-group-text">Rs.</div>
-                            </div>
-                            <input type="text" class="form-control" name="typeprice" placeholder="Room Type Price">
-                        </div>
+                    <label for="gender">Gender</label>
+                    <select class="form-control" name="custgender">
+                        <option>Male</option>
+                        <option>Female</option>
+                    </select>
+                    </div>
+                    <div class="form-group col-md-6">
+                        <label for="cnic">CNIC</label>
+                        <input type="text" class="form-control" name="custcnic" placeholder="Citizen National Identity Card Number">
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group col-md-6">
+                        <label for="contact">Contact</label>
+                        <input type="text" class="form-control" name="custcontact" placeholder="Customer Contact Number">
                     </div>
                 </div>
                 <div class="form-group">
-                    <label for="capacity">Capacity</label>
-                    <select class="form-control" name="typecapacity">
-                        <option>1</option>
-                        <option>2</option>
-                        <option>3</option>
-                        <option>4</option>
-                    </select>
+                    <label for="address">Address</label>
+                    <input type="text" class="form-control" name="custaddress" placeholder="Customer Address">
                 </div>
-                <button type=submit" class="btn btn-sm btn-outline-secondary">Add Room Type</button>
+                <div class="form-row">
+                    <div class="form-group col-md-6">
+                        <label for="email">Email</label>
+                        <input type="email" class="form-control" name="custemail" placeholder="Customer Email">
+                    </div>
+                    <div class="form-group col-md-6">
+                        <label for="password">Password</label>
+                        <input type="password" class="form-control" name="custpassword" placeholder="Customer Password">
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group col-md-6">
+                        <label for="ccno">Credit Card Number</label>
+                        <input type="text" class="form-control" name="custccno" placeholder="Customer Credit Card Number">
+                    </div>
+                    <div class="form-group col-md-6">
+                        <label for="ccexpiry">Credit Card Expiry</label>
+                        <input type="text" onfocus="(this.type='date')" class="form-control" name="custccexp" placeholder="Credit Card Expiry Date">
+                    </div>
+                </div>
+                <button type=submit" class="btn btn-sm btn-outline-secondary">Add Customer</button>
             </form>
 
         </main>
