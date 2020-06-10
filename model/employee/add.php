@@ -30,7 +30,7 @@ if($stmt = $mysqli->prepare($sql)) {
     $param_salary = $employee->getempSalary();
     $param_contact = $employee->getempContact();
     $param_email = $employee->getempEmail();
-    $param_password = $employee->getempPassword();
+    $param_password = password_hash($employee->getempPassword(),PASSWORD_BCRYPT);
     $param_department = $employee->geteserviceId();
     $param_service = $employee->geteserviceId();
 

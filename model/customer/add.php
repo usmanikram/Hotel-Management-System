@@ -25,7 +25,7 @@ if($stmt = $mysqli->prepare($sql)) {
     $param_contact = $customer->getcustContact();
     $param_address = $customer->getcustAddress();
     $param_email = $customer->getcustEmail();
-    $param_password = $customer->getcustPassword();
+    $param_password = password_hash($customer->getcustPassword(),PASSWORD_BCRYPT);
     $param_ccno = $customer->getcustCCNO();
     $param_ccexpiry = $customer->getcustCCExpiry();
 

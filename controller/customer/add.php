@@ -19,6 +19,8 @@ if(isset($_POST['name']) && isset($_POST['dob']) && isset($_POST['gender']) && i
     $ccexpiry = $_POST["ccexpiry"];
 }
 
+
+
 $customer = new customer(NULL,$name,$dob,$gender,$cnic,$contact,$address,
     $email,$password,$ccno,$ccexpiry);
 

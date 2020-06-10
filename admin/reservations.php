@@ -1,3 +1,9 @@
+<?php
+require_once ("../config/config.php");
+$queryreservation="SELECT * FROM reservation r join customer c where r.custID=c.custID";
+$resultreservation = $mysqli->query($queryreservation);
+$countreservation = $resultreservation->num_rows;
+?>
 <!doctype html>
 <html lang="en">
 <head>
@@ -159,6 +165,45 @@
                 echo "<b><p style='color: red'>$msg</p></b>";
             }
             ?>
+            <table class='table table-light table-bordered table-striped'>
+                <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Customer Name</th>
+                    <th>Room Number</th>
+                    <th>Start Date</th>
+                    <th>End Date</th>
+                    <th>Actions</th>
+                </tr>
+                </thead>
+                <tbody>
+                <?php
+                if($countreservation==0)
+                {
+                    echo '<option value="">No Datas have been created Yet</option>';
+                }
+                else
+                {
+                while($fetchreservation = $resultreservation->fetch_assoc())
+                {
+                ?>
+                <tr>
+                    <td> <?php echo $fetchreservation['resID']; ?></td>
+                    <td> <?php echo $fetchreservation['custName']; ?></td>
+                    <td> <?php echo $fetchreservation['roomID']; ?></td>
+                    <td> <?php echo $fetchreservation['resStartDate']; ?></td>
+                    <td> <?php echo $fetchreservation['resEndtDate']; ?></td>
+                    <td>
+                        <a href='viewservice.php?id=<?php echo $fetchreservation['resID']; ?>' title="view record" data-toggle='tooltip'>View/Update</a>
+                        <a href='deleteservice.php?id=<?php echo $fetchreservation['resID']; ?>' title='Delete Record' data-toggle='tooltip'>Delete</a>
+                    </td>
+                    <?php
+                    }
+                    }
+                    ?>
+                </tr>
+                </tbody>
+            </table>
 
         </main>
     </div>

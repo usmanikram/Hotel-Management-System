@@ -1,3 +1,9 @@
+<?php
+require_once ("../config/config.php");
+$querytype="SELECT * FROM roomtype";
+$resulttype = $mysqli->query($querytype);
+$counttype = $resulttype->num_rows;
+?>
 <!doctype html>
 <html lang="en">
 <head>
@@ -160,6 +166,46 @@
                 echo "<b><p style='color: red'>$msg</p></b>";
             }
             ?>
+            <table class='table table-light table-bordered table-striped'>
+                <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Type</th>
+                    <th>Details</th>
+                    <th>Price</th>
+                    <th>Capacity</th>
+                    <th>Actions</th>
+                </tr>
+                </thead>
+                <tbody>
+                <?php
+                if($counttype==0)
+                {
+                    echo '<option value="">No Datas have been created Yet</option>';
+                }
+                else
+                {
+                while($fetchtype= $resulttype->fetch_assoc())
+                {
+                ?>
+                <tr>
+                    <td> <?php echo $fetchtype['rtypeID']; ?></td>
+                    <td> <?php echo $fetchtype['rtypeName']; ?></td>
+                    <td> <?php echo $fetchtype['rtypeDetails']; ?></td>
+                    <td> <?php echo $fetchtype['rtypePrice']; ?></td>
+                    <td> <?php echo $fetchtype['rtypeCapacity']; ?></td>
+                    <td>
+                        <a href='viewservice.php?id=<?php echo $fetchtype['rtypeID']; ?>' title="view record" data-toggle='tooltip'>View/Update</a>
+                        <a href='deleteservice.php?id=<?php echo $fetchtype['rtypeID']; ?>' title='Delete Record' data-toggle='tooltip'>Delete</a>
+                    </td>
+                    <?php
+                    }
+                    }
+                    ?>
+                </tr>
+                </tbody>
+            </table>
+
         </main>
     </div>
 </div>

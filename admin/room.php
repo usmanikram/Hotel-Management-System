@@ -1,3 +1,10 @@
+<?php
+require_once ("../config/config.php");
+
+$queryroom="SELECT * FROM room r join roomtype rt where r.roomType=rt.rtypeID";
+$resultroom = $mysqli->query($queryroom);
+$countroom = $resultroom->num_rows;
+?>
 <!doctype html>
 <html lang="en">
 <head>
@@ -160,6 +167,45 @@
                 echo "<b><p style='color: red'>$msg</p></b>";
             }
             ?>
+            <table class='table table-light table-bordered table-striped'>
+                <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Details</th>
+                    <th>Type</th>
+                    <th>Status</th>
+                    <th>Image</th>
+                    <th>Actions</th>
+                </tr>
+                </thead>
+                <tbody>
+                <?php
+                if($countroom==0)
+                {
+                    echo '<option value="">No Datas have been created Yet</option>';
+                }
+                else
+                {
+                while($fetchroom= $resultroom->fetch_assoc())
+                {
+                ?>
+                <tr>
+                    <td> <?php echo $fetchroom['roomID']; ?></td>
+                    <td> <?php echo $fetchroom['roomDetails']; ?></td>
+                    <td> <?php echo $fetchroom['rtypeName']; ?></td>
+                    <td> <?php echo $fetchroom['roomStatus']; ?></td>
+                    <td> <?php echo $fetchroom['roomImage']; ?></td>
+                    <td>
+                        <a href='viewservice.php?id=<?php echo $fetchroom['roomID']; ?>' title="view record" data-toggle='tooltip'>View/Update</a>
+                        <a href='deleteservice.php?id=<?php echo $fetchroom['roomID']; ?>' title='Delete Record' data-toggle='tooltip'>Delete</a>
+                    </td>
+                    <?php
+                    }
+                    }
+                    ?>
+                </tr>
+                </tbody>
+            </table>
 
         </main>
     </div>

@@ -1,3 +1,10 @@
+<?php
+require_once ("../config/config.php");
+$queryservice="SELECT * FROM service";
+$resultservice = $mysqli->query($queryservice);
+$countservice = $resultservice->num_rows;
+?>
+
 <!doctype html>
 <html lang="en">
 <head>
@@ -162,6 +169,44 @@
                     }
                     ?>
 
+            <table class='table table-light table-bordered table-striped'>
+                <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Name</th>
+                    <th>Details</th>
+                    <th>Price</th>
+                    <th>Actions</th>
+                </tr>
+                </thead>
+                <tbody>
+                <?php
+                if($countservice==0)
+                {
+                    echo '<option value="">No Datas have been created Yet</option>';
+                }
+                else
+                {
+                while($fetchservice = $resultservice->fetch_assoc())
+                {
+                ?>
+                <tr>
+
+                        <td> <?php echo $fetchservice['serviceID']; ?></td>
+                        <td> <?php echo $fetchservice['serviceName']; ?></td>
+                        <td> <?php echo $fetchservice['serviceDetails']; ?></td>
+                        <td> <?php echo $fetchservice['servicePrice']; ?></td>
+                        <td>
+                            <a href='viewservice.php?id=<?php echo $fetchservice['serviceID']; ?>' title="view record" data-toggle='tooltip'>View/Update</a>
+                            <a href='deleteservice.php?id=<?php echo $fetchservice['serviceID']; ?>' title='Delete Record' data-toggle='tooltip'>Delete</a>
+                        </td>
+                        <?php
+                    }
+                }
+                ?>
+                    </tr>
+                </tbody>
+            </table>
 
         </main>
     </div>

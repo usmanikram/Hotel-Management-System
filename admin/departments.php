@@ -1,3 +1,9 @@
+<?php
+require_once ("../config/config.php");
+$querydept="SELECT * FROM department";
+$resultdept = $mysqli->query($querydept);
+$countdept = $resultdept->num_rows;
+?>
 <!doctype html>
 <html lang="en">
 <head>
@@ -159,6 +165,42 @@
                 echo "<b><p style='color: red'>$msg</p></b>";
             }
             ?>
+
+            <table class='table table-light table-bordered table-striped'>
+                <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Name</th>
+                    <th>Details</th>
+                    <th>Actions</th>
+                </tr>
+                </thead>
+                <tbody>
+                <?php
+                if($countdept==0)
+                {
+                    echo '<option value="">No Datas have been created Yet</option>';
+                }
+                else
+                {
+                while($fetchdept = $resultdept->fetch_assoc())
+                {
+                ?>
+                <tr>
+                    <td> <?php echo $fetchdept['deptID']; ?></td>
+                    <td> <?php echo $fetchdept['deptName']; ?></td>
+                    <td> <?php echo $fetchdept['deptDetails']; ?></td>
+                    <td>
+                        <a href='viewservice.php?id=<?php echo $fetchdept['deptID']; ?>' title="view record" data-toggle='tooltip'>View/Update</a>
+                        <a href='deleteservice.php?id=<?php echo $fetchdept['deptID']; ?>' title='Delete Record' data-toggle='tooltip'>Delete</a>
+                    </td>
+                    <?php
+                    }
+                    }
+                    ?>
+                </tr>
+                </tbody>
+            </table>
 
         </main>
     </div>
