@@ -1,3 +1,12 @@
+<?php
+require_once ("../config/config.php");
+$querycustomer="SELECT * FROM customer";
+$resultcustomer = $mysqli->query($querycustomer);
+$countcustomer = $resultcustomer->num_rows;
+$queryroom="SELECT * FROM room r join roomtype rt where r.roomType=rt.rtypeID and r.roomStatus=1";
+$resultroom = $mysqli->query($queryroom);
+$countroom= $resultroom->num_rows;
+?>
 <!doctype html>
 <html lang="en">
 <head>
@@ -154,7 +163,53 @@
                 </div>
             </div>
 
-            <form>
+            <form action="../model/reservation/add.php" method="post">
+                <div class="form-group">
+                    <label for="customer">Customer Name:</label>
+                    <select class="form-control" name="customerid">
+                        <?php
+                        if($countcustomer==0)
+                        {
+                            echo '<option value="">No Datas have been created Yet</option>';
+                        }
+                        else
+                        {
+                            while($fetchcustomer = $resultcustomer->fetch_assoc())
+                            {
+                                ?>
+                                <option value="<?php echo $fetchcustomer['custID']; ?>">
+                                    <?php echo $fetchcustomer['custName']; ?></option>
+                                <?php
+                            }
+                        }
+                        ?>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="room">Room</label>
+                    <select class="form-control" name="roomid">
+                        <?php
+                        if($countroom==0)
+                        {
+                            echo '<option value="">No Datas have been created Yet</option>';
+                        }
+                        else
+                        {
+                            while($fetchroom = $resultroom->fetch_assoc())
+                            {
+                                ?>
+                                <option value="<?php echo $fetchroom['roomID']; ?>">
+                                    Room No:<?php echo $fetchroom['roomID']; ?>
+                                    Price:<?php echo $fetchroom['rtypePrice']; ?>
+                                    TypeName:<?php echo $fetchroom['rtypeName']; ?>
+                                    Capacity:<?php echo $fetchroom['rtypeCapacity']; ?>
+                                </option>
+                                <?php
+                            }
+                        }
+                        ?>
+                    </select>
+                </div>
                 <div class="form-row">
                     <div class="form-group col-md-6">
                         <label for="name">Reservation Start Date:</label>
@@ -167,24 +222,8 @@
                         <input type="text" onfocus="(this.type='date')" class="form-control" name="enddate" placeholder="Reservation End Date">
                     </div>
                 </div>
-                <div class="form-group">
-                    <label for="capacity">Room ID</label>
-                    <select class="form-control" name="roomid">
-                        <option>1</option>
-                        <option>2</option>
-                        <option>3</option>
-                        <option>4</option>
-                    </select>
-                </div>
-                <div class="form-group">
-                    <label for="capacity">Customer Name:</label>
-                    <select class="form-control" name="custname">
-                        <option>Ali</option>
-                        <option>Bilal</option>
-                        <option>Haider</option>
-                        <option>Jamal</option>
-                    </select>
-                </div>
+
+
                 <button type=submit" class="btn btn-sm btn-outline-secondary">Add Reservation</button>
             </form>
 

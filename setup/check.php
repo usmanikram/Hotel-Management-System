@@ -182,6 +182,23 @@ serviceID int
     }
 
 
+    $sql = " 
+    Create Table reservation (
+    resID int AUTO_INCREMENT Primary Key,
+    custID int,
+    roomID int,
+    resStartDate Date,
+    resEndtDate Date
+)";
+
+
+    if ($mysqli->query($sql) === TRUE) {
+        echo "Table created successfully";
+    } else {
+        echo "Error creating table: " . $mysqli->error;
+    }
+
+
 
 
 
