@@ -153,7 +153,7 @@
             </div>
 
 
-            <form>
+            <form action="../model/department/add.php" method="post">
                 <div class="form-row">
                     <div class="form-group col-md-6">
                         <label for="name">Name:</label>
@@ -162,7 +162,7 @@
                 </div>
                 <div class="form-group">
                     <label for="details">Details</label>
-                    <input type="text" class="form-control" id="deptdetails" placeholder="Department Details">
+                    <input type="text" class="form-control" name="deptdetails" placeholder="Department Details">
                 </div>
 
                 <button type=submit" class="btn btn-sm btn-outline-secondary">Add Department</button>

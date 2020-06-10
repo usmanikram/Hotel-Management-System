@@ -1,3 +1,12 @@
+<?php
+require_once ("../config/config.php");
+$querydept="SELECT * FROM department";
+$resultdept = $mysqli->query($querydept);
+$countdept = $resultdept->num_rows;
+$queryservice="SELECT * FROM service";
+$resultservice = $mysqli->query($queryservice);
+$countservoce= $resultservice->num_rows;
+?>
 <!doctype html>
 <html lang="en">
 <head>
@@ -153,28 +162,28 @@
                 </div>
             </div>
 
-            <form>
+            <form action="../model/employee/add.php" method="post">
                 <div class="form-row">
                     <div class="form-group col-md-6">
                         <label for="name">Name</label>
-                        <input type="text" class="form-control" name="empname" placeholder="Employee Name">
+                        <input type="text" class="form-control" name="name" placeholder="Employee Name">
                     </div>
                     <div class="form-group col-md-6">
                         <label for="dob">DOB</label>
-                        <input type="text" onfocus="(this.type='date')" class="form-control" name="empdob" placeholder="Date of Birth">
+                        <input type="text" onfocus="(this.type='date')" class="form-control" name="dob" placeholder="Date of Birth">
                     </div>
                 </div>
                 <div class="form-row">
                     <div class="form-group col-md-6">
                         <label for="gender">Gender</label>
-                        <select class="form-control" name="empgender">
+                        <select class="form-control" name="gender">
                             <option>Male</option>
                             <option>Female</option>
                         </select>
                     </div>
                     <div class="form-group col-md-6">
                         <label for="cnic">CNIC</label>
-                        <input type="text" class="form-control" name="empcnic" placeholder="Citizen National Identity Card Number">
+                        <input type="text" class="form-control" name="cnic" placeholder="Citizen National Identity Card Number">
                     </div>
                 </div>
                 <div class="form-row">
@@ -182,16 +191,16 @@
                 </div>
                 <div class="form-group">
                     <label for="address">Address</label>
-                    <input type="text" class="form-control" name="empaddress" placeholder="Employee Address">
+                    <input type="text" class="form-control" name="address" placeholder="Employee Address">
                 </div>
                 <div class="form-row">
                     <div class="form-group col-md-6">
                         <label for="dob">DOJ</label>
-                        <input type="text" onfocus="(this.type='date')" class="form-control" name="empdoj" placeholder="Date of Joining">
+                        <input type="text" onfocus="(this.type='date')" class="form-control" name="doj" placeholder="Date of Joining">
                     </div>
                     <div class="form-group col-md-6">
                         <label for="designation">Designation</label>
-                        <input type="text" class="form-control" name="empdesignation" placeholder="Employee Designation">
+                        <input type="text" class="form-control" name="designation" placeholder="Employee Designation">
                     </div>
                 </div>
                 <div class="form-row">
@@ -201,37 +210,53 @@
                             <div class="input-group-prepend">
                                 <div class="input-group-text">Rs.</div>
                             </div>
-                            <input type="text" class="form-control" name="empsalary" placeholder="Employee Salary">
+                            <input type="text" class="form-control" name="salary" placeholder="Employee Salary">
                         </div>
                     </div>
                     <div class="form-group col-md-6">
                         <label for="contact">Contact</label>
-                        <input type="text" class="form-control" name="empcontact" placeholder="Employee Contact Number">
+                        <input type="text" class="form-control" name="contact" placeholder="Employee Contact Number">
                     </div>
                 </div>
                 <div class="form-row">
                     <div class="form-group col-md-6">
                         <label for="email">Email</label>
-                        <input type="email" class="form-control" name="empemail" placeholder="Employee Email">
+                        <input type="email" class="form-control" name="email" placeholder="Employee Email">
                     </div>
                     <div class="form-group col-md-6">
                         <label for="password">Password</label>
-                        <input type="password" class="form-control" name="emppassword" placeholder="Employee Password">
+                        <input type="password" class="form-control" name="password" placeholder="Employee Password">
                     </div>
                 </div>
                 <div class="form-row">
+
+
                     <div class="form-group col-md-6">
                         <label for="department">Department</label>
-                        <select class="form-control" name="empdepartment">
-                            <option>Security</option>
-                            <option>Management</option>
+                        <select class="form-control" name="department">
+                            <?php
+                            while($fetchdept = $resultdept->fetch_assoc())
+                            {
+                            ?>
+                                <option value="<?php echo $fetchdept['deptID']; ?>">
+                                    <?php echo $fetchdept['deptName']; ?></option>
+                                <?php
+                        }
+                        ?>
                         </select>
                     </div>
                     <div class="form-group col-md-6">
                         <label for="service">Service</label>
-                        <select class="form-control" name="empservice">
-                            <option>Cleaning</option>
-                            <option>sd</option>
+                        <select class="form-control" name="service">
+                            <?php
+                            while($fetchservice = $resultservice->fetch_assoc())
+                            {
+                                ?>
+                                <option value="<?php echo $fetchservice['serviceID']; ?>">
+                                    <?php echo $fetchservice['serviceName']; ?></option>
+                                <?php
+                            }
+                            ?>
                         </select>
                     </div>
                 </div>

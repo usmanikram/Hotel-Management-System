@@ -73,6 +73,43 @@ servicePrice varchar(15)
         echo "Error creating table: " . $mysqli->error;
     }
 
+    $sql = "Create Table department 
+(
+deptID int AUTO_INCREMENT Primary Key,
+deptName varchar(15),
+deptDetails varchar(50)
+)";
+
+    if ($mysqli->query($sql) === TRUE) {
+        echo "Table created successfully";
+    } else {
+        echo "Error creating table: " . $mysqli->error;
+    }
+
+    $sql = " Create Table employee
+    (
+empID int AUTO_INCREMENT Primary Key,
+empName varchar(30),
+empDOB date,
+empGender varchar(10),
+empCNIC varchar(13),
+empAddress varchar(30),
+empDOJ date,
+empDesignation varchar(15),
+empSalary varchar(10),
+empContact varchar(11),
+empEmail varchar(20),
+empPassword varchar(20),
+deptID int,
+serviceID int
+)";
+
+
+    if ($mysqli->query($sql) === TRUE) {
+        echo "Table created successfully";
+    } else {
+        echo "Error creating table: " . $mysqli->error;
+    }
 
 
     $msg= "Database Connection Successful.Tables Created.";
