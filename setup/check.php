@@ -112,6 +112,79 @@ serviceID int
     }
 
 
+    $sql = " 
+    Create Table customer 
+    (
+    custID int AUTO_INCREMENT Primary Key, 
+    custName varchar(30), 
+    custDOB date, 
+    custGender varchar(10), 
+    custCNIC varchar(13), 
+    custContact varchar(11), 
+    custAddress varchar(30), 
+    custEmail varchar(20), 
+    custPassword varchar(20), 
+    custCCNO varchar(15), 
+    custCCExpiry date 
+    ) ";
+
+
+    if ($mysqli->query($sql) === TRUE) {
+        echo "Table created successfully";
+    } else {
+        echo "Error creating table: " . $mysqli->error;
+    }
+
+
+    $sql = " 
+    Create Table roomType (
+    rtypeID int AUTO_INCREMENT Primary Key,
+    rtypeName varchar(15),
+    rtypeDetails varchar(50),
+    rtypePrice varchar(10),
+    rtypeCapacity int
+    )";
+
+
+    if ($mysqli->query($sql) === TRUE) {
+        echo "Table created successfully";
+    } else {
+        echo "Error creating table: " . $mysqli->error;
+    }
+
+    $sql = "
+    CREATE TABLE status (
+    id int AUTO_INCREMENT Primary Key,
+    name varchar(15)
+    )";
+
+
+    if ($mysqli->query($sql) === TRUE) {
+        echo "Table created successfully";
+    } else {
+        echo "Error creating table: " . $mysqli->error;
+    }
+
+    $sql = " 
+    Create Table room (
+    roomID int AUTO_INCREMENT Primary Key,
+    roomDetails varchar(50),
+    roomType int,
+    roomStatus varchar(10),
+    roomImage varchar(100)
+    )";
+
+
+    if ($mysqli->query($sql) === TRUE) {
+        echo "Table created successfully";
+    } else {
+        echo "Error creating table: " . $mysqli->error;
+    }
+
+
+
+
+
     $msg= "Database Connection Successful.Tables Created.";
     header("Location: setup2.php?message=$msg");
 

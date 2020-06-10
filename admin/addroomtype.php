@@ -155,16 +155,16 @@
             </div>
 
 
-            <form>
+            <form action="../model/roomtype/add.php" method="post">
                 <div class="form-row">
                     <div class="form-group col-md-6">
                         <label for="name">Name:</label>
-                        <input type="text" class="form-control" name="typename" placeholder="Room Type Name">
+                        <input type="text" class="form-control" name="name" placeholder="Room Type Name">
                     </div>
                 </div>
                 <div class="form-group">
                     <label for="details">Details</label>
-                    <input type="text" class="form-control" id="typedetails" placeholder="Room Type Details">
+                    <input type="text" class="form-control" name="details" placeholder="Room Type Details">
                 </div>
                 <div class="form-row">
                     <div class="form-group col-md-6">
@@ -173,13 +173,13 @@
                             <div class="input-group-prepend">
                                 <div class="input-group-text">Rs.</div>
                             </div>
-                            <input type="text" class="form-control" name="typeprice" placeholder="Room Type Price">
+                            <input type="text" class="form-control" name="price" placeholder="Room Type Price">
                         </div>
                     </div>
                 </div>
                 <div class="form-group">
                     <label for="capacity">Capacity</label>
-                    <select class="form-control" name="typecapacity">
+                    <select class="form-control" name="capacity">
                         <option>1</option>
                         <option>2</option>
                         <option>3</option>

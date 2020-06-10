@@ -155,58 +155,58 @@
                 </div>
             </div>
 
-            <form>
+            <form action="../model/customer/add.php" method="post">
                 <div class="form-row">
                     <div class="form-group col-md-6">
                         <label for="name">Name</label>
-                        <input type="text" class="form-control" name="custname" placeholder="Customer Name">
+                        <input type="text" class="form-control" name="name" placeholder="Customer Name">
                     </div>
                     <div class="form-group col-md-6">
                         <label for="dob">DOB</label>
-                        <input type="text" onfocus="(this.type='date')" class="form-control" name="custdob" placeholder="Date of Birth">
+                        <input type="text" onfocus="(this.type='date')" class="form-control" name="dob" placeholder="Date of Birth">
                     </div>
                 </div>
                 <div class="form-row">
                     <div class="form-group col-md-6">
                     <label for="gender">Gender</label>
-                    <select class="form-control" name="custgender">
+                    <select class="form-control" name="gender">
                         <option>Male</option>
                         <option>Female</option>
                     </select>
                     </div>
                     <div class="form-group col-md-6">
                         <label for="cnic">CNIC</label>
-                        <input type="text" class="form-control" name="custcnic" placeholder="Citizen National Identity Card Number">
+                        <input type="text" class="form-control" name="cnic" placeholder="Citizen National Identity Card Number">
                     </div>
                 </div>
                 <div class="form-row">
                     <div class="form-group col-md-6">
                         <label for="contact">Contact</label>
-                        <input type="text" class="form-control" name="custcontact" placeholder="Customer Contact Number">
+                        <input type="text" class="form-control" name="contact" placeholder="Customer Contact Number">
                     </div>
                 </div>
                 <div class="form-group">
                     <label for="address">Address</label>
-                    <input type="text" class="form-control" name="custaddress" placeholder="Customer Address">
+                    <input type="text" class="form-control" name="address" placeholder="Customer Address">
                 </div>
                 <div class="form-row">
                     <div class="form-group col-md-6">
                         <label for="email">Email</label>
-                        <input type="email" class="form-control" name="custemail" placeholder="Customer Email">
+                        <input type="email" class="form-control" name="email" placeholder="Customer Email">
                     </div>
                     <div class="form-group col-md-6">
                         <label for="password">Password</label>
-                        <input type="password" class="form-control" name="custpassword" placeholder="Customer Password">
+                        <input type="password" class="form-control" name="password" placeholder="Customer Password">
                     </div>
                 </div>
                 <div class="form-row">
                     <div class="form-group col-md-6">
                         <label for="ccno">Credit Card Number</label>
-                        <input type="text" class="form-control" name="custccno" placeholder="Customer Credit Card Number">
+                        <input type="text" class="form-control" name="ccno" placeholder="Customer Credit Card Number">
                     </div>
                     <div class="form-group col-md-6">
                         <label for="ccexpiry">Credit Card Expiry</label>
-                        <input type="text" onfocus="(this.type='date')" class="form-control" name="custccexp" placeholder="Credit Card Expiry Date">
+                        <input type="text" onfocus="(this.type='date')" class="form-control" name="ccexpiry" placeholder="Credit Card Expiry Date">
                     </div>
                 </div>
                 <button type=submit" class="btn btn-sm btn-outline-secondary">Add Customer</button>

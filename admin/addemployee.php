@@ -5,7 +5,7 @@ $resultdept = $mysqli->query($querydept);
 $countdept = $resultdept->num_rows;
 $queryservice="SELECT * FROM service";
 $resultservice = $mysqli->query($queryservice);
-$countservoce= $resultservice->num_rows;
+$countservice= $resultservice->num_rows;
 ?>
 <!doctype html>
 <html lang="en">
@@ -235,6 +235,12 @@ $countservoce= $resultservice->num_rows;
                         <label for="department">Department</label>
                         <select class="form-control" name="department">
                             <?php
+                            if($countdept==0)
+                            {
+                                echo '<option value="">No Datas have been created Yet</option>';
+                            }
+                            else
+                            {
                             while($fetchdept = $resultdept->fetch_assoc())
                             {
                             ?>
@@ -242,6 +248,7 @@ $countservoce= $resultservice->num_rows;
                                     <?php echo $fetchdept['deptName']; ?></option>
                                 <?php
                         }
+                                }
                         ?>
                         </select>
                     </div>
@@ -249,12 +256,19 @@ $countservoce= $resultservice->num_rows;
                         <label for="service">Service</label>
                         <select class="form-control" name="service">
                             <?php
+                            if($countservice==0)
+                            {
+                                echo '<option value="">No Datas have been created Yet</option>';
+                            }
+                            else
+                            {
                             while($fetchservice = $resultservice->fetch_assoc())
                             {
                                 ?>
                                 <option value="<?php echo $fetchservice['serviceID']; ?>">
                                     <?php echo $fetchservice['serviceName']; ?></option>
                                 <?php
+                            }
                             }
                             ?>
                         </select>

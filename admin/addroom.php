@@ -1,3 +1,12 @@
+<?php
+require_once ("../config/config.php");
+$querytype="SELECT * FROM roomtype";
+$resulttype = $mysqli->query($querytype);
+$counttype = $resulttype->num_rows;
+$querystatus="SELECT * FROM status";
+$resultstatus = $mysqli->query($querystatus);
+$countstatus= $resultstatus->num_rows;
+?>
 <!doctype html>
 <html lang="en">
 <head>
@@ -155,32 +164,52 @@
             </div>
 
 
-            <form>
-                <div class="form-row">
-                    <div class="form-group col-md-6">
-                        <label for="name">Room Number:</label>
-                        <input type="number" class="form-control" name="roomnumber" placeholder="Room Number">
-                    </div>
-                </div>
+            <form action="../model/room/add.php" method="post">
                 <div class="form-group">
                     <label for="details">Details</label>
-                    <input type="text" class="form-control" id="roomdetails" placeholder="Room Details">
+                    <input type="text" class="form-control" name="details" placeholder="Room Details">
                 </div>
 
                 <div class="form-group">
                     <label for="capacity">Room Type</label>
-                    <select class="form-control" name="roomtype">
-                        <option>1</option>
-                        <option>2</option>
-                        <option>3</option>
-                        <option>4</option>
+                    <select class="form-control" name="type">
+                        <?php
+                        if($counttype==0)
+                        {
+                            echo '<option value="">No Datas have been created Yet</option>';
+                        }
+                        else
+                        {
+                            while($fetchtype = $resulttype->fetch_assoc())
+                            {
+                                ?>
+                                <option value="<?php echo $fetchtype['rtypeID']; ?>">
+                                    <?php echo $fetchtype['rtypeName']; ?></option>
+                                <?php
+                            }
+                        }
+                        ?>
                     </select>
                 </div>
                 <div class="form-group">
                     <label for="capacity">Room Status</label>
-                    <select class="form-control" name="roomstatus">
-                        <option>Available</option>
-                        <option>Not Available</option>
+                    <select class="form-control" name="status">
+                        <?php
+                        if($countstatus==0)
+                        {
+                            echo '<option value="">No Datas have been created Yet</option>';
+                        }
+                        else
+                        {
+                            while($fetchstatus = $resultstatus->fetch_assoc())
+                            {
+                                ?>
+                                <option value="<?php echo $fetchstatus['id']; ?>">
+                                    <?php echo $fetchstatus['name']; ?></option>
+                                <?php
+                            }
+                        }
+                        ?>
                     </select>
                 </div>
 
@@ -189,7 +218,7 @@
                     <div class="form-group col-md-6">
                         <label for="price">Room Image</label>
                         <div class="input-group mb-2">
-                            <input type="file" class="form-control" name="typeprice" placeholder="Room Type Price">
+                            <input type="file" class="form-control" name="image" placeholder="Room Type Price">
 
                         </div>
                     </div>
