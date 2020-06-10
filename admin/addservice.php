@@ -155,7 +155,7 @@
             </div>
 
 
-            <form>
+            <form action="../model/service/add.php" method="post" >
                 <div class="form-row">
                     <div class="form-group col-md-6">
                         <label for="name">Name:</label>
@@ -164,7 +164,7 @@
                 </div>
                 <div class="form-group">
                     <label for="details">Details</label>
-                    <input type="text" class="form-control" id="sdetails" placeholder="Service Details">
+                    <input type="text" class="form-control" name="sdetails" placeholder="Service Details">
                 </div>
                 <div class="form-row">
                     <div class="form-group col-md-6">

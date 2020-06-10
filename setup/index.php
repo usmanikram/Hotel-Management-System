@@ -1,4 +1,5 @@
 <?php
+
 $file= '../config/config.php';
 if(file_exists($file))
 {

@@ -59,6 +59,20 @@ adminPassword varchar(100)
     } else {
         echo "Error creating table: " . $mysqli->error;
     }
+    $sql = "Create Table service 
+(
+serviceID int AUTO_INCREMENT Primary Key,
+serviceName varchar(15),
+serviceDetails varchar(50),
+servicePrice varchar(15)
+)";
+
+    if ($mysqli->query($sql) === TRUE) {
+        echo "Table created successfully";
+    } else {
+        echo "Error creating table: " . $mysqli->error;
+    }
+
 
 
     $msg= "Database Connection Successful.Tables Created.";

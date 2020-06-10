@@ -151,6 +151,16 @@
                         <button type="button" class="btn btn-sm btn-outline-secondary">Download PDF</button>
                     </div>
                 </div>
+            </div>
+
+
+                    <?php
+                    if(isset($_GET["message"]))
+                    {
+                        $msg = $_GET["message"];
+                        echo "<b><p style='color: red'>$msg</p></b>";
+                    }
+                    ?>
 
 
         </main>
