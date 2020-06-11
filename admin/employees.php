@@ -1,3 +1,9 @@
+<?php
+require_once ("../config/config.php");
+$queryemployee="SELECT * FROM employee e join department d where e.deptID=d.deptID";
+$resultemployee = $mysqli->query($queryemployee);
+$countemployee = $resultemployee->num_rows;
+?>
 <!doctype html>
 <html lang="en">
 <head>
@@ -38,7 +44,7 @@
     </button>
     <ul class="navbar-nav px-3">
         <li class="nav-item text-nowrap">
-            <a class="nav-link" href="#">Sign out</a>
+            <a class="nav-link" href="logout.php">Sign out</a>
         </li>
     </ul>
 </nav>
@@ -160,6 +166,65 @@
                 echo "<b><p style='color: red'>$msg</p></b>";
             }
             ?>
+
+            <div class="table-responsive">
+
+                <table class='table table-light table-bordered table-striped'>
+                    <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Name</th>
+                        <th>Date Of Birth</th>
+                        <th>Gender</th>
+                        <th>CNIC</th>
+                        <th>Address</th>
+                        <th>Date Of Joining</th>
+                        <th>Designation</th>
+                        <th>Salary</th>
+                        <th>Contact</th>
+                        <th>Email</th>
+                        <th>Department Name</th>
+                        <th>Actions</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <?php
+                    if($countemployee==0)
+                    {
+                        echo '<option value="">No Datas have been created Yet</option>';
+                    }
+                    else
+                    {
+                    while($fetchemployee = $resultemployee->fetch_assoc())
+                    {
+                    ?>
+                    <tr>
+                        <td> <?php echo $fetchemployee['empID']; ?></td>
+                        <td> <?php echo $fetchemployee['empName']; ?></td>
+                        <td> <?php echo $fetchemployee['empDOB']; ?></td>
+                        <td> <?php echo $fetchemployee['empGender']; ?></td>
+                        <td> <?php echo $fetchemployee['empCNIC']; ?></td>
+                        <td> <?php echo $fetchemployee['empAddress']; ?></td>
+                        <td> <?php echo $fetchemployee['empDOJ']; ?></td>
+                        <td> <?php echo $fetchemployee['empDesignation']; ?></td>
+                        <td> <?php echo $fetchemployee['empSalary']; ?></td>
+                        <td> <?php echo $fetchemployee['empContact']; ?></td>
+                        <td> <?php echo $fetchemployee['empEmail']; ?></td>
+                        <td> <?php echo $fetchemployee['deptName']; ?></td>
+                        <td>
+                            <a href='viewservice.php?id=<?php echo $fetchemployee['empID']; ?>' title="view record" data-toggle='tooltip'>View/Update</a>
+                            <a href='deleteservice.php?id=<?php echo $fetchemployee['empID']; ?>' title='Delete Record' data-toggle='tooltip'>Delete</a>
+                        </td>
+                        <?php
+                        }
+                        }
+                        ?>
+                    </tr>
+                    </tbody>
+                </table>
+
+            </div>
+
         </main>
     </div>
 </div>

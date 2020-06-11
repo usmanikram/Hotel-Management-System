@@ -1,3 +1,9 @@
+<?php
+require_once ("../config/config.php");
+$querycustomer="SELECT * FROM customer";
+$resultcustomer = $mysqli->query($querycustomer);
+$countcustomer = $resultcustomer->num_rows;
+?>
 <!doctype html>
 <html lang="en">
 <head>
@@ -38,7 +44,7 @@
     </button>
     <ul class="navbar-nav px-3">
         <li class="nav-item text-nowrap">
-            <a class="nav-link" href="#">Sign out</a>
+            <a class="nav-link" href="logout.php">Sign out</a>
         </li>
     </ul>
 </nav>
@@ -159,6 +165,60 @@
                 echo "<b><p style='color: red'>$msg</p></b>";
             }
             ?>
+
+            <div class="table-responsive">
+
+                <table class='table table-light table-bordered table-striped'>
+                    <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Name</th>
+                        <th>Date Of Birth</th>
+                        <th>Gender</th>
+                        <th>CNIC</th>
+                        <th>Contact</th>
+                        <th>Address</th>
+                        <th>Email</th>
+                        <th>Credit Card No</th>
+                        <th>Credit Card Expiry</th>
+                        <th>Actions</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <?php
+                    if($countcustomer==0)
+                    {
+                        echo '<option value="">No Datas have been created Yet</option>';
+                    }
+                    else
+                    {
+                    while($fetchcustomer = $resultcustomer->fetch_assoc())
+                    {
+                    ?>
+                    <tr>
+                        <td> <?php echo $fetchcustomer['custID']; ?></td>
+                        <td> <?php echo $fetchcustomer['custName']; ?></td>
+                        <td> <?php echo $fetchcustomer['custDOB']; ?></td>
+                        <td> <?php echo $fetchcustomer['custGender']; ?></td>
+                        <td> <?php echo $fetchcustomer['custCNIC']; ?></td>
+                        <td> <?php echo $fetchcustomer['custContact']; ?></td>
+                        <td> <?php echo $fetchcustomer['custAddress']; ?></td>
+                        <td> <?php echo $fetchcustomer['custEmail']; ?></td>
+                        <td> <?php echo $fetchcustomer['custCCNO']; ?></td>
+                        <td> <?php echo $fetchcustomer['custCCExpiry']; ?></td>
+                        <td>
+                            <a href='viewservice.php?id=<?php echo $fetchcustomer['custID']; ?>' title="view record" data-toggle='tooltip'>View/Update</a>
+                            <a href='deleteservice.php?id=<?php echo $fetchcustomer['custID']; ?>' title='Delete Record' data-toggle='tooltip'>Delete</a>
+                        </td>
+                        <?php
+                        }
+                        }
+                        ?>
+                    </tr>
+                    </tbody>
+                </table>
+
+            </div>
 
         </main>
     </div>
