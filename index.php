@@ -72,29 +72,29 @@ else
         <div class="container">
             <p class="lead">Enter the following details to check room availability.</p>
 
-            <form action="#" method="post" novalidate="novalidate">
+            <form action="availability.php" method="post" >
                 <div class="row">
                     <div class="col-lg-12">
                         <div class="row">
 
                             <div class="col-lg-3 col-md-3 col-sm-12 p-0">
-                                <input type="text" onfocus="(this.type='date')" class="form-control search-slt" placeholder="Checkin Date">
+                                <input type="text" onfocus="(this.type='date')" name="startdate" class="form-control search-slt" placeholder="Checkin Date" required>
                             </div>
                             <div class="col-lg-3 col-md-3 col-sm-12 p-0">
-                                <input type="text" onfocus="(this.type='date')" class="form-control search-slt" placeholder="Checkout Date">
+                                <input type="text" onfocus="(this.type='date')" name="enddate" class="form-control search-slt" placeholder="Checkout Date" required>
                             </div>
                             <div class="col-lg-3 col-md-3 col-sm-12 p-0">
 
-                                <select class="form-control search-slt" id="exampleFormControlSelect1">
+                                <select class="form-control search-slt" name="capacity" required>
                                     <option>No. of Guests</option>
                                     <option>1</option>
                                     <option>2</option>
                                     <option>3</option>
-                                    <option>3</option>
+                                    <option>4</option>
                                 </select>
                             </div>
                             <div class="col-lg-3 col-md-3 col-sm-12 p-0">
-                                <button type="button" class="btn btn-danger wrn-btn">Check Availability</button>
+                                <button type="submit" class="btn btn-danger wrn-btn">Check Availability</button>
                             </div>
                         </div>
                     </div>

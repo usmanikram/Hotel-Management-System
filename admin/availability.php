@@ -1,3 +1,28 @@
+<?php
+require_once ("../config/config.php");
+$startdate=$enddate=$capacity="";
+if(isset($_POST['startdate'])&&isset($_POST['enddate'])&&isset($_POST['capacity']))
+{
+    $startdate=$_POST['startdate'];
+    $enddate=$_POST['enddate'];
+    $capacity=$_POST['capacity'];
+}
+
+$querycustomer="SELECT * FROM customer";
+$resultcustomer = $mysqli->query($querycustomer);
+$countcustomer = $resultcustomer->num_rows;
+$queryroom="SELECT
+    * FROM room join roomtype on room.roomType=roomtype.rtypeID WHERE roomID   NOT IN 
+(
+        SELECT reservation.roomID FROM reservation LEFT Outer JOIN
+            room ON reservation.roomID = room.roomID 
+        WHERE resStartDate<'$startdate'AND resEndtDate>='$enddate' 
+) AND room.roomStatus='1' AND roomtype.rtypeCapacity>='$capacity'
+
+";
+$resultroom = $mysqli->query($queryroom);
+$countroom= $resultroom->num_rows;
+?>
 <!doctype html>
 <html lang="en">
 <head>
@@ -154,35 +179,68 @@
                 </div>
             </div>
 
-            <form action="availability.php" method="post">
-
+            <form action="../model/reservation/add.php" method="post">
+                <div class="form-group">
+                    <label for="customer">Customer Name:</label>
+                    <select class="form-control" name="customerid">
+                        <?php
+                        if($countcustomer==0)
+                        {
+                            echo '<option value="">No Datas have been created Yet</option>';
+                        }
+                        else
+                        {
+                            while($fetchcustomer = $resultcustomer->fetch_assoc())
+                            {
+                                ?>
+                                <option value="<?php echo $fetchcustomer['custID']; ?>">
+                                    <?php echo $fetchcustomer['custName']; ?></option>
+                                <?php
+                            }
+                        }
+                        ?>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="room">Room</label>
+                    <select class="form-control" name="roomid">
+                        <?php
+                        if($countroom==0)
+                        {
+                            echo '<option value="">No Datas have been created Yet</option>';
+                        }
+                        else
+                        {
+                            while($fetchroom = $resultroom->fetch_assoc())
+                            {
+                                ?>
+                                <option value="<?php echo $fetchroom['roomID']; ?>">
+                                    Room No:<?php echo $fetchroom['roomID']; ?>
+                                    Price:<?php echo $fetchroom['rtypePrice']; ?>
+                                    TypeName:<?php echo $fetchroom['rtypeName']; ?>
+                                    Capacity:<?php echo $fetchroom['rtypeCapacity']; ?>
+                                </option>
+                                <?php
+                            }
+                        }
+                        ?>
+                    </select>
+                </div>
                 <div class="form-row">
                     <div class="form-group col-md-6">
                         <label for="name">Reservation Start Date:</label>
-                        <input type="text" onfocus="(this.type='date')" class="form-control" name="startdate" placeholder="Checkin Date">
+                        <input type="date" class="form-control" name="startdate" value="<?php echo $startdate; ?>" readonly>
                     </div>
                 </div>
                 <div class="form-row">
                     <div class="form-group col-md-6">
                         <label for="name">Reservation End Date:</label>
-                        <input type="text" onfocus="(this.type='date')" class="form-control" name="enddate" placeholder="Checkout Date">
-                    </div>
-                </div>
-                <div class="form-row">
-                    <div class="form-group col-md-6">
-                        <label for="capacity">Guests:</label>
-                    <select class="form-control search-slt" name="capacity">
-                        <option>No. of Guests</option>
-                        <option>1</option>
-                        <option>2</option>
-                        <option>3</option>
-                        <option>4</option>
-                    </select>
+                        <input type="date" class="form-control" name="enddate" value="<?php echo $enddate; ?>" readonly>
                     </div>
                 </div>
 
 
-                <button type=submit" class="btn btn-sm btn-outline-secondary">Check Availability</button>
+                <button type=submit" class="btn btn-sm btn-outline-secondary">Confirm Reservation</button>
             </form>
 
         </main>
