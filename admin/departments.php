@@ -191,8 +191,8 @@ $countdept = $resultdept->num_rows;
                     <td> <?php echo $fetchdept['deptName']; ?></td>
                     <td> <?php echo $fetchdept['deptDetails']; ?></td>
                     <td>
-                        <a href='viewservice.php?id=<?php echo $fetchdept['deptID']; ?>' title="view record" data-toggle='tooltip'>View/Update</a>
-                        <a href='deleteservice.php?id=<?php echo $fetchdept['deptID']; ?>' title='Delete Record' data-toggle='tooltip'>Delete</a>
+                        <a href='viewdepartment.php?id=<?php echo $fetchdept['deptID']; ?>' title="view record" data-toggle='tooltip'>View/Update</a>
+                        <a href='deletedepartment.php?id=<?php echo $fetchdept['deptID']; ?>' title='Delete Record' data-toggle='tooltip'>Delete</a>
                     </td>
                     <?php
                     }

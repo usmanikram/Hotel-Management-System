@@ -212,8 +212,8 @@ $countemployee = $resultemployee->num_rows;
                         <td> <?php echo $fetchemployee['empEmail']; ?></td>
                         <td> <?php echo $fetchemployee['deptName']; ?></td>
                         <td>
-                            <a href='viewservice.php?id=<?php echo $fetchemployee['empID']; ?>' title="view record" data-toggle='tooltip'>View/Update</a>
-                            <a href='deleteservice.php?id=<?php echo $fetchemployee['empID']; ?>' title='Delete Record' data-toggle='tooltip'>Delete</a>
+                            <a href='viewemployee.php?id=<?php echo $fetchemployee['empID']; ?>' title="view record" data-toggle='tooltip'>View/Update</a>
+                            <a href='deleteemployee.php?id=<?php echo $fetchemployee['empID']; ?>' title='Delete Record' data-toggle='tooltip'>Delete</a>
                         </td>
                         <?php
                         }

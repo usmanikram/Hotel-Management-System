@@ -1,8 +1,9 @@
 <?php
-require_once ("../config/config.php");
-$querycustomer="SELECT * FROM customer";
-$resultcustomer = $mysqli->query($querycustomer);
-$countcustomer = $resultcustomer->num_rows;
+$id="";
+if(isset($_GET['id']))
+{
+    $id=$_GET['id'];
+}
 ?>
 <!doctype html>
 <html lang="en">
@@ -12,7 +13,7 @@ $countcustomer = $resultcustomer->num_rows;
     <meta name="description" content="">
     <meta name="author" content="Mark Otto, Jacob Thornton, and Bootstrap contributors">
     <meta name="generator" content="Jekyll v4.0.1">
-    <title>Customers · Admin Panel · HMS</title>
+    <title>Delete Customer · Admin Panel · HMS</title>
 
     <!-- Bootstrap core CSS -->
     <link href="../css/bootstrap.css" rel="stylesheet">
@@ -166,59 +167,11 @@ $countcustomer = $resultcustomer->num_rows;
             }
             ?>
 
-            <div class="table-responsive">
 
-                <table class='table table-light table-bordered table-striped'>
-                    <thead>
-                    <tr>
-                        <th>ID</th>
-                        <th>Name</th>
-                        <th>Date Of Birth</th>
-                        <th>Gender</th>
-                        <th>CNIC</th>
-                        <th>Contact</th>
-                        <th>Address</th>
-                        <th>Email</th>
-                        <th>Credit Card No</th>
-                        <th>Credit Card Expiry</th>
-                        <th>Actions</th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    <?php
-                    if($countcustomer==0)
-                    {
-                        echo '<option value="">No Datas have been created Yet</option>';
-                    }
-                    else
-                    {
-                    while($fetchcustomer = $resultcustomer->fetch_assoc())
-                    {
-                    ?>
-                    <tr>
-                        <td> <?php echo $fetchcustomer['custID']; ?></td>
-                        <td> <?php echo $fetchcustomer['custName']; ?></td>
-                        <td> <?php echo $fetchcustomer['custDOB']; ?></td>
-                        <td> <?php echo $fetchcustomer['custGender']; ?></td>
-                        <td> <?php echo $fetchcustomer['custCNIC']; ?></td>
-                        <td> <?php echo $fetchcustomer['custContact']; ?></td>
-                        <td> <?php echo $fetchcustomer['custAddress']; ?></td>
-                        <td> <?php echo $fetchcustomer['custEmail']; ?></td>
-                        <td> <?php echo $fetchcustomer['custCCNO']; ?></td>
-                        <td> <?php echo $fetchcustomer['custCCExpiry']; ?></td>
-                        <td>
-                            <a href='viewcustomer.php?id=<?php echo $fetchcustomer['custID']; ?>' title="view record" data-toggle='tooltip'>View/Update</a>
-                            <a href='deletecustomer.php?id=<?php echo $fetchcustomer['custID']; ?>' title='Delete Record' data-toggle='tooltip'>Delete</a>
-                        </td>
-                        <?php
-                        }
-                        }
-                        ?>
-                    </tr>
-                    </tbody>
-                </table>
+            <h3>Are You Sure Want To Delete ?</h3>
+            <a href="../model/admin/customer/delete.php?id=<?php echo $id; ?>" class="btn btn-sm btn-outline-secondary"><h2>Yes</h2></a>
+           <a href="customers.php" class="btn btn-sm btn-outline-secondary"><h2>No</h2></a>
 
-            </div>
 
         </main>
     </div>

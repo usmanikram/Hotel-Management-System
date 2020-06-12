@@ -1,8 +1,9 @@
 <?php
-require_once ("../config/config.php");
-$querycustomer="SELECT * FROM customer";
-$resultcustomer = $mysqli->query($querycustomer);
-$countcustomer = $resultcustomer->num_rows;
+$id="";
+if(isset($_GET['id']))
+{
+    $id=$_GET['id'];
+}
 ?>
 <!doctype html>
 <html lang="en">
@@ -12,10 +13,11 @@ $countcustomer = $resultcustomer->num_rows;
     <meta name="description" content="">
     <meta name="author" content="Mark Otto, Jacob Thornton, and Bootstrap contributors">
     <meta name="generator" content="Jekyll v4.0.1">
-    <title>Customers · Admin Panel · HMS</title>
+    <title>Delete Room Type · Admin Panel · HMS</title>
 
     <!-- Bootstrap core CSS -->
     <link href="../css/bootstrap.css" rel="stylesheet">
+
 
     <style>
         .bd-placeholder-img {
@@ -74,9 +76,9 @@ $countcustomer = $resultcustomer->num_rows;
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="roomtype.php">
+                        <a class="nav-link active" href="roomtype.php">
                             <span data-feather="type"></span>
-                            Room Type
+                            Room Type <span class="sr-only">(current)</span>
                         </a>
                     </li>
                     <li class="nav-item">
@@ -92,9 +94,9 @@ $countcustomer = $resultcustomer->num_rows;
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link active" href="customers.php">
+                        <a class="nav-link" href="customers.php">
                             <span data-feather="users"></span>
-                            Customers<span class="sr-only">(current)</span>
+                            Customers
                         </a>
                     </li>
                     </li>
@@ -150,10 +152,10 @@ $countcustomer = $resultcustomer->num_rows;
 
         <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-md-4">
             <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
-                <h1 class="h2">Customers</h1>
+                <h1 class="h2">Room Types</h1>
                 <div class="btn-toolbar mb-2 mb-md-0">
                     <div class="btn-group mr-2">
-                        <button onclick="location.href='addcustomer.php';" type="button" class="btn btn-sm btn-outline-secondary">Add New Customer</button>
+                        <button onclick="location.href='addroomtype.php';" type="button" class="btn btn-sm btn-outline-secondary">Add New Room Type</button>
                         <button type="button" class="btn btn-sm btn-outline-secondary">Download PDF</button>
                     </div>
                 </div>
@@ -166,59 +168,9 @@ $countcustomer = $resultcustomer->num_rows;
             }
             ?>
 
-            <div class="table-responsive">
-
-                <table class='table table-light table-bordered table-striped'>
-                    <thead>
-                    <tr>
-                        <th>ID</th>
-                        <th>Name</th>
-                        <th>Date Of Birth</th>
-                        <th>Gender</th>
-                        <th>CNIC</th>
-                        <th>Contact</th>
-                        <th>Address</th>
-                        <th>Email</th>
-                        <th>Credit Card No</th>
-                        <th>Credit Card Expiry</th>
-                        <th>Actions</th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    <?php
-                    if($countcustomer==0)
-                    {
-                        echo '<option value="">No Datas have been created Yet</option>';
-                    }
-                    else
-                    {
-                    while($fetchcustomer = $resultcustomer->fetch_assoc())
-                    {
-                    ?>
-                    <tr>
-                        <td> <?php echo $fetchcustomer['custID']; ?></td>
-                        <td> <?php echo $fetchcustomer['custName']; ?></td>
-                        <td> <?php echo $fetchcustomer['custDOB']; ?></td>
-                        <td> <?php echo $fetchcustomer['custGender']; ?></td>
-                        <td> <?php echo $fetchcustomer['custCNIC']; ?></td>
-                        <td> <?php echo $fetchcustomer['custContact']; ?></td>
-                        <td> <?php echo $fetchcustomer['custAddress']; ?></td>
-                        <td> <?php echo $fetchcustomer['custEmail']; ?></td>
-                        <td> <?php echo $fetchcustomer['custCCNO']; ?></td>
-                        <td> <?php echo $fetchcustomer['custCCExpiry']; ?></td>
-                        <td>
-                            <a href='viewcustomer.php?id=<?php echo $fetchcustomer['custID']; ?>' title="view record" data-toggle='tooltip'>View/Update</a>
-                            <a href='deletecustomer.php?id=<?php echo $fetchcustomer['custID']; ?>' title='Delete Record' data-toggle='tooltip'>Delete</a>
-                        </td>
-                        <?php
-                        }
-                        }
-                        ?>
-                    </tr>
-                    </tbody>
-                </table>
-
-            </div>
+            <h3>Are You Sure Want To Delete ?</h3>
+            <a href="../model/admin/roomtype/delete.php?id=<?php echo $id; ?>" class="btn btn-sm btn-outline-secondary"><h2>Yes</h2></a>
+            <a href="roomtype.php" class="btn btn-sm btn-outline-secondary"><h2>No</h2></a>
 
         </main>
     </div>

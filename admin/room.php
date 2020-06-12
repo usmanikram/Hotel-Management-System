@@ -196,8 +196,8 @@ $countroom = $resultroom->num_rows;
                     <td> <?php echo $fetchroom['roomStatus']; ?></td>
                     <td> <?php echo $fetchroom['roomImage']; ?></td>
                     <td>
-                        <a href='viewservice.php?id=<?php echo $fetchroom['roomID']; ?>' title="view record" data-toggle='tooltip'>View/Update</a>
-                        <a href='deleteservice.php?id=<?php echo $fetchroom['roomID']; ?>' title='Delete Record' data-toggle='tooltip'>Delete</a>
+                        <a href='viewroom.php?id=<?php echo $fetchroom['roomID']; ?>' title="view record" data-toggle='tooltip'>View/Update</a>
+                        <a href='deleteroom.php?id=<?php echo $fetchroom['roomID']; ?>' title='Delete Record' data-toggle='tooltip'>Delete</a>
                     </td>
                     <?php
                     }

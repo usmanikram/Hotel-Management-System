@@ -195,8 +195,8 @@ $counttype = $resulttype->num_rows;
                     <td> <?php echo $fetchtype['rtypePrice']; ?></td>
                     <td> <?php echo $fetchtype['rtypeCapacity']; ?></td>
                     <td>
-                        <a href='viewservice.php?id=<?php echo $fetchtype['rtypeID']; ?>' title="view record" data-toggle='tooltip'>View/Update</a>
-                        <a href='deleteservice.php?id=<?php echo $fetchtype['rtypeID']; ?>' title='Delete Record' data-toggle='tooltip'>Delete</a>
+                        <a href='viewroomtype.php?id=<?php echo $fetchtype['rtypeID']; ?>' title="view record" data-toggle='tooltip'>View/Update</a>
+                        <a href='deleteroomtype.php?id=<?php echo $fetchtype['rtypeID']; ?>' title='Delete Record' data-toggle='tooltip'>Delete</a>
                     </td>
                     <?php
                     }
