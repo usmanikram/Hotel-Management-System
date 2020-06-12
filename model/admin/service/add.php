@@ -1,6 +1,6 @@
 <?php
-require_once "../../controller/service/add.php";
-require_once "../../config/config.php";
+require_once "../../../controller/admin/service/add.php";
+require_once "../../../config/config.php";
 
 $service = $_SESSION['key'];
 
@@ -24,11 +24,11 @@ if($stmt = $mysqli->prepare($sql)) {
     // Attempt to execute the prepared statement
     if($stmt->execute()){
         $message= "Service Added Successfully";
-        header("location: ../../admin/services.php?message=$message");
+        header("location: ../../../admin/services.php?message=$message");
         exit();
     } else{
         $message= "Something went wrong. Please try again later.";
-        header("location: ../../admin/services.php?message=$message");
+        header("location: ../../../admin/services.php?message=$message");
     }
 
 

@@ -164,7 +164,7 @@ $countstatus= $resultstatus->num_rows;
             </div>
 
 
-            <form action="../model/room/add.php" method="post">
+            <form action="../model/admin/room/add.php" method="post">
                 <div class="form-group">
                     <label for="details">Details</label>
                     <input type="text" class="form-control" name="details" placeholder="Room Details">

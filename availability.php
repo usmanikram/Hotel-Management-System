@@ -1,4 +1,5 @@
 <?php
+session_start();
 if(!isset($_SERVER['HTTP_REFERER'])){
     // redirect them to your desired location
     header('location:../error.php');
@@ -18,7 +19,7 @@ else
 ?>
 <?php
 require_once ("config/config.php");
-$startdate=$enddate=$capacity="";
+$startdate=$enddate=$capacity=$roomid="";
 if(isset($_POST['startdate'])&&isset($_POST['enddate'])&&isset($_POST['capacity']))
 {
     $startdate=$_POST['startdate'];
@@ -26,9 +27,7 @@ if(isset($_POST['startdate'])&&isset($_POST['enddate'])&&isset($_POST['capacity'
     $capacity=$_POST['capacity'];
 }
 
-$querycustomer="SELECT * FROM customer";
-$resultcustomer = $mysqli->query($querycustomer);
-$countcustomer = $resultcustomer->num_rows;
+
 $queryroom="SELECT
     * FROM room join roomtype on room.roomType=roomtype.rtypeID WHERE roomID   NOT IN 
 (
@@ -49,7 +48,7 @@ $countroom= $resultroom->num_rows;
     <meta name="description" content="">
     <meta name="author" content="Mark Otto, Jacob Thornton, and Bootstrap contributors">
     <meta name="generator" content="Jekyll v4.0.1">
-    <title>Hotel Management System</title>
+    <title>Room Availability · HMS</title>
 
 
 
@@ -91,52 +90,58 @@ $countroom= $resultroom->num_rows;
     </header>
 
     <main role="main" class="inner cover">
-        <form action="../model/reservation/add.php" method="post">
+        <div class="table-responsive">
 
-            <div class="form-group">
-                <label for="room">Room</label>
-                <select class="form-control" name="roomid">
-                    <?php
-                    if($countroom==0)
+            <table class='table table-light table-bordered table-striped'>
+                <thead>
+                <tr>
+                    <th>Room No.</th>
+                    <th>Category</th>
+                    <th>Capacity(Maximum)</th>
+                    <th>Rent Per Night(Rs.)</th>
+
+                </tr>
+                </thead>
+                <tbody>
+                <?php
+                if($countroom==0)
+                {
+                    echo '<option value="">No Datas have been created Yet</option>';
+                }
+                else
+                {
+                    while($fetchroom = $resultroom->fetch_assoc())
                     {
-                        echo '<option value="">No Datas have been created Yet</option>';
-                    }
-                    else
-                    {
-                        while($fetchroom = $resultroom->fetch_assoc())
-                        {
-                            ?>
-                            <option value="<?php echo $fetchroom['roomID']; ?>">
-                                Room No:<?php echo $fetchroom['roomID']; ?>
-                                Price:<?php echo $fetchroom['rtypePrice']; ?>
-                                TypeName:<?php echo $fetchroom['rtypeName']; ?>
-                                Capacity:<?php echo $fetchroom['rtypeCapacity']; ?>
-                            </option>
-                            <?php
-                        }
-                    }
-                    ?>
-                </select>
-            </div>
-            <div class="form-row">
-                <div class="form-group col-md-6">
-                    <label for="name">Reservation Start Date:</label>
-                    <input type="date" class="form-control" name="startdate" value="<?php echo $startdate; ?>" readonly>
-                </div>
-            </div>
-            <div class="form-row">
-                <div class="form-group col-md-6">
-                    <label for="name">Reservation End Date:</label>
-                    <input type="date" class="form-control" name="enddate" value="<?php echo $enddate; ?>" readonly>
-                </div>
-            </div>
+                        ?>
+                <tr>
+                    <td> <?php echo $fetchroom['roomID']; ?></td>
+                    <td> <?php echo $fetchroom['rtypeName']; ?></td>
+                    <td> <?php echo $fetchroom['rtypeCapacity']; ?></td>
+                    <td> <?php echo $fetchroom['rtypePrice']; ?></td>
 
+                        <?php
 
-            <button type=submit" class="btn btn-sm btn-outline-secondary">Confirm Reservation</button>
-        </form>
+                    }
+                }
+                ?>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+        <main role="main" class="inner cover">
+            <h3 class="cover-heading">Please Sign In To Book Room </h3>
+            <p class="lead">
+                <a href="customerlogin.php" class="btn btn-lg btn-secondary">Sign In</a>
+            <h3 class="cover-heading">Don't Have Account ? Sign Up Below</h3>
+            <a href="customersignup.php" class="btn btn-lg btn-secondary">Sign Up</a>
+            <a href="index.php" class="btn btn-lg btn-secondary">Go Back</a>
+            </p>
+
+        </main>
+
     </main>
 
-    
+
     <footer class="mastfoot mt-auto">
         <div class="inner">
             <p>Cover template for <a href="https://getbootstrap.com/">Bootstrap</a>, by <a href="https://twitter.com/mdo">@mdo</a>.</p>

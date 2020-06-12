@@ -1,6 +1,6 @@
 <?php
 session_start();
-require_once "../../classes/department.php";
+require_once "../../../classes/department.php";
 
 $name=$detail="";
 if(isset($_POST['deptname']) && isset($_POST['deptdetails'])) {

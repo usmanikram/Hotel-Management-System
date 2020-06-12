@@ -1,5 +1,5 @@
 <?php
-require_once "../../classes/customer.php";
+require_once "../../../classes/customer.php";
 
 $name=$dob=$gender=$cnic=$contact=$address=
 $email=$password=$ccno=$ccexpiry="";

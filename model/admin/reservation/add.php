@@ -1,6 +1,6 @@
 <?php
-require_once "../../controller/reservation/add.php";
-require_once "../../config/config.php";
+require_once "../../../controller/admin/reservation/add.php";
+require_once "../../../config/config.php";
 
 $reservation = $_SESSION['reservation'];
 
@@ -24,11 +24,11 @@ if($stmt = $mysqli->prepare($sql)) {
     // Attempt to execute the prepared statement
     if($stmt->execute()){
         $message= "Reservation Added Successfully";
-        header("location: ../../admin/reservations.php?message=$message");
+        header("location: ../../../admin/reservations.php?message=$message");
         exit();
     } else{
         $message= "Something went wrong. Please try again later.";
-        header("location: ../../admin/reservations.php?message=$message");
+        header("location: ../../../admin/reservations.php?message=$message");
     }
 
 

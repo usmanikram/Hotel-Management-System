@@ -179,7 +179,7 @@ $countroom= $resultroom->num_rows;
                 </div>
             </div>
 
-            <form action="../model/reservation/add.php" method="post">
+            <form action="../model/admin/reservation/add.php" method="post">
                 <div class="form-group">
                     <label for="customer">Customer Name:</label>
                     <select class="form-control" name="customerid">

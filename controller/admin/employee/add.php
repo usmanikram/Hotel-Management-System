@@ -1,5 +1,5 @@
 <?php
-require_once "../../classes/employee.php";
+require_once "../../../classes/employee.php";
 
 $name=$dob=$gender=$cnic=$address=$doj=$designation=$salary=$contact=
 $email=$password=$departmentid=$serviceid="";

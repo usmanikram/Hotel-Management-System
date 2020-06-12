@@ -1,6 +1,6 @@
 <?php
-require_once "../../controller/employee/add.php";
-require_once "../../config/config.php";
+require_once "../../../controller/admin/employee/add.php";
+require_once "../../../config/config.php";
 
 $employee= $_SESSION['employee'];
 
@@ -37,11 +37,11 @@ if($stmt = $mysqli->prepare($sql)) {
     // Attempt to execute the prepared statement
     if($stmt->execute()){
         $message= "Employee Added Successfully";
-        header("location: ../../admin/employees.php?message=$message");
+        header("location: ../../../admin/employees.php?message=$message");
         exit();
     } else{
         $message= "Something went wrong. Please try again later.";
-        header("location: ../../admin/employees.php?message=$message");
+        header("location: ../../../admin/employees.php?message=$message");
     }
 
 

@@ -1,6 +1,6 @@
 <?php
 session_start();
-require_once "../../classes/reservation.php";
+require_once "../../../classes/reservation.php";
 
 $customerid=$roomid=$startdate=$enddate="";
 

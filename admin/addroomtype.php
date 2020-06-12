@@ -155,7 +155,7 @@
             </div>
 
 
-            <form action="../model/roomtype/add.php" method="post">
+            <form action="../model/admin/roomtype/add.php" method="post">
                 <div class="form-row">
                     <div class="form-group col-md-6">
                         <label for="name">Name:</label>

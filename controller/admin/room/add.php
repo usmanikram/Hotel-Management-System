@@ -1,6 +1,6 @@
 <?php
 session_start();
-require_once "../../classes/room.php";
+require_once "../../../classes/room.php";
 
 $detail=$type=$status=$image="";
 if(isset($_POST['details']) && isset($_POST['type'])&& isset($_POST['status'])

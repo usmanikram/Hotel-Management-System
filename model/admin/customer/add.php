@@ -1,6 +1,6 @@
 <?php
-require_once "../../controller/customer/add.php";
-require_once "../../config/config.php";
+require_once "../../../controller/admin/customer/add.php";
+require_once "../../../config/config.php";
 
 $customer= $_SESSION['customer'];
 
@@ -32,11 +32,11 @@ if($stmt = $mysqli->prepare($sql)) {
     // Attempt to execute the prepared statement
     if($stmt->execute()){
         $message= "Customer Added Successfully";
-        header("location: ../../admin/customers.php?message=$message");
+        header("location: ../../../admin/customers.php?message=$message");
         exit();
     } else{
         $message= "Something went wrong. Please try again later.";
-        header("location: ../../admin/customers.php?message=$message");
+        header("location: ../../../admin/customers.php?message=$message");
     }
 
 

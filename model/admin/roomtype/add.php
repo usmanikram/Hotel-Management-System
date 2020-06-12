@@ -1,6 +1,6 @@
 <?php
-require_once "../../controller/roomtype/add.php";
-require_once "../../config/config.php";
+require_once "../../../controller/admin/roomtype/add.php";
+require_once "../../../config/config.php";
 
 $roomtype = $_SESSION['rtype'];
 
@@ -25,11 +25,11 @@ if($stmt = $mysqli->prepare($sql)) {
     // Attempt to execute the prepared statement
     if($stmt->execute()){
         $message= "Room Type Added Successfully";
-        header("location: ../../admin/roomtype.php?message=$message");
+        header("location: ../../../admin/roomtype.php?message=$message");
         exit();
     } else{
         $message= "Something went wrong. Please try again later.";
-        header("location: ../../admin/roomtype.php?message=$message");
+        header("location: ../../../admin/roomtype.php?message=$message");
     }
 
 

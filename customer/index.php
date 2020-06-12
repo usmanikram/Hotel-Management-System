@@ -3,12 +3,14 @@ session_start();
 if(isset($_SESSION['customername']))
 {
     $customername=$_SESSION['customername'];
+
 }
 else
 {
     $msg= "Login First";
     header("Location: ../customerlogin.php?message=$msg");
 }
+
 
 ?>
 <!doctype html>
@@ -176,6 +178,7 @@ else
                     </button>
                 </div>
             </div>
+
 
 
         </main>

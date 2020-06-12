@@ -153,7 +153,7 @@
             </div>
 
 
-            <form action="../model/department/add.php" method="post">
+            <form action="../model/admin/department/add.php" method="post">
                 <div class="form-row">
                     <div class="form-group col-md-6">
                         <label for="name">Name:</label>

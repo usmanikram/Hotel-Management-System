@@ -1,6 +1,6 @@
 <?php
 session_start();
-require_once "../../classes/roomtype.php";
+require_once "../../../classes/roomtype.php";
 
 $name=$detail=$price=$capacity="";
 if(isset($_POST['name']) && isset($_POST['details'])&& isset($_POST['price'])
