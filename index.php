@@ -53,6 +53,7 @@ else
                 <a class="nav-link active" href="index.html">Home</a>
                 <a class="nav-link" href="customerlogin.php">Customer Login</a>
                 <a class="nav-link" href="employeelogin.php">Employee Login</a>
+                <a class="nav-link" href="adminlogin.php">Admin Login</a>
             </nav>
         </div>
     </header>

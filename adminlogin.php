@@ -6,7 +6,7 @@
     <meta name="description" content="">
     <meta name="author" content="Mark Otto, Jacob Thornton, and Bootstrap contributors">
     <meta name="generator" content="Jekyll v4.0.1">
-    <title>Employee Login · HMS</title>
+    <title>Admin Login - HMS</title>
 
 
 
@@ -33,9 +33,9 @@
     <link href="css/floating-labels.css" rel="stylesheet">
 </head>
 <body>
-<form class="form-signin" action="verifyemployee.php" method="post">
+<form class="form-signin" action="verifyadmin.php" method="post">
     <div class="text-center mb-4">
-        <h1 >Employee Login</h1>
+        <h1 >Admin Login</h1>
         <h4>Enter Your Credentials</h4>
     </div>
     <?php

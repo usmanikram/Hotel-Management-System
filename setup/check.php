@@ -355,6 +355,22 @@ VALUES
     }
 
 
+    $sql = "Create Table bill 
+(
+billID int AUTO_INCREMENT Primary Key,
+billDate date,
+billDetails varchar(50),
+billAmount varchar(10),
+paymentMode varchar(15),
+custID int
+)";
+
+
+    if ($mysqli->query($sql) === TRUE) {
+        echo "Table created successfully";
+    } else {
+        echo "Error creating table: " . $mysqli->error;
+    }
 
 
 

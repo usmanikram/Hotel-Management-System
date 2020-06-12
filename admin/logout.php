@@ -4,12 +4,12 @@ if(isset($_SESSION['name']))
 {
 session_destroy();
     $msg= "Logout Successful";
-    header("Location: ../employeelogin.php?message=$msg");
+    header("Location: ../adminlogin.php?message=$msg");
 }
 else
     {
         $msg= "Login First";
-        header("Location: ../employeelogin.php?message=$msg");
+        header("Location: ../adminlogin.php?message=$msg");
     }
 
 ?>
