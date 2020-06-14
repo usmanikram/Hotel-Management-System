@@ -1,6 +1,5 @@
 <?php
 require_once ("../config/config.php");
-
 $queryroom="SELECT * FROM room r join roomtype rt join status s where r.roomType=rt.rtypeID and r.roomStatus=s.id";
 $resultroom = $mysqli->query($queryroom);
 $countroom = $resultroom->num_rows;
@@ -35,6 +34,15 @@ $countroom = $resultroom->num_rows;
             }
         }
     </style>
+    <script>
+        function printContent(el){
+            var restorepage = $('body').html();
+            var printcontent = $('#' + el).clone();
+            $('body').empty().html(printcontent);
+            window.print();
+            $('body').html(restorepage);
+        }
+    </script>
     <!-- Custom styles for this template -->
     <link href="../css/dashboard.css" rel="stylesheet">
 </head>
@@ -113,18 +121,6 @@ $countroom = $resultroom->num_rows;
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="complaints.php">
-                            <span data-feather="alert-circle"></span>
-                            Complaints
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="feedback.php">
-                            <span data-feather="archive"></span>
-                            Feedback
-                        </a>
-                    </li>
-                    <li class="nav-item">
                         <a class="nav-link" href="bills.php">
                             <span data-feather="file"></span>
                             Bills
@@ -156,7 +152,7 @@ $countroom = $resultroom->num_rows;
                 <div class="btn-toolbar mb-2 mb-md-0">
                     <div class="btn-group mr-2">
                         <button onclick="location.href='addroom.php';" type="button" class="btn btn-sm btn-outline-secondary">Add New Room</button>
-                        <button type="button" class="btn btn-sm btn-outline-secondary">Download PDF</button>
+                        <button id="print" type="button" onclick="printContent('table');"  class="btn btn-sm btn-outline-secondary">Print</button>
                     </div>
                 </div>
             </div>
@@ -167,7 +163,7 @@ $countroom = $resultroom->num_rows;
                 echo "<b><p style='color: red'>$msg</p></b>";
             }
             ?>
-            <table class='table table-light table-bordered table-striped'>
+            <table class='table table-light table-bordered table-striped' id="table">
                 <thead>
                 <tr>
                     <th>ID</th>

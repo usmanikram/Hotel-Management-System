@@ -3,11 +3,8 @@ if(!isset($_SERVER['HTTP_REFERER'])){
     header('location:../error.php');
     exit;
 }
-?>
-<?php
 
 $dbhostname = $dbusername = $dbpassword = $dbname = "";
-
 if(isset($_POST['hostname']) && isset($_POST['username']) && isset($_POST['password'])
 && isset($_POST['name']))
 {
@@ -28,7 +25,6 @@ if ($mysqli->connect_error) {
     header("location: index.php?message=$message");
 }
 else {
-
     $configfile = fopen("../config/config.php", "x+");
 
 
@@ -375,9 +371,5 @@ custID int
 
     $msg= "Database Connection Successful.Tables Created.";
     header("Location: setup2.php?message=$msg");
-
-
-
-
 }
 ?>

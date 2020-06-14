@@ -1,4 +1,3 @@
-
 <!doctype html>
 <html lang="en">
 <head>
@@ -61,7 +60,7 @@
 
 
     <div class="form-label-group">
-        <input type="password" class="form-control" name="password" placeholder="Adminstrator Password">
+        <input type="password" class="form-control" name="password" placeholder="Adminstrator Password" required>
         <label for="password">Adminstrator Password</label>
     </div>
 

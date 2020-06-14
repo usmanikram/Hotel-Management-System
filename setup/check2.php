@@ -4,9 +4,6 @@ if(!isset($_SERVER['HTTP_REFERER'])){
     header('location:../error.php');
     exit;
 }
-?>
-<?php
-
 require_once("../config/config.php");
 
 $adminname = $adminemail = $adminpassword = "";
@@ -25,5 +22,4 @@ if($mysqli->query($sql)) {
     $msg = "Admin Registeration Successful. Kindly Login Using Email and Password";
     header("location: setupfinish.php?message=$msg");
 }
-
 ?>

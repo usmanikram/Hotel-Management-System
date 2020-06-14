@@ -1,11 +1,7 @@
 <?php
-
-require_once "../model/admin/employee/view.php";
-
-$employee= $_SESSION['employeeview'];
-?>
-<?php
 require_once ("../config/config.php");
+require_once "../model/admin/employee/view.php";
+$employee= $_SESSION['employeeview'];
 $querydept="SELECT * FROM department";
 $resultdept = $mysqli->query($querydept);
 $countdept = $resultdept->num_rows;
@@ -120,18 +116,6 @@ $countservice= $resultservice->num_rows;
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="complaints.php">
-                            <span data-feather="alert-circle"></span>
-                            Complaints
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="feedback.php">
-                            <span data-feather="archive"></span>
-                            Feedback
-                        </a>
-                    </li>
-                    <li class="nav-item">
                         <a class="nav-link" href="bills.php">
                             <span data-feather="file"></span>
                             Bills
@@ -178,25 +162,25 @@ $countservice= $resultservice->num_rows;
                 <div class="form-row">
                     <div class="form-group col-md-6">
                         <label for="name">Name</label>
-                        <input type="text" class="form-control" name="name" value="<?php echo $employee->getempName(); ?>">
+                        <input type="text" class="form-control" name="name" value="<?php echo $employee->getempName(); ?>" required>
                     </div>
                     <div class="form-group col-md-6">
                         <label for="dob">DOB</label>
-                        <input type="date"  class="form-control" name="dob" value="<?php echo $employee->getempDOB(); ?>">
+                        <input type="date"  class="form-control" name="dob" value="<?php echo $employee->getempDOB(); ?>" required>
                     </div>
                 </div>
                 <div class="form-row">
                     <div class="form-group col-md-6">
                         <label for="gender">Gender</label>
-                        <select class="form-control" name="gender">
-                            <option>Current:<?php echo $employee->getempGender(); ?></option>
+                        <select class="form-control" name="gender" required>
+                            <option value="">Current:<?php echo $employee->getempGender(); ?></option>
                             <option>Male</option>
                             <option>Female</option>
                         </select>
                     </div>
                     <div class="form-group col-md-6">
                         <label for="cnic">CNIC</label>
-                        <input type="text" class="form-control" name="cnic" value="<?php echo $employee->getempCNIC(); ?>">
+                        <input type="text" class="form-control" name="cnic" value="<?php echo $employee->getempCNIC(); ?>" required>
                     </div>
                 </div>
                 <div class="form-row">
@@ -204,16 +188,16 @@ $countservice= $resultservice->num_rows;
                 </div>
                 <div class="form-group">
                     <label for="address">Address</label>
-                    <input type="text" class="form-control" name="address" value="<?php echo $employee->getempAddress(); ?>">
+                    <input type="text" class="form-control" name="address" value="<?php echo $employee->getempAddress(); ?>" required>
                 </div>
                 <div class="form-row">
                     <div class="form-group col-md-6">
                         <label for="dob">DOJ</label>
-                        <input type="date" class="form-control" name="doj" value="<?php echo $employee->getempDOJ(); ?>">
+                        <input type="date" class="form-control" name="doj" value="<?php echo $employee->getempDOJ(); ?>" required>
                     </div>
                     <div class="form-group col-md-6">
                         <label for="designation">Designation</label>
-                        <input type="text" class="form-control" name="designation" value="<?php echo $employee->getempDesignation(); ?>">
+                        <input type="text" class="form-control" name="designation" value="<?php echo $employee->getempDesignation(); ?>" required>
                     </div>
                 </div>
                 <div class="form-row">
@@ -223,18 +207,18 @@ $countservice= $resultservice->num_rows;
                             <div class="input-group-prepend">
                                 <div class="input-group-text">Rs.</div>
                             </div>
-                            <input type="text" class="form-control" name="salary" value="<?php echo $employee->getempSalary(); ?>">
+                            <input type="text" class="form-control" name="salary" value="<?php echo $employee->getempSalary(); ?>" required>
                         </div>
                     </div>
                     <div class="form-group col-md-6">
                         <label for="contact">Contact</label>
-                        <input type="text" class="form-control" name="contact" value="<?php echo $employee->getempContact(); ?>">
+                        <input type="text" class="form-control" name="contact" value="<?php echo $employee->getempContact(); ?>"required>
                     </div>
                 </div>
                 <div class="form-row">
                     <div class="form-group col-md-6">
                         <label for="email">Email</label>
-                        <input type="email" class="form-control" name="email" value="<?php echo $employee->getempEmail(); ?>">
+                        <input type="email" class="form-control" name="email" value="<?php echo $employee->getempEmail(); ?>" required>
                     </div>
                     <div class="form-group col-md-6">
                         <label for="password">Password</label>
@@ -246,7 +230,7 @@ $countservice= $resultservice->num_rows;
 
                     <div class="form-group col-md-6">
                         <label for="department">Department</label>
-                        <select class="form-control" name="department">
+                        <select class="form-control" name="department" required>
                             <?php
                             if($countdept==0)
                             {
@@ -255,7 +239,7 @@ $countservice= $resultservice->num_rows;
                             else
                             {
                                 ?>
-                            <option>Current:<?php echo $employee->getedepartmentId(); ?></option>
+                            <option value="">Current:<?php echo $employee->getedepartmentId(); ?></option>
                             <?php
                                 while($fetchdept = $resultdept->fetch_assoc())
                                 {
@@ -268,27 +252,7 @@ $countservice= $resultservice->num_rows;
                             ?>
                         </select>
                     </div>
-                    <div class="form-group col-md-6">
-                        <label for="service">Service</label>
-                        <select class="form-control" name="service">
-                            <?php
-                            if($countservice==0)
-                            {
-                                echo '<option value="">No Datas have been created Yet</option>';
-                            }
-                            else
-                            {
-                                while($fetchservice = $resultservice->fetch_assoc())
-                                {
-                                    ?>
-                                    <option value="<?php echo $fetchservice['serviceID']; ?>">
-                                        <?php echo $fetchservice['serviceName']; ?></option>
-                                    <?php
-                                }
-                            }
-                            ?>
-                        </select>
-                    </div>
+
                 </div>
 
                 <button type=submit" class="btn btn-sm btn-outline-secondary">Update Employee</button>

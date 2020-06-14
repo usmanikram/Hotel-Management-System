@@ -1,12 +1,6 @@
 <?php
-
 require_once "../model/admin/department/view.php";
-
-
 $department= $_SESSION['deptview'];
-
-
-
 ?>
 <!doctype html>
 <html lang="en">
@@ -114,18 +108,6 @@ $department= $_SESSION['deptview'];
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="complaints.php">
-                            <span data-feather="alert-circle"></span>
-                            Complaints
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="feedback.php">
-                            <span data-feather="archive"></span>
-                            Feedback
-                        </a>
-                    </li>
-                    <li class="nav-item">
                         <a class="nav-link" href="bills.php">
                             <span data-feather="file"></span>
                             Bills
@@ -153,7 +135,7 @@ $department= $_SESSION['deptview'];
 
         <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-md-4">
             <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
-                <h1 class="h2">Add Department</h1>
+                <h1 class="h2">View Department</h1>
                 <div class="btn-toolbar mb-2 mb-md-0">
                     <div class="btn-group mr-2">
                         <button onclick="location.href='departments.php';" type="button" class="btn btn-sm btn-outline-secondary">Go Back</button>
@@ -174,12 +156,12 @@ $department= $_SESSION['deptview'];
                 <div class="form-row">
                     <div class="form-group col-md-6">
                         <label for="name">Name:</label>
-                        <input type="text" class="form-control" name="deptname"value="<?php echo $department->getdeptName(); ?>">
+                        <input type="text" class="form-control" name="deptname"value="<?php echo $department->getdeptName(); ?>" required>
                     </div>
                 </div>
                 <div class="form-group">
                     <label for="details">Details</label>
-                    <input type="text" class="form-control" name="deptdetails" value="<?php echo $department->getdeptDetail(); ?>">
+                    <input type="text" class="form-control" name="deptdetails" value="<?php echo $department->getdeptDetail(); ?>" required>
                 </div>
 
                 <button type=submit" class="btn btn-sm btn-outline-secondary">Update Department</button>

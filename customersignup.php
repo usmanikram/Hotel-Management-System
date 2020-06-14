@@ -37,10 +37,11 @@
     <link href="css/floating-labels.css" rel="stylesheet">
 </head>
 <body>
-<form class="form-signin" action="verifycustomer.php" method="post">
+<form class="form-signin" action="verifycustomer.php" method="post" name="customersignup" onsubmit="return check(customersignup)">
     <div class="text-center mb-4">
         <h1>Customer Sign Up</h1>
         <h4>Fill Out The Form To Sign Up</h4>
+        <p style='color: red'>* Fields are required</p>
     </div>
     <?php
     if(isset($_GET["message"]))
@@ -51,45 +52,45 @@
     ?>
     <div class="form-row">
         <div class="form-group col-md-6">
-            <label for="name">Name</label>
-            <input type="text" class="form-control" name="name" placeholder="Customer Name">
+            <label for="name">Name <b style='color: red'>*</b></label>
+            <input type="text" class="form-control" name="name" placeholder="Customer Name" required>
         </div>
         <div class="form-group col-md-6">
-            <label for="dob">DOB</label>
-            <input type="text" onfocus="(this.type='date')" class="form-control" name="dob" placeholder="Date of Birth">
+            <label for="dob">DOB <b style='color: red'>*</b></label>
+            <input type="text" onfocus="(this.type='date')" class="form-control" name="dob" placeholder="Date of Birth" required>
         </div>
     </div>
     <div class="form-row">
         <div class="form-group col-md-6">
-            <label for="gender">Gender</label>
-            <select class="form-control" name="gender">
+            <label for="gender">Gender <b style='color: red'>*</b></label>
+            <select class="form-control" name="gender" required>
                 <option>Male</option>
                 <option>Female</option>
             </select>
         </div>
         <div class="form-group col-md-6">
-            <label for="cnic">CNIC</label>
-            <input type="text" class="form-control" name="cnic" placeholder="Citizen National Identity Card Number">
+            <label for="cnic">CNIC <b style='color: red'>*</b></label>
+            <input type="text" class="form-control" name="cnic" placeholder="Citizen National Identity Card Number" required>
         </div>
     </div>
     <div class="form-row">
         <div class="form-group col-md-6">
-            <label for="contact">Contact</label>
-            <input type="text" class="form-control" name="contact" placeholder="Customer Contact Number">
+            <label for="contact">Contact <b style='color: red'>*</b></label>
+            <input type="text" class="form-control" name="contact" placeholder="Customer Contact Number" required>
         </div>
     </div>
     <div class="form-group">
-        <label for="address">Address</label>
-        <input type="text" class="form-control" name="address" placeholder="Customer Address">
+        <label for="address">Address <b style='color: red'>*</b></label>
+        <input type="text" class="form-control" name="address" placeholder="Customer Address" required>
     </div>
     <div class="form-row">
         <div class="form-group col-md-6">
-            <label for="email">Email</label>
-            <input type="email" class="form-control" name="email" placeholder="Customer Email">
+            <label for="email">Email <b style='color: red'>*</b></label>
+            <input type="email" class="form-control" name="email" placeholder="Customer Email" required>
         </div>
         <div class="form-group col-md-6">
-            <label for="password">Password</label>
-            <input type="password" class="form-control" name="password" placeholder="Customer Password">
+            <label for="password">Password <b style='color: red'>*</b></label>
+            <input type="password" class="form-control" name="password" placeholder="Customer Password" required>
         </div>
     </div>
     <div class="form-row">
@@ -104,7 +105,7 @@
     </div>
     <button class="btn btn-lg btn-primary btn-block" type="submit" >Register</button>
     <button class="btn btn-lg btn-primary btn-block" type="button" onclick="goBack();">Go Back</button>
-    <p class="mt-5 mb-3 text-muted text-center">&copy; 2017-2020</p>
+    <p class="mt-5 mb-3 text-muted text-center">&copy; Copyright 2020, Hotel Management System.</p>
 </form>
 </body>
 </html>

@@ -14,9 +14,7 @@ $countcustomer = $resultcustomer->num_rows;
     <meta name="generator" content="Jekyll v4.0.1">
     <title>Customers · Admin Panel · HMS</title>
 
-    <!-- Bootstrap core CSS -->
     <link href="../css/bootstrap.css" rel="stylesheet">
-
     <style>
         .bd-placeholder-img {
             font-size: 1.125rem;
@@ -33,7 +31,15 @@ $countcustomer = $resultcustomer->num_rows;
             }
         }
     </style>
-    <!-- Custom styles for this template -->
+    <script>
+        function printContent(el){
+            var restorepage = $('body').html();
+            var printcontent = $('#' + el).clone();
+            $('body').empty().html(printcontent);
+            window.print();
+            $('body').html(restorepage);
+        }
+    </script>
     <link href="../css/dashboard.css" rel="stylesheet">
 </head>
 <body>
@@ -111,18 +117,6 @@ $countcustomer = $resultcustomer->num_rows;
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="complaints.php">
-                            <span data-feather="alert-circle"></span>
-                            Complaints
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="feedback.php">
-                            <span data-feather="archive"></span>
-                            Feedback
-                        </a>
-                    </li>
-                    <li class="nav-item">
                         <a class="nav-link" href="bills.php">
                             <span data-feather="file"></span>
                             Bills
@@ -154,7 +148,7 @@ $countcustomer = $resultcustomer->num_rows;
                 <div class="btn-toolbar mb-2 mb-md-0">
                     <div class="btn-group mr-2">
                         <button onclick="location.href='addcustomer.php';" type="button" class="btn btn-sm btn-outline-secondary">Add New Customer</button>
-                        <button type="button" class="btn btn-sm btn-outline-secondary">Download PDF</button>
+                        <button id="print" type="button" onclick="printContent('table');" class="btn btn-sm btn-outline-secondary">Print</button>
                     </div>
                 </div>
             </div>
@@ -168,7 +162,7 @@ $countcustomer = $resultcustomer->num_rows;
 
             <div class="table-responsive">
 
-                <table class='table table-light table-bordered table-striped'>
+                <table class='table table-light table-bordered table-striped' id="table">
                     <thead>
                     <tr>
                         <th>ID</th>

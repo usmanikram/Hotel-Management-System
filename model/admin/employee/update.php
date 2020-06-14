@@ -17,13 +17,12 @@ $contact = $employee->getempContact();
 $email = $employee->getempEmail();
 $password = password_hash($employee->getempPassword(),PASSWORD_BCRYPT);
 $dept = $employee->getedepartmentId();
-$service = $employee->geteserviceId();
+
 
 $sql = "UPDATE employee SET empName='$name', empDOB='$dob', 
 empGender='$gender', empCNIC='$cnic',empAddress='$address',empDOJ='$doj',
 empDesignation='$designation',empSalary='$salary',empContact='$contact',empEmail='$email', 
-empPassword='$password',deptID='$dept', 
-serviceID='$service' where empID='$id'";
+empPassword='$password',deptID='$dept' where empID='$id'";
 
 
 

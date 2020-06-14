@@ -58,7 +58,7 @@
 
     <button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
     <button class="btn btn-lg btn-primary btn-block" type="button" onclick="location.href='index.php';">Go Back</button>
-    <p class="mt-5 mb-3 text-muted text-center">&copy; 2017-2020</p>
+    <p class="mt-5 mb-3 text-muted text-center">&copy; Copyright 2020, Hotel Management System.</p>
 </form>
 </body>
 </html>

@@ -7,7 +7,6 @@ if(isset($_POST['startdate'])&&isset($_POST['enddate'])&&isset($_POST['capacity'
     $enddate=$_POST['enddate'];
     $capacity=$_POST['capacity'];
 }
-
 $querycustomer="SELECT * FROM customer";
 $resultcustomer = $mysqli->query($querycustomer);
 $countcustomer = $resultcustomer->num_rows;
@@ -17,9 +16,7 @@ $queryroom="SELECT
         SELECT reservation.roomID FROM reservation LEFT Outer JOIN
             room ON reservation.roomID = room.roomID 
         WHERE resStartDate<'$startdate'AND resEndtDate>='$enddate' 
-) AND room.roomStatus='1' AND roomtype.rtypeCapacity>='$capacity'
-
-";
+) AND room.roomStatus='1' AND roomtype.rtypeCapacity>='$capacity'";
 $resultroom = $mysqli->query($queryroom);
 $countroom= $resultroom->num_rows;
 ?>
@@ -32,10 +29,7 @@ $countroom= $resultroom->num_rows;
     <meta name="author" content="Mark Otto, Jacob Thornton, and Bootstrap contributors">
     <meta name="generator" content="Jekyll v4.0.1">
     <title>Add Reservations · Admin Panel · HMS</title>
-
-    <!-- Bootstrap core CSS -->
     <link href="../css/bootstrap.css" rel="stylesheet">
-
 
     <style>
         .bd-placeholder-img {
@@ -53,7 +47,6 @@ $countroom= $resultroom->num_rows;
             }
         }
     </style>
-    <!-- Custom styles for this template -->
     <link href="../css/dashboard.css" rel="stylesheet">
 </head>
 <body>
@@ -131,18 +124,6 @@ $countroom= $resultroom->num_rows;
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="complaints.php">
-                            <span data-feather="alert-circle"></span>
-                            Complaints
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="feedback.php">
-                            <span data-feather="archive"></span>
-                            Feedback
-                        </a>
-                    </li>
-                    <li class="nav-item">
                         <a class="nav-link" href="bills.php">
                             <span data-feather="file"></span>
                             Bills
@@ -178,7 +159,6 @@ $countroom= $resultroom->num_rows;
                     </div>
                 </div>
             </div>
-
             <form action="../model/admin/reservation/add.php" method="post">
                 <div class="form-group">
                     <label for="customer">Customer Name:</label>

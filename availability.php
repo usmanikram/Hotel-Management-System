@@ -5,8 +5,6 @@ if(!isset($_SERVER['HTTP_REFERER'])){
     header('location:../error.php');
     exit;
 }
-?>
-<?php
 $file= 'config/config.php';
 if(file_exists($file))
 {
@@ -16,9 +14,6 @@ else
 {
     header("Location: setup/index.php");
 }
-?>
-<?php
-require_once ("config/config.php");
 $startdate=$enddate=$capacity="";
 if(isset($_POST['startdate'])&&isset($_POST['enddate'])&&isset($_POST['capacity']))
 {
@@ -26,8 +21,6 @@ if(isset($_POST['startdate'])&&isset($_POST['enddate'])&&isset($_POST['capacity'
     $enddate=$_POST['enddate'];
     $capacity=$_POST['capacity'];
 }
-
-
 $queryroom="SELECT
     * FROM room join roomtype on room.roomType=roomtype.rtypeID WHERE roomID   NOT IN 
 (
@@ -92,13 +85,20 @@ $countroom= $resultroom->num_rows;
             </p>
         </div>
     </section>
-    <?php
-    while($fetchroom = $resultroom->fetch_assoc())
-    {
-    ?>
+
     <div class="album py-5 bg-light">
         <div class="container">
-
+            <?php
+            if($countroom==0)
+            {
+                echo '<h3 align="center">Sorry All Room Are Reserved For The Dates You Have Entered</h3>';
+                echo '<h3 align="center">Try Again By Changing Dates</h3>';
+                echo '<p align="center"><a href="index.php" class="btn btn-primary my-2">Go Back</a></p>';
+            }
+            else {
+            while($fetchroom = $resultroom->fetch_assoc())
+            {
+            ?>
             <div class="row h-100">
                 <div class="col-sm-12 my-auto">
                     <div class="card card-block w-25 mx-auto">
@@ -120,6 +120,7 @@ $countroom= $resultroom->num_rows;
         </div
         <?php
         }
+        }
         ?>
     </div>
 
@@ -131,10 +132,7 @@ $countroom= $resultroom->num_rows;
             <a href="customerlogin.php" class="btn btn-primary my-2">Sign In (If You Have A Account)</a>
             <a href="customersignup.php" class="btn btn-secondary my-2">Register Here (If You Don't Have A Account)</a>
         </p>
-        <p>
-            <a href="index.php" class="btn btn-primary my-2">Go Back</a>
 
-        </p>
     </div>
 </section>
 
@@ -143,7 +141,7 @@ $countroom= $resultroom->num_rows;
         <p class="float-right">
             <a href="#">Back to top</a>
         </p>
-        <p> &copy; Hotel Management System, All Rights Reserved.</p>
+        <p> &copy; Copyright 2020, Hotel Management System.</p>
 
     </div>
 </footer>

@@ -8,7 +8,6 @@
     <meta name="generator" content="Jekyll v4.0.1">
     <title>Add Department · Admin Panel · HMS</title>
 
-    <!-- Bootstrap core CSS -->
     <link href="../css/bootstrap.css" rel="stylesheet">
     <style>
         .bd-placeholder-img {
@@ -26,7 +25,6 @@
             }
         }
     </style>
-    <!-- Custom styles for this template -->
     <link href="../css/dashboard.css" rel="stylesheet">
 </head>
 <body>
@@ -104,18 +102,6 @@
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="complaints.php">
-                            <span data-feather="alert-circle"></span>
-                            Complaints
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="feedback.php">
-                            <span data-feather="archive"></span>
-                            Feedback
-                        </a>
-                    </li>
-                    <li class="nav-item">
                         <a class="nav-link" href="bills.php">
                             <span data-feather="file"></span>
                             Bills
@@ -140,7 +126,6 @@
                 </ul>
             </div>
         </nav>
-
         <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-md-4">
             <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
                 <h1 class="h2">Add Department</h1>
@@ -151,8 +136,6 @@
                     </div>
                 </div>
             </div>
-
-
             <form action="../model/admin/department/add.php" method="post">
                 <div class="form-row">
                     <div class="form-group col-md-6">

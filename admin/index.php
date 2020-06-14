@@ -1,15 +1,14 @@
 <?php
 session_start();
 if(isset($_SESSION['name']))
-{
+    {
     $adminname=$_SESSION['name'];
-}
+    }
 else
     {
         $msg= "Login First";
         header("Location: ../employeelogin.php?message=$msg");
     }
-
 ?>
 <!doctype html>
 <html lang="en">
@@ -121,18 +120,6 @@ else
                         <a class="nav-link" href="departments.php">
                             <span data-feather="truck"></span>
                             Departments
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="complaints.php">
-                            <span data-feather="alert-circle"></span>
-                            Complaints
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="feedback.php">
-                            <span data-feather="archive"></span>
-                            Feedback
                         </a>
                     </li>
                     <li class="nav-item">

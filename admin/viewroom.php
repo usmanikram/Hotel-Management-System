@@ -1,12 +1,7 @@
 <?php
-
-require_once "../model/admin/room/view.php";
-
-$room= $_SESSION['roomview'];
-
-?>
-<?php
 require_once ("../config/config.php");
+require_once "../model/admin/room/view.php";
+$room= $_SESSION['roomview'];
 $querytype="SELECT * FROM roomtype";
 $resulttype = $mysqli->query($querytype);
 $counttype = $resulttype->num_rows;
@@ -122,18 +117,6 @@ $countstatus= $resultstatus->num_rows;
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="complaints.php">
-                            <span data-feather="alert-circle"></span>
-                            Complaints
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="feedback.php">
-                            <span data-feather="archive"></span>
-                            Feedback
-                        </a>
-                    </li>
-                    <li class="nav-item">
                         <a class="nav-link" href="bills.php">
                             <span data-feather="file"></span>
                             Bills
@@ -161,7 +144,7 @@ $countstatus= $resultstatus->num_rows;
 
         <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-md-4">
             <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
-                <h1 class="h2">Add Room</h1>
+                <h1 class="h2">View Room</h1>
                 <div class="btn-toolbar mb-2 mb-md-0">
                     <div class="btn-group mr-2">
                         <button onclick="location.href='room.php';" type="button" class="btn btn-sm btn-outline-secondary">Go Back</button>
@@ -178,12 +161,12 @@ $countstatus= $resultstatus->num_rows;
                 </div>
                 <div class="form-group">
                     <label for="details">Details</label>
-                    <input type="text" class="form-control" name="details" value="<?php echo $room->getroomDetails(); ?>">
+                    <input type="text" class="form-control" name="details" value="<?php echo $room->getroomDetails(); ?>" required>
                 </div>
 
                 <div class="form-group">
                     <label for="capacity">Room Type</label>
-                    <select class="form-control" name="type">
+                    <select class="form-control" name="type" required>
                         <?php
                         if($counttype==0)
                         {
@@ -192,7 +175,9 @@ $countstatus= $resultstatus->num_rows;
                         else
                         {
                             ?>
-                        <?php
+                            <option value="">
+                                Please Select Room Type</option>
+                            <?php
                             while($fetchtype = $resulttype->fetch_assoc())
                             {
                                 ?>
@@ -206,7 +191,7 @@ $countstatus= $resultstatus->num_rows;
                 </div>
                 <div class="form-group">
                     <label for="capacity">Room Status</label>
-                    <select class="form-control" name="status">
+                    <select class="form-control" name="status" required>
                         <?php
                         if($countstatus==0)
                         {
@@ -214,6 +199,10 @@ $countstatus= $resultstatus->num_rows;
                         }
                         else
                         {
+                            ?>
+                            <option value="">
+                                Please Select Room Status</option>
+                        <?php
                             while($fetchstatus = $resultstatus->fetch_assoc())
                             {
                                 ?>
@@ -231,7 +220,7 @@ $countstatus= $resultstatus->num_rows;
                     <div class="form-group col-md-6">
                         <label for="price">Room Image</label>
                         <div class="input-group mb-2">
-                            <input type="file" class="form-control" name="image" value="<?php echo $room->getroomImage(); ?>">
+                            <input type="file" class="form-control" name="image" value="<?php echo $room->getroomImage(); ?>" required>
 
                         </div>
                     </div>

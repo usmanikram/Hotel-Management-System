@@ -8,10 +8,7 @@
     <meta name="generator" content="Jekyll v4.0.1">
     <title>Add Customer · Admin Panel · HMS</title>
 
-
-    <!-- Bootstrap core CSS -->
     <link href="../css/bootstrap.css" rel="stylesheet">
-
 
     <style>
         .bd-placeholder-img {
@@ -29,7 +26,6 @@
             }
         }
     </style>
-    <!-- Custom styles for this template -->
     <link href="../css/dashboard.css" rel="stylesheet">
 </head>
 <body>
@@ -104,18 +100,6 @@
                         <a class="nav-link" href="departments.php">
                             <span data-feather="truck"></span>
                             Departments
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="complaints.php">
-                            <span data-feather="alert-circle"></span>
-                            Complaints
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="feedback.php">
-                            <span data-feather="archive"></span>
-                            Feedback
                         </a>
                     </li>
                     <li class="nav-item">

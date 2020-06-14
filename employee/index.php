@@ -9,7 +9,6 @@ else
     $msg= "Login First";
     header("Location: ../employeelogin.php?message=$msg");
 }
-
 ?>
 <!doctype html>
 <html lang="en">
@@ -21,11 +20,7 @@ else
     <meta name="generator" content="Jekyll v4.0.1">
     <title>Employee Panel · HMS</title>
 
-
-
-    <!-- Bootstrap core CSS -->
     <link href="../css/bootstrap.css" rel="stylesheet">
-
     <style>
         .bd-placeholder-img {
             font-size: 1.125rem;

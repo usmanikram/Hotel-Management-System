@@ -1,12 +1,6 @@
 <?php
-
 require_once "../model/admin/service/view.php";
-
-
 $service= $_SESSION['serviceview'];
-
-
-
 ?>
 <!doctype html>
 <html lang="en">
@@ -115,18 +109,6 @@ $service= $_SESSION['serviceview'];
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="complaints.php">
-                            <span data-feather="alert-circle"></span>
-                            Complaints
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="feedback.php">
-                            <span data-feather="archive"></span>
-                            Feedback
-                        </a>
-                    </li>
-                    <li class="nav-item">
                         <a class="nav-link" href="bills.php">
                             <span data-feather="file"></span>
                             Bills
@@ -154,7 +136,7 @@ $service= $_SESSION['serviceview'];
 
         <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-md-4">
             <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
-                <h1 class="h2">Add Service</h1>
+                <h1 class="h2">View Service</h1>
                 <div class="btn-toolbar mb-2 mb-md-0">
                     <div class="btn-group mr-2">
                         <button onclick="location.href='services.php';" type="button" class="btn btn-sm btn-outline-secondary">Go Back</button>

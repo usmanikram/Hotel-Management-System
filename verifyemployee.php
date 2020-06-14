@@ -7,7 +7,6 @@ if(isset($_POST['email']) && isset($_POST['password']))
     $email=$_POST['email'];
     $password=$_POST['password'];
 }
-
 $sql = "select * from employee where empEmail='$email'";
 $result = $mysqli->query($sql);
 $row = $result->num_rows;
@@ -28,6 +27,7 @@ if ($row == 1) {
     $msg = "Wrong Credentials";
     header("Location: employeelogin.php?message=$msg");
 }
+?>
 
 
 

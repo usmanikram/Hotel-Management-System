@@ -8,16 +8,16 @@ $employee= $_SESSION['employee'];
 
 
 $sql = "INSERT INTO employee (empID,empName, empDOB, empGender, empCNIC,empAddress, empDOJ, 
-empDesignation,empSalary,empContact, empEmail, empPassword,deptID, serviceID) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
+empDesignation,empSalary,empContact, empEmail, empPassword,deptID) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?)";
 
 
 
 if($stmt = $mysqli->prepare($sql)) {
     // Bind variables to the prepared statement as parameters
-    $stmt->bind_param("ssssssssssssss",$param_id, $param_name, $param_dob,
+    $stmt->bind_param("sssssssssssss",$param_id, $param_name, $param_dob,
         $param_gender, $param_cnic ,$param_address,$param_doj,
         $param_designation,$param_salary,$param_contact,$param_email,$param_password,$param_department
-        ,$param_service);
+        );
 
     $param_id=$employee->getempID();
     $param_name = $employee->getempName();
@@ -31,8 +31,8 @@ if($stmt = $mysqli->prepare($sql)) {
     $param_contact = $employee->getempContact();
     $param_email = $employee->getempEmail();
     $param_password = password_hash($employee->getempPassword(),PASSWORD_BCRYPT);
-    $param_department = $employee->geteserviceId();
-    $param_service = $employee->geteserviceId();
+    $param_department = $employee->getedepartmentId();
+
 
     // Attempt to execute the prepared statement
     if($stmt->execute()){

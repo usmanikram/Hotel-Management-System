@@ -60,10 +60,7 @@ else
 
     <main role="main" class="inner cover">
         <h1 class="cover-heading">Hotel Management System</h1>
-        <p class="lead">Cover is a one-page template for building simple and beautiful home pages. Download, edit the text, and add your own fullscreen background photo to make it your own.</p>
-        <p class="lead">
-            <a href="#" class="btn btn-lg btn-secondary">Learn more</a>
-        </p>
+        <h3 >Premier Hotel Management Solutions</h3>
 
     </main>
 
@@ -104,7 +101,7 @@ else
     </section>
     <footer class="mastfoot mt-auto">
         <div class="inner">
-            <p>Cover template for <a href="https://getbootstrap.com/">Bootstrap</a>, by <a href="https://twitter.com/mdo">@mdo</a>.</p>
+            <p><a href="index.php">&copy; Copyright 2020, Hotel Management System.</a></p>
         </div>
     </footer>
 </div>

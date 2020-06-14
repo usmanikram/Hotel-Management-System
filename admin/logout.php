@@ -11,5 +11,4 @@ else
         $msg= "Login First";
         header("Location: ../adminlogin.php?message=$msg");
     }
-
 ?>

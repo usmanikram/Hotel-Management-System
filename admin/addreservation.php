@@ -8,10 +8,7 @@
     <meta name="generator" content="Jekyll v4.0.1">
     <title>Add Reservations · Admin Panel · HMS</title>
 
-    <!-- Bootstrap core CSS -->
     <link href="../css/bootstrap.css" rel="stylesheet">
-
-
     <style>
         .bd-placeholder-img {
             font-size: 1.125rem;
@@ -28,7 +25,6 @@
             }
         }
     </style>
-    <!-- Custom styles for this template -->
     <link href="../css/dashboard.css" rel="stylesheet">
 </head>
 <body>

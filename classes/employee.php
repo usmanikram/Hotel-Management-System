@@ -16,7 +16,6 @@ class employee
     private $empEmail;
     private $empPassword;
     private $edepartmentId;
-    private $eserviceId;
 
 
 
@@ -24,7 +23,7 @@ class employee
 // Constructor
     function __construct($empID=NULL,$empName=NULL,$empDOB=NULL,$empGender=NULL,$empCNIC=NULL,$empAddress=NULL,$empDOJ=NULL,
                          $empDesignation=NULL, $empSalary=NULL,$empContact=NULL,
-                        $empEmail=NULL,$empPassword=NULL,$edepartmentId=NULL,$eserviceId=NULL)
+                        $empEmail=NULL,$empPassword=NULL,$edepartmentId=NULL)
     {
         $this->setempID($empID);
         $this->setempName($empName);
@@ -39,7 +38,7 @@ class employee
         $this->setempEmail($empEmail);
         $this->setempPassword($empPassword);
         $this->setedepartmentId($edepartmentId);
-        $this->seteserviceId($eserviceId);
+
     }
 
 //Setter
@@ -56,7 +55,7 @@ class employee
     function setempEmail($empEmail){$this->empEmail=$empEmail;}
     function setempPassword($empPassword){$this->empPassword=$empPassword;}
     function setedepartmentId($edepartmentId){$this->edepartmentId=$edepartmentId;}
-    function seteserviceId($eserviceId){$this->eserviceId=$eserviceId;}
+
 //Getter
     function getempID(){return $this->empID;}
     function getempName(){return $this->empName;}
@@ -71,7 +70,7 @@ class employee
     function getempEmail(){return $this->empEmail;}
     function getempPassword(){return $this->empPassword;}
     function getedepartmentId(){$this->edepartmentId;}
-    function geteserviceId(){return $this->eserviceId;}
+
 }
 
 ?>

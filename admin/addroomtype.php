@@ -104,17 +104,6 @@
                             Departments
                         </a>
                     </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="complaints.php">
-                            <span data-feather="alert-circle"></span>
-                            Complaints
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="feedback.php">
-                            <span data-feather="archive"></span>
-                            Feedback
-                        </a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="bills.php">

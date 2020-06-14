@@ -1,12 +1,6 @@
 <?php
-
 require_once "../model/admin/customer/view.php";
-
-
 $customer= $_SESSION['custview'];
-
-
-
 ?>
 <!doctype html>
 <html lang="en">
@@ -117,18 +111,6 @@ $customer= $_SESSION['custview'];
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="complaints.php">
-                            <span data-feather="alert-circle"></span>
-                            Complaints
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="feedback.php">
-                            <span data-feather="archive"></span>
-                            Feedback
-                        </a>
-                    </li>
-                    <li class="nav-item">
                         <a class="nav-link" href="bills.php">
                             <span data-feather="file"></span>
                             Bills
@@ -156,7 +138,7 @@ $customer= $_SESSION['custview'];
 
         <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-md-4">
             <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
-                <h1 class="h2">Add Customer</h1>
+                <h1 class="h2">View Customer</h1>
                 <div class="btn-toolbar mb-2 mb-md-0">
                     <div class="btn-group mr-2">
                         <button onclick="location.href='customers.php';" type="button" class="btn btn-sm btn-outline-secondary">Go Back</button>
@@ -176,30 +158,31 @@ $customer= $_SESSION['custview'];
                 <div class="form-row">
                     <div class="form-group col-md-6">
                         <label for="name">Name</label>
-                        <input type="text" class="form-control" name="name" value="<?php echo $customer->getcustName(); ?>">
+                        <input type="text" class="form-control" name="name" value="<?php echo $customer->getcustName(); ?>" readonly>
                     </div>
                     <div class="form-group col-md-6">
                         <label for="dob">DOB</label>
-                        <input type="date"  class="form-control" name="dob" value="<?php echo $customer->getcustDOB(); ?>">
+                        <input type="date"  class="form-control" name="dob" value="<?php echo $customer->getcustDOB(); ?>" readonly>
                     </div>
                 </div>
                 <div class="form-row">
                     <div class="form-group col-md-6">
                         <label for="gender">Gender</label>
-                        <select class="form-control" name="gender" value="<?php echo $customer->getcustGender(); ?>">
-                            <option>Male</option>
-                            <option>Female</option>
+                        <select class="form-control" name="gender" required>
+                            <option value=""><?php echo $customer->getcustGender(); ?></option>
+                            <option value="Male">Male</option>
+                            <option value="Female">Female</option>
                         </select>
                     </div>
                     <div class="form-group col-md-6">
                         <label for="cnic">CNIC</label>
-                        <input type="text" class="form-control" name="cnic" value="<?php echo $customer->getcustCNIC(); ?>">
+                        <input type="text" class="form-control" name="cnic" value="<?php echo $customer->getcustCNIC(); ?>" required>
                     </div>
                 </div>
                 <div class="form-row">
                     <div class="form-group col-md-6">
                         <label for="contact">Contact</label>
-                        <input type="text" class="form-control" name="contact" value="<?php echo $customer->getcustContact(); ?>">
+                        <input type="text" class="form-control" name="contact" value="<?php echo $customer->getcustContact(); ?>" required>
                     </div>
                 </div>
                 <div class="form-group">

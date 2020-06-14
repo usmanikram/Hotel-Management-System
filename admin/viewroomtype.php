@@ -1,9 +1,6 @@
 <?php
-
 require_once "../model/admin/roomtype/view.php";
-
 $roomtype= $_SESSION['roomtypeview'];
-
 ?>
 <!doctype html>
 <html lang="en">
@@ -112,18 +109,6 @@ $roomtype= $_SESSION['roomtypeview'];
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="complaints.php">
-                            <span data-feather="alert-circle"></span>
-                            Complaints
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="feedback.php">
-                            <span data-feather="archive"></span>
-                            Feedback
-                        </a>
-                    </li>
-                    <li class="nav-item">
                         <a class="nav-link" href="bills.php">
                             <span data-feather="file"></span>
                             Bills
@@ -151,7 +136,7 @@ $roomtype= $_SESSION['roomtypeview'];
 
         <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-md-4">
             <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
-                <h1 class="h2">Add Room Type</h1>
+                <h1 class="h2">ViewRoom Type</h1>
                 <div class="btn-toolbar mb-2 mb-md-0">
                     <div class="btn-group mr-2">
                         <button onclick="location.href='roomtype.php';" type="button" class="btn btn-sm btn-outline-secondary">Go Back</button>
@@ -192,12 +177,12 @@ $roomtype= $_SESSION['roomtypeview'];
                 </div>
                 <div class="form-group">
                     <label for="capacity">Capacity</label>
-                    <select class="form-control" name="capacity">
-                        <option>Current: <?php echo $roomtype->getrtypeCapacity(); ?></option>
-                        <option>1</option>
-                        <option>2</option>
-                        <option>3</option>
-                        <option>4</option>
+                    <select class="form-control" name="capacity" required>
+                        <option value="">Current: <?php echo $roomtype->getrtypeCapacity(); ?></option>
+                        <option value="1">1</option>
+                        <option value="2">2</option>
+                        <option value="3">3</option>
+                        <option value="4">4</option>
                     </select>
                 </div>
                 <button type=submit" class="btn btn-sm btn-outline-secondary">Update Room Type</button>

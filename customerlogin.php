@@ -35,6 +35,7 @@
     </style>
     <!-- Custom styles for this template -->
     <link href="css/floating-labels.css" rel="stylesheet">
+
 </head>
 <body>
 <form class="form-signin" action="verifycustomer.php" method="post">
@@ -63,7 +64,7 @@
     <button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
     <button class="btn btn-lg btn-primary btn-block" type="button" onclick="location.href='customersignup.php';">Register</button>
     <button class="btn btn-lg btn-primary btn-block" type="button" onclick="goBack();">Go Back</button>
-    <p class="mt-5 mb-3 text-muted text-center">&copy; 2017-2020</p>
+    <p class="mt-5 mb-3 text-muted text-center">&copy; Copyright 2020, Hotel Management System.</p>
 </form>
 </body>
 </html>

@@ -3,9 +3,6 @@ require_once ("../config/config.php");
 $querydept="SELECT * FROM department";
 $resultdept = $mysqli->query($querydept);
 $countdept = $resultdept->num_rows;
-$queryservice="SELECT * FROM service";
-$resultservice = $mysqli->query($queryservice);
-$countservice= $resultservice->num_rows;
 ?>
 <!doctype html>
 <html lang="en">
@@ -17,9 +14,7 @@ $countservice= $resultservice->num_rows;
     <meta name="generator" content="Jekyll v4.0.1">
     <title>Add Employee · Admin Panel · HMS</title>
 
-    <!-- Bootstrap core CSS -->
     <link href="../css/bootstrap.css" rel="stylesheet">
-
     <style>
         .bd-placeholder-img {
             font-size: 1.125rem;
@@ -36,7 +31,6 @@ $countservice= $resultservice->num_rows;
             }
         }
     </style>
-    <!-- Custom styles for this template -->
     <link href="../css/dashboard.css" rel="stylesheet">
 </head>
 <body>
@@ -111,18 +105,6 @@ $countservice= $resultservice->num_rows;
                         <a class="nav-link" href="departments.php">
                             <span data-feather="truck"></span>
                             Departments
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="complaints.php">
-                            <span data-feather="alert-circle"></span>
-                            Complaints
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="feedback.php">
-                            <span data-feather="archive"></span>
-                            Feedback
                         </a>
                     </li>
                     <li class="nav-item">
@@ -252,27 +234,7 @@ $countservice= $resultservice->num_rows;
                         ?>
                         </select>
                     </div>
-                    <div class="form-group col-md-6">
-                        <label for="service">Service</label>
-                        <select class="form-control" name="service">
-                            <?php
-                            if($countservice==0)
-                            {
-                                echo '<option value="">No Datas have been created Yet</option>';
-                            }
-                            else
-                            {
-                            while($fetchservice = $resultservice->fetch_assoc())
-                            {
-                                ?>
-                                <option value="<?php echo $fetchservice['serviceID']; ?>">
-                                    <?php echo $fetchservice['serviceName']; ?></option>
-                                <?php
-                            }
-                            }
-                            ?>
-                        </select>
-                    </div>
+
                 </div>
 
                 <button type=submit" class="btn btn-sm btn-outline-secondary">Add Employee</button>

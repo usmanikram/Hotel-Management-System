@@ -7,11 +7,9 @@ if(isset($_POST['email']) && isset($_POST['password']))
     $email=$_POST['email'];
     $password=$_POST['password'];
 }
-
 $sql = "select * from customer where custEmail='$email'";
 $result = $mysqli->query($sql);
 $row = $result->num_rows;
-
 if ($row == 1) {
     $arr = $result->fetch_array();
 
@@ -28,6 +26,6 @@ if ($row == 1) {
     $msg = "Wrong Credentials";
     header("Location: customerlogin.php?message=$msg");
 }
-
+?>
 
 

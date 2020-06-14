@@ -16,7 +16,7 @@ if($result=$mysqli->query($sql)) {
 
         $employee = new employee($row['empID'],$row['empName'],$row['empDOB'],$row['empGender'],$row['empCNIC'],$row['empAddress'],
             $row['empDOJ'],$row['empDesignation'],$row['empSalary'],$row['empContact'],
-            $row['empEmail'],$row['empPassword'],$row['deptID'],$row['serviceID']);
+            $row['empEmail'],$row['empPassword'],$row['deptID']);
 
     }
 }
