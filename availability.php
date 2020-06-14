@@ -19,7 +19,7 @@ else
 ?>
 <?php
 require_once ("config/config.php");
-$startdate=$enddate=$capacity=$roomid="";
+$startdate=$enddate=$capacity="";
 if(isset($_POST['startdate'])&&isset($_POST['enddate'])&&isset($_POST['capacity']))
 {
     $startdate=$_POST['startdate'];
@@ -40,6 +40,7 @@ $queryroom="SELECT
 $resultroom = $mysqli->query($queryroom);
 $countroom= $resultroom->num_rows;
 ?>
+
 <!doctype html>
 <html lang="en">
 <head>
@@ -48,13 +49,12 @@ $countroom= $resultroom->num_rows;
     <meta name="description" content="">
     <meta name="author" content="Mark Otto, Jacob Thornton, and Bootstrap contributors">
     <meta name="generator" content="Jekyll v4.0.1">
-    <title>Room Availability · HMS</title>
+    <title>Room Availability Check· HMS</title>
 
 
 
     <!-- Bootstrap core CSS -->
     <link href="css/bootstrap.css" rel="stylesheet">
-    <link href="css/search.css" rel="stylesheet">
 
     <style>
         .bd-placeholder-img {
@@ -73,80 +73,81 @@ $countroom= $resultroom->num_rows;
         }
     </style>
     <!-- Custom styles for this template -->
-    <link href="css/cover.css" rel="stylesheet">
-</head>
-<body class="text-center">
-<div class="cover-container d-flex w-100 h-100 p-3 mx-auto flex-column">
-    <header class="masthead mb-auto">
-        <div class="inner">
-            <h3 class="masthead-brand">HMS</h3>
-            <nav class="nav nav-masthead justify-content-center">
-                <a class="nav-link active" href="index.html">Home</a>
-                <a class="nav-link" href="customerlogin.php">Customer Login</a>
-                <a class="nav-link" href="employeelogin.php">Employee Login</a>
-                <a class="nav-link" href="adminlogin.php">Admin Login</a>
-            </nav>
-        </div>
-    </header>
+    <link href="css/album.css" rel="stylesheet">
+    </head>
+<body>
 
-    <main role="main" class="inner cover">
-        <div class="table-responsive">
 
-            <table class='table table-light table-bordered table-striped'>
-                <thead>
-                <tr>
-                    <th>Room No.</th>
-                    <th>Category</th>
-                    <th>Capacity(Maximum)</th>
-                    <th>Rent Per Night(Rs.)</th>
+<main role="main">
 
-                </tr>
-                </thead>
-                <tbody>
-                <?php
-                if($countroom==0)
-                {
-                    echo '<option value="">No Datas have been created Yet</option>';
-                }
-                else
-                {
-                    while($fetchroom = $resultroom->fetch_assoc())
-                    {
-                        ?>
-                <tr>
-                    <td> <?php echo $fetchroom['roomID']; ?></td>
-                    <td> <?php echo $fetchroom['rtypeName']; ?></td>
-                    <td> <?php echo $fetchroom['rtypeCapacity']; ?></td>
-                    <td> <?php echo $fetchroom['rtypePrice']; ?></td>
+    <section class="jumbotron text-center">
+        <div class="container">
+            <h1>Room Availability Check</h1>
+            <h3>Following rooms are available for reservation according to checkin and checkout date
+                entered by you.</h3>
+            <p class="lead text-muted">For room reservation you must have a account.</p>
+            <p>
+                <a href="index.php" class="btn btn-primary my-2">Go Back</a>
 
-                        <?php
-
-                    }
-                }
-                ?>
-                </tr>
-                </tbody>
-            </table>
-        </div>
-        <main role="main" class="inner cover">
-            <h3 class="cover-heading">Please Sign In To Book Room </h3>
-            <p class="lead">
-                <a href="customerlogin.php" class="btn btn-lg btn-secondary">Sign In</a>
-            <h3 class="cover-heading">Don't Have Account ? Sign Up Below</h3>
-            <a href="customersignup.php" class="btn btn-lg btn-secondary">Sign Up</a>
-            <a href="index.php" class="btn btn-lg btn-secondary">Go Back</a>
             </p>
-
-        </main>
-
-    </main>
-
-
-    <footer class="mastfoot mt-auto">
-        <div class="inner">
-            <p>Cover template for <a href="https://getbootstrap.com/">Bootstrap</a>, by <a href="https://twitter.com/mdo">@mdo</a>.</p>
         </div>
-    </footer>
-</div>
-</body>
+    </section>
+    <?php
+    while($fetchroom = $resultroom->fetch_assoc())
+    {
+    ?>
+    <div class="album py-5 bg-light">
+        <div class="container">
+
+            <div class="row h-100">
+                <div class="col-sm-12 my-auto">
+                    <div class="card card-block w-25 mx-auto">
+                        <?php  echo "<img id='myImg' width='275' height='250' src='images/room/".$fetchroom['roomImage']."' >"; ?>
+                        <div class="card-body">
+                            <p class="card-text">Room No: <?php echo $fetchroom['roomID']; ?></p>
+                            <p class="card-text">Room Type: <?php echo $fetchroom['rtypeName']; ?></p>
+                            <p class="card-text">Room Capcity: <?php echo $fetchroom['rtypeCapacity']; ?></p>
+                            <p class="card-text">Room Rent Per Night: <?php echo $fetchroom['rtypePrice']; ?></p>
+                            <div class="d-flex justify-content-between align-items-center">
+                                <small class="text-muted"><b>From:</b><?php echo $startdate;?>, <b>To:</b><?php echo $enddate;?> </small>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+        </div
+        <?php
+        }
+        ?>
+    </div>
+
+</main>
+<section class="jumbotron text-center">
+    <div class="container">
+        <p class="lead text-muted">For room reservation you must have a account.</p>
+        <p>
+            <a href="customerlogin.php" class="btn btn-primary my-2">Sign In (If You Have A Account)</a>
+            <a href="customersignup.php" class="btn btn-secondary my-2">Register Here (If You Don't Have A Account)</a>
+        </p>
+        <p>
+            <a href="index.php" class="btn btn-primary my-2">Go Back</a>
+
+        </p>
+    </div>
+</section>
+
+<footer class="text-muted">
+    <div class="container">
+        <p class="float-right">
+            <a href="#">Back to top</a>
+        </p>
+        <p> &copy; Hotel Management System, All Rights Reserved.</p>
+
+    </div>
+</footer>
+
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+<script>window.jQuery || document.write('<script src="js/jquery.slim.min.js"><\/script>')</script><script src="js/bootstrap.bundle.js"></script></body>
 </html>

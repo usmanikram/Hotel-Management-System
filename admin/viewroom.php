@@ -171,7 +171,7 @@ $countstatus= $resultstatus->num_rows;
             </div>
 
 
-            <form action="../model/admin/room/update.php" method="post">
+            <form action="../model/admin/room/update.php" method="post" >
                 <div class="form-group">
                     <label for="id">ID</label>
                     <input type="text" class="form-control" name="id" value="<?php echo $room->getroomID(); ?>" readonly>

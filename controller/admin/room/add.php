@@ -11,6 +11,7 @@ if(isset($_POST['details']) && isset($_POST['type'])&& isset($_POST['status'])
     $image = $_POST['image'];
 }
 
+
 $room= new room(NULL,$detail,$type,$status,$image);
 
 $_SESSION['room'] = $room;
@@ -18,4 +19,3 @@ $_SESSION['room'] = $room;
 
 ?>
 
-<?php

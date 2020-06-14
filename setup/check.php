@@ -298,15 +298,15 @@ VALUES
    INSERT INTO `room`
 (`roomID`, `roomDetails`, `roomType`, `roomStatus`, `roomImage`) 
 VALUES 
-(NULL,'Basic room for 1 Person',1,1,NULL),
-(NULL,'Basic room for 2 Persons',2,1,NULL),
-(NULL,'Luxery room with a queen-sized bed for 2 Persons',3,1,NULL),
-(NULL,'Luxery room with a king-sized bed for 2 Persons',4,1,NULL),
-(NULL,'A room with two beds.',5,1,''),
-(NULL,'A room with two double king-sized beds',6,1,NULL),
-(NULL,' A parlour or living room connected to one or more bedrooms',7,1,NULL),
-(NULL,'Basic room for 1 Person',1,2,NULL),
-(NULL,' A parlour or living room connected to one or more bedrooms',7,2,NULL)
+(NULL,'Basic room for 1 Person',1,1,'single.png'),
+(NULL,'Basic room for 2 Persons',2,1,'double.jpg'),
+(NULL,'Luxery room with a queen-sized bed for 2 Persons',3,1,'queen.jpg'),
+(NULL,'Luxery room with a king-sized bed for 2 Persons',4,1,'king.jpg'),
+(NULL,'A room with two beds.',5,1,'twin.jpg'),
+(NULL,'A room with two double king-sized beds',6,1,'double-double.jpg'),
+(NULL,' A parlour or living room connected to one or more bedrooms',7,1,'master.jpg'),
+(NULL,'Basic room for 1 Person',1,2,''single.png),
+(NULL,' A parlour or living room connected to one or more bedrooms',7,2,'master.jpg')
 ";
 
 
