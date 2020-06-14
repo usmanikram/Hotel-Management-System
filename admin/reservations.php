@@ -194,7 +194,6 @@ $countreservation = $resultreservation->num_rows;
                     <td> <?php echo $fetchreservation['resStartDate']; ?></td>
                     <td> <?php echo $fetchreservation['resEndtDate']; ?></td>
                     <td>
-                        <a href='viewreservation.php?id=<?php echo $fetchreservation['resID']; ?>' title="view record" data-toggle='tooltip'>View/Update</a>
                         <a href='deletereservation.php?id=<?php echo $fetchreservation['resID']; ?>' title='Delete Record' data-toggle='tooltip'>Delete</a>
                     </td>
                     <?php

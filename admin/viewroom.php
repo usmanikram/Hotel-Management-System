@@ -1,9 +1,18 @@
 <?php
-require_once ("../config/config.php");
 
-$queryroom="SELECT * FROM room r join roomtype rt join status s where r.roomType=rt.rtypeID and r.roomStatus=s.id";
-$resultroom = $mysqli->query($queryroom);
-$countroom = $resultroom->num_rows;
+require_once "../model/admin/room/view.php";
+
+$room= $_SESSION['roomview'];
+
+?>
+<?php
+require_once ("../config/config.php");
+$querytype="SELECT * FROM roomtype";
+$resulttype = $mysqli->query($querytype);
+$counttype = $resulttype->num_rows;
+$querystatus="SELECT * FROM status";
+$resultstatus = $mysqli->query($querystatus);
+$countstatus= $resultstatus->num_rows;
 ?>
 <!doctype html>
 <html lang="en">
@@ -13,7 +22,7 @@ $countroom = $resultroom->num_rows;
     <meta name="description" content="">
     <meta name="author" content="Mark Otto, Jacob Thornton, and Bootstrap contributors">
     <meta name="generator" content="Jekyll v4.0.1">
-    <title>Rooms · Admin Panel · HMS</title>
+    <title>View Room · Admin Panel · HMS</title>
 
     <!-- Bootstrap core CSS -->
     <link href="../css/bootstrap.css" rel="stylesheet">
@@ -152,62 +161,85 @@ $countroom = $resultroom->num_rows;
 
         <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-md-4">
             <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
-                <h1 class="h2">Rooms</h1>
+                <h1 class="h2">Add Room</h1>
                 <div class="btn-toolbar mb-2 mb-md-0">
                     <div class="btn-group mr-2">
-                        <button onclick="location.href='addroom.php';" type="button" class="btn btn-sm btn-outline-secondary">Add New Room</button>
-                        <button type="button" class="btn btn-sm btn-outline-secondary">Download PDF</button>
+                        <button onclick="location.href='room.php';" type="button" class="btn btn-sm btn-outline-secondary">Go Back</button>
+
                     </div>
                 </div>
             </div>
-            <?php
-            if(isset($_GET["message"]))
-            {
-                $msg = $_GET["message"];
-                echo "<b><p style='color: red'>$msg</p></b>";
-            }
-            ?>
-            <table class='table table-light table-bordered table-striped'>
-                <thead>
-                <tr>
-                    <th>ID</th>
-                    <th>Details</th>
-                    <th>Type</th>
-                    <th>Status</th>
-                    <th>Image</th>
-                    <th>Actions</th>
-                </tr>
-                </thead>
-                <tbody>
-                <?php
-                if($countroom==0)
-                {
-                    echo '<option value="">No Datas have been created Yet</option>';
-                }
-                else
-                {
-                while($fetchroom= $resultroom->fetch_assoc())
-                {
-                ?>
-                <tr>
-                    <td> <?php echo $fetchroom['roomID']; ?></td>
-                    <td> <?php echo $fetchroom['roomDetails']; ?></td>
-                    <td> <?php echo $fetchroom['rtypeName']; ?></td>
-                    <td> <?php echo $fetchroom['name']; ?></td>
-                    <?php
-                    echo "<td><img width='100' height='100' src='../images/room/".$fetchroom['roomImage']."' ></td>";
-                    ?>
-                    <td>
-                        <a href='viewroom.php?id=<?php echo $fetchroom['roomID']; ?>' title="view record" data-toggle='tooltip'>View/Update</a>
-                        <a href='deleteroom.php?id=<?php echo $fetchroom['roomID']; ?>' title='Delete Record' data-toggle='tooltip'>Delete</a>
-                    </td>
-                    <?php
-                    }
-                    }
-                    ?>
-                </tr>
-                </tbody>
-            </table>
+
+
+            <form action="../model/admin/room/update.php" method="post">
+                <div class="form-group">
+                    <label for="id">ID</label>
+                    <input type="text" class="form-control" name="id" value="<?php echo $room->getroomID(); ?>" readonly>
+                </div>
+                <div class="form-group">
+                    <label for="details">Details</label>
+                    <input type="text" class="form-control" name="details" value="<?php echo $room->getroomDetails(); ?>">
+                </div>
+
+                <div class="form-group">
+                    <label for="capacity">Room Type</label>
+                    <select class="form-control" name="type">
+                        <?php
+                        if($counttype==0)
+                        {
+                            echo '<option value="">No Datas have been created Yet</option>';
+                        }
+                        else
+                        {
+                            ?>
+                        <?php
+                            while($fetchtype = $resulttype->fetch_assoc())
+                            {
+                                ?>
+                                <option value="<?php echo $fetchtype['rtypeID']; ?>">
+                                    <?php echo $fetchtype['rtypeName']; ?></option>
+                                <?php
+                            }
+                        }
+                        ?>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="capacity">Room Status</label>
+                    <select class="form-control" name="status">
+                        <?php
+                        if($countstatus==0)
+                        {
+                            echo '<option value="">No Datas have been created Yet</option>';
+                        }
+                        else
+                        {
+                            while($fetchstatus = $resultstatus->fetch_assoc())
+                            {
+                                ?>
+                                <option value="<?php echo $fetchstatus['id']; ?>">
+                                    <?php echo $fetchstatus['name']; ?></option>
+                                <?php
+                            }
+                        }
+                        ?>
+                    </select>
+                </div>
+
+
+                <div class="form-row">
+                    <div class="form-group col-md-6">
+                        <label for="price">Room Image</label>
+                        <div class="input-group mb-2">
+                            <input type="file" class="form-control" name="image" value="<?php echo $room->getroomImage(); ?>">
+
+                        </div>
+                    </div>
+                </div>
+
+                <button type=submit" class="btn btn-sm btn-outline-secondary">Add Room</button>
+            </form>
+
 
         </main>
     </div>

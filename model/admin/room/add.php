@@ -4,8 +4,6 @@ require_once "../../../config/config.php";
 
 $room = $_SESSION['room'];
 
-
-
 $sql = "INSERT INTO room (roomID,roomDetails,roomType,roomStatus,roomImage) 
 VALUES (?,?,?,?,?)";
 

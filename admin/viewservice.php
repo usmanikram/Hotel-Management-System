@@ -1,9 +1,12 @@
 <?php
-require_once ("../config/config.php");
 
-$queryroom="SELECT * FROM room r join roomtype rt join status s where r.roomType=rt.rtypeID and r.roomStatus=s.id";
-$resultroom = $mysqli->query($queryroom);
-$countroom = $resultroom->num_rows;
+require_once "../model/admin/service/view.php";
+
+
+$service= $_SESSION['serviceview'];
+
+
+
 ?>
 <!doctype html>
 <html lang="en">
@@ -13,11 +16,10 @@ $countroom = $resultroom->num_rows;
     <meta name="description" content="">
     <meta name="author" content="Mark Otto, Jacob Thornton, and Bootstrap contributors">
     <meta name="generator" content="Jekyll v4.0.1">
-    <title>Rooms · Admin Panel · HMS</title>
+    <title>View Service · Admin Panel · HMS</title>
 
     <!-- Bootstrap core CSS -->
     <link href="../css/bootstrap.css" rel="stylesheet">
-
 
     <style>
         .bd-placeholder-img {
@@ -70,9 +72,9 @@ $countroom = $resultroom->num_rows;
                         </a>
                     </h6>
                     <li class="nav-item">
-                        <a class="nav-link  active" href="room.php">
+                        <a class="nav-link" href="room.php">
                             <span data-feather="briefcase"></span>
-                            Rooms <span class="sr-only">(current)</span>
+                            Rooms
                         </a>
                     </li>
                     <li class="nav-item">
@@ -82,9 +84,9 @@ $countroom = $resultroom->num_rows;
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="services.php">
+                        <a class="nav-link  active" href="services.php">
                             <span data-feather="shopping-cart"></span>
-                            Services
+                            Services<span class="sr-only">(current)</span>
                         </a>
                     </li>
                     <li class="nav-item">
@@ -152,65 +154,54 @@ $countroom = $resultroom->num_rows;
 
         <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-md-4">
             <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
-                <h1 class="h2">Rooms</h1>
+                <h1 class="h2">Add Service</h1>
                 <div class="btn-toolbar mb-2 mb-md-0">
                     <div class="btn-group mr-2">
-                        <button onclick="location.href='addroom.php';" type="button" class="btn btn-sm btn-outline-secondary">Add New Room</button>
-                        <button type="button" class="btn btn-sm btn-outline-secondary">Download PDF</button>
+                        <button onclick="location.href='services.php';" type="button" class="btn btn-sm btn-outline-secondary">Go Back</button>
+
                     </div>
                 </div>
+
             </div>
-            <?php
-            if(isset($_GET["message"]))
-            {
-                $msg = $_GET["message"];
-                echo "<b><p style='color: red'>$msg</p></b>";
-            }
-            ?>
-            <table class='table table-light table-bordered table-striped'>
-                <thead>
-                <tr>
-                    <th>ID</th>
-                    <th>Details</th>
-                    <th>Type</th>
-                    <th>Status</th>
-                    <th>Image</th>
-                    <th>Actions</th>
-                </tr>
-                </thead>
-                <tbody>
-                <?php
-                if($countroom==0)
-                {
-                    echo '<option value="">No Datas have been created Yet</option>';
-                }
-                else
-                {
-                while($fetchroom= $resultroom->fetch_assoc())
-                {
-                ?>
-                <tr>
-                    <td> <?php echo $fetchroom['roomID']; ?></td>
-                    <td> <?php echo $fetchroom['roomDetails']; ?></td>
-                    <td> <?php echo $fetchroom['rtypeName']; ?></td>
-                    <td> <?php echo $fetchroom['name']; ?></td>
-                    <?php
-                    echo "<td><img width='100' height='100' src='../images/room/".$fetchroom['roomImage']."' ></td>";
-                    ?>
-                    <td>
-                        <a href='viewroom.php?id=<?php echo $fetchroom['roomID']; ?>' title="view record" data-toggle='tooltip'>View/Update</a>
-                        <a href='deleteroom.php?id=<?php echo $fetchroom['roomID']; ?>' title='Delete Record' data-toggle='tooltip'>Delete</a>
-                    </td>
-                    <?php
-                    }
-                    }
-                    ?>
-                </tr>
-                </tbody>
-            </table>
+
+
+            <form action="../model/admin/service/update.php" method="post" >
+                <div class="form-row">
+                    <div class="form-group col-md-6">
+                        <label for="id">ID:</label>
+                        <input type="text" class="form-control" name="sid" value="<?php echo $service->getserviceID(); ?>" readonly>
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group col-md-6">
+                        <label for="name">Name:</label>
+                        <input type="text" class="form-control" name="sname" value="<?php echo $service->getserviceName(); ?>">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="details">Details</label>
+                    <input type="text" class="form-control" name="sdetails" value="<?php echo $service->getserviceDetail(); ?>">
+                </div>
+                <div class="form-row">
+                    <div class="form-group col-md-6">
+                        <label for="price">Price</label>
+                        <div class="input-group mb-2">
+                            <div class="input-group-prepend">
+                                <div class="input-group-text">Rs.</div>
+                            </div>
+                            <input type="text" class="form-control" name="sprice" value="<?php echo $service->getservicePrice(); ?>">
+                        </div>
+                    </div>
+                </div>
+                <button type=submit" class="btn btn-sm btn-outline-secondary">Update Service</button>
+            </form>
+
 
         </main>
+
     </div>
+
+
 </div>
 <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
 <script>window.jQuery || document.write('<script src="../assets/js/vendor/jquery.slim.min.js"><\/script>')</script><script src="../assets/dist/js/bootstrap.bundle.js"></script>

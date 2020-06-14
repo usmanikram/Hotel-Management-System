@@ -1,6 +1,6 @@
 <?php
 require_once ("../config/config.php");
-$queryemployee="SELECT * FROM employee e join department d where e.deptID=d.deptID";
+$queryemployee="SELECT * FROM employee ";
 $resultemployee = $mysqli->query($queryemployee);
 $countemployee = $resultemployee->num_rows;
 ?>
