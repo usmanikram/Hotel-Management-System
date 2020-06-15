@@ -1,4 +1,4 @@
-<!doctype html>
+﻿<!doctype html>
 <html lang="en">
 <head>
     <meta charset="utf-8">
@@ -47,7 +47,7 @@
         ?>
         <p>Redirecting in 5 Seconds</p>
         <?php
-        header( "refresh:5;url=../employeelogin.php" );
+        header( "refresh:5;url=../adminlogin.php" );
         ?>
     </div>
     <p class="mt-5 mb-3 text-muted text-center">&copy; 2017-2020</p>

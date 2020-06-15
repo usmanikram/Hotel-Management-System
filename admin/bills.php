@@ -1,3 +1,11 @@
+<?php
+require_once ("../config/config.php");
+
+$querybill="SELECT * FROM bill b join reservation r join customer c join room ro on 
+b.custID=c.custID and b.resID=r.resID and r.roomID=ro.roomID";
+$resultbill = $mysqli->query($querybill);
+$countbill = $resultbill->num_rows;
+?>
 <!doctype html>
 <html lang="en">
 <head>
@@ -132,11 +140,65 @@
                 <h1 class="h2">Bills</h1>
                 <div class="btn-toolbar mb-2 mb-md-0">
                     <div class="btn-group mr-2">
-                        <button type="button" class="btn btn-sm btn-outline-secondary">Add New Bill</button>
-                        <button type="button" class="btn btn-sm btn-outline-secondary">Download PDF</button>
+                        <button onclick="location.href='addbill.php';" type="button" class="btn btn-sm btn-outline-secondary">Add New Bill</button>
+                        <button id="print" type="button" onclick="printContent('table');" class="btn btn-sm btn-outline-secondary">Print</button>
                     </div>
                 </div>
+            </div>
+            <?php
+            if(isset($_GET["message"]))
+            {
+                $msg = $_GET["message"];
+                echo "<b><p style='color: red'>$msg</p></b>";
+            }
+            ?>
 
+            <table class='table table-light table-bordered table-striped' id="table">
+                <thead>
+                <tr>
+                    <th>Bill ID</th>
+                    <th>Bill Date</th>
+                    <th>Customer Name</th>
+                    <th>Room No</th>
+                    <th>Reservation ID</th>
+                    <th>Amount</th>
+                    <th>Payment Method</th>
+                    <th>Remarks</th>
+                    <th>Actions</th>
+                </tr>
+                </thead>
+                <tbody>
+                <?php
+                if($countbill==0)
+                {
+                    echo '<option value="">No Datas have been created Yet</option>';
+                }
+                else
+                {
+                while($fetchbill = $resultbill->fetch_assoc())
+                {
+                ?>
+                <tr>
+                    <td> <?php echo $fetchbill['billID']; ?></td>
+                    <td> <?php echo $fetchbill['billDate']; ?></td>
+                    <td> <?php echo $fetchbill['custName']; ?></td>
+                    <td> <?php echo $fetchbill['roomID']; ?></td>
+                    <td> <?php echo $fetchbill['resID']; ?></td>
+                    <td> <?php echo $fetchbill['amount']; ?></td>
+                    <td> <?php echo $fetchbill['paymentmethod']; ?></td>
+                    <td> <?php echo $fetchbill['remarks']; ?></td>
+
+                    <td>
+                        <a href='viewinvoice.php?id=<?php echo $fetchbill['custID']; ?>' title="view record" data-toggle='tooltip'>View Invoice</a>
+                        <a href='deletebill.php?id=<?php echo $fetchbill['billID']; ?>' title='Delete Record' data-toggle='tooltip'>Delete</a>
+                    </td>
+                    <?php
+                    }
+                    }
+                    ?>
+                </tr>
+                </tbody>
+            </table>
 
         </main>
     </div>

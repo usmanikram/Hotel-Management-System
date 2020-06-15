@@ -86,8 +86,7 @@ $countroom= $resultroom->num_rows;
         </div>
     </section>
 
-    <div class="album py-5 bg-light">
-        <div class="container">
+            <div class="card-group">
             <?php
             if($countroom==0)
             {
@@ -99,30 +98,27 @@ $countroom= $resultroom->num_rows;
             while($fetchroom = $resultroom->fetch_assoc())
             {
             ?>
-            <div class="row h-100">
-                <div class="col-sm-12 my-auto">
-                    <div class="card card-block w-25 mx-auto">
-                        <?php  echo "<img id='myImg' width='275' height='250' src='images/room/".$fetchroom['roomImage']."' >"; ?>
-                        <div class="card-body">
-                            <p class="card-text">Room No: <?php echo $fetchroom['roomID']; ?></p>
-                            <p class="card-text">Room Type: <?php echo $fetchroom['rtypeName']; ?></p>
-                            <p class="card-text">Room Capcity: <?php echo $fetchroom['rtypeCapacity']; ?></p>
-                            <p class="card-text">Room Rent Per Night: <?php echo $fetchroom['rtypePrice']; ?></p>
-                            <div class="d-flex justify-content-between align-items-center">
-                                <small class="text-muted"><b>From:</b><?php echo $startdate;?>, <b>To:</b><?php echo $enddate;?> </small>
-                            </div>
-                        </div>
-                    </div>
-                </div>
 
+            <div class="card">
+                <img class="card-img-top" width='275' height='250' src="images/room/<?php echo $fetchroom['roomImage']; ?>" alt="Card image cap">
+                <div class="card-body">
+                    <h5 class="card-title" align="center"><b>Room No: <?php echo $fetchroom['roomID']; ?></b> </h5>
+                    <p class="card-text"><?php echo $fetchroom['rtypeDetails']; ?></p>
+                    <p class="card-text"><b>Rent Per Night:</b> Rs.<?php echo $fetchroom['rtypePrice']; ?></p>
+                    <p class="card-text"><b>Room Type: </b><?php echo $fetchroom['rtypeName']; ?></p>
+                    <p class="card-text"><b>Room Capcity: </b><?php echo $fetchroom['rtypeCapacity']; ?></p>
+                </div>
+                <div class="card-footer" align="center">
+                    <small class="text-muted" ><b>Available From </b><?php echo $startdate;?> <b>To</b> <?php echo $enddate;?>  </small>
+                </div>
             </div>
 
-        </div
+
         <?php
         }
         }
         ?>
-    </div>
+        </div>
 
 </main>
 <section class="jumbotron text-center">

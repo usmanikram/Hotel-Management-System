@@ -60,7 +60,7 @@ adminPassword varchar(100)
 (
 serviceID int AUTO_INCREMENT Primary Key,
 serviceName varchar(20),
-serviceDetails varchar(100),
+serviceDetails varchar(200),
 servicePrice varchar(15)
 )";
 
@@ -92,7 +92,7 @@ servicePrice varchar(15)
 (
 deptID int AUTO_INCREMENT Primary Key,
 deptName varchar(50),
-deptDetails varchar(100)
+deptDetails varchar(200)
 )";
 
     if ($mysqli->query($sql) === TRUE) {
@@ -135,8 +135,7 @@ empSalary varchar(10),
 empContact varchar(11),
 empEmail varchar(30),
 empPassword varchar(100),
-deptID int,
-serviceID int
+deptID int
 )";
 
 
@@ -150,13 +149,13 @@ serviceID int
     $sql = " INSERT INTO `employee`
 (`empID`, `empName`, `empDOB`, `empGender`, `empCNIC`, `empAddress`, `empDOJ`, `empDesignation`, `empSalary`, `empContact`, `empEmail`, `empPassword`, `deptID`, `serviceID`) 
 VALUES 
-(NULL,'Kamran Ali','1985-04-07','Male','352021553367','Askari 1, Lahore','2020-04-07','Security Incharge','60000','03210000000','kamaran@gmail.com','kamaran123','5',NULL),
-(NULL,'Kashif Yunus','1990-06-06','Male','352021444647','Samnabad,Lahore','2020-04-07','Chef','30000','03000000000','kashif@gmail.com','kashif123','3',NULL),
-(NULL,'Gohar Ali','1995-07-05','Male','352552345467','Wapda Town,Lahore','2020-04-07','HR Manager','40000','03220000000','gohar@gmail.com','gohar123','6',NULL),
-(NULL,'Hafeez Sheikh','1991-08-04','Male','354421234567','Sui Gas Society,Lahore','2020-04-07','Receptionist','25000','03240000000','hafeez@gmal.com','hafeez123','1',NULL),
-(NULL,'Zain Aslam','1996-09-03','Male','353331234567','Ichra, Lahore','2020-04-07','Housekeeper','20000','03090000000','zain@gmail.com','zain123','2',NULL),
-(NULL,'Umair Ali','2000-10-02','Male','352221234567','Mulism Town,Lahore','2020-04-07','Plumber','20000','03450000000','umair@gmail.com','umair123','4',NULL),
-(NULL,'Arslan Butt','1985-01-01','Male','351111234567','Township,Lahore','2020-04-07','Marketing Manager','30000','03110000000','arslan@gmail.com','arslan123','7',NULL)
+(NULL,'Kamran Ali','1985-04-07','Male','352021553367','Askari 1, Lahore','2020-04-07','Security Incharge','60000','03210000000','kamaran@gmail.com','kamaran123','5'),
+(NULL,'Kashif Yunus','1990-06-06','Male','352021444647','Samnabad,Lahore','2020-04-07','Chef','30000','03000000000','kashif@gmail.com','kashif123','3'),
+(NULL,'Gohar Ali','1995-07-05','Male','352552345467','Wapda Town,Lahore','2020-04-07','HR Manager','40000','03220000000','gohar@gmail.com','gohar123','6'),
+(NULL,'Hafeez Sheikh','1991-08-04','Male','354421234567','Sui Gas Society,Lahore','2020-04-07','Receptionist','25000','03240000000','hafeez@gmal.com','hafeez123','1'),
+(NULL,'Zain Aslam','1996-09-03','Male','353331234567','Ichra, Lahore','2020-04-07','Housekeeper','20000','03090000000','zain@gmail.com','zain123','2'),
+(NULL,'Umair Ali','2000-10-02','Male','352221234567','Mulism Town,Lahore','2020-04-07','Plumber','20000','03450000000','umair@gmail.com','umair123','4'),
+(NULL,'Arslan Butt','1985-01-01','Male','351111234567','Township,Lahore','2020-04-07','Marketing Manager','30000','03110000000','arslan@gmail.com','arslan123','7')
 ";
 
 
@@ -212,10 +211,10 @@ VALUES
 
 
     $sql = " 
-    Create Table roomType (
+    Create Table roomtype (
     rtypeID int AUTO_INCREMENT Primary Key,
     rtypeName varchar(15),
-    rtypeDetails varchar(100),
+    rtypeDetails varchar(200),
     rtypePrice varchar(10),
     rtypeCapacity int
     )";
@@ -276,7 +275,7 @@ VALUES
     $sql = " 
     Create Table room (
     roomID int AUTO_INCREMENT Primary Key,
-    roomDetails varchar(100),
+    roomDetails varchar(200),
     roomType int,
     roomStatus varchar(15),
     roomImage varchar(100)
@@ -301,7 +300,7 @@ VALUES
 (NULL,'A room with two beds.',5,1,'twin.jpg'),
 (NULL,'A room with two double king-sized beds',6,1,'double-double.jpg'),
 (NULL,' A parlour or living room connected to one or more bedrooms',7,1,'master.jpg'),
-(NULL,'Basic room for 1 Person',1,2,''single.png),
+(NULL,'Basic room for 1 Person',1,2,'single.png'),
 (NULL,' A parlour or living room connected to one or more bedrooms',7,2,'master.jpg')
 ";
 
@@ -354,10 +353,11 @@ VALUES
 (
 billID int AUTO_INCREMENT Primary Key,
 billDate date,
-billDetails varchar(50),
-billAmount varchar(10),
-paymentMode varchar(15),
-custID int
+custID int,
+resID int,
+amount varchar(10),
+paymentmethod varchar(15),
+remarks varchar(150)
 )";
 
 

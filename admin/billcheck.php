@@ -1,37 +1,21 @@
 <?php
-session_start();
-if(isset($_SESSION['name']))
-    {
-    $adminname=$_SESSION['name'];
-    }
-else
-    {
-        $msg= "Login First";
-        header("Location: ../employeelogin.php?message=$msg");
-    }
-require_once ("../config/config.php");
-$queryroom="SELECT * FROM room";
-$resultroom = $mysqli->query($queryroom);
-$countroom = $resultroom->num_rows;
-$querycustomer="SELECT * FROM customer";
-$resultcustomer = $mysqli->query($querycustomer);
-$countcustomer = $resultcustomer->num_rows;
-$queryreservation="SELECT * FROM reservation";
-$resultreservation = $mysqli->query($queryreservation);
-$countreservation = $resultreservation->num_rows;
-$queryemployee="SELECT * FROM employee";
-$resultemployee = $mysqli->query($queryemployee);
-$countemployee = $resultemployee->num_rows;
-$querydept="SELECT * FROM department";
-$resultdept = $mysqli->query($querydept);
-$countdept = $resultdept->num_rows;
-$querybill="SELECT * FROM bill";
-$total=0;
-$resultbill = $mysqli->query($querybill);
-while($billtotal = $resultbill->fetch_assoc())
+require_once("../config/config.php");
+$id="";
+if(isset($_POST['id']))
 {
-    $total=$total+$billtotal['amount'];
+    $id=$_POST['id'];
 }
+$querycustomer = "SELECT * FROM customer c join reservation res join room r  on c.custID=$id and c.custID=res.custID and r.roomID=res.roomID";
+$resultcustomer = $mysqli->query($querycustomer);
+$countcustomer= $resultcustomer->num_rows;
+$fetchcustomer = $resultcustomer->fetch_assoc();
+
+$billquery="SELECT DATEDIFF(resEndtDate,resStartDate)*rt.rtypePrice as 
+Total FROM reservation r JOIN room ro JOIN roomtype rt on 
+r.custID=$id and r.roomID=ro.roomID and ro.roomType=rt.rtypeID";
+$billresult=$mysqli->query($billquery);
+$billfetch=$billresult->fetch_assoc();
+
 ?>
 <!doctype html>
 <html lang="en">
@@ -41,13 +25,9 @@ while($billtotal = $resultbill->fetch_assoc())
     <meta name="description" content="">
     <meta name="author" content="Mark Otto, Jacob Thornton, and Bootstrap contributors">
     <meta name="generator" content="Jekyll v4.0.1">
-    <title>Admin Panel · HMS</title>
+    <title>Bills · Admin Panel · HMS</title>
 
-
-
-    <!-- Bootstrap core CSS -->
     <link href="../css/bootstrap.css" rel="stylesheet">
-
     <style>
         .bd-placeholder-img {
             font-size: 1.125rem;
@@ -64,25 +44,20 @@ while($billtotal = $resultbill->fetch_assoc())
             }
         }
     </style>
-    <!-- Custom styles for this template -->
     <link href="../css/dashboard.css" rel="stylesheet">
 </head>
 <body>
-
-
-    <nav class="navbar navbar-dark sticky-top bg-dark flex-md-nowrap p-0 shadow">
-        <a class="navbar-brand col-md-3 col-lg-2 mr-0 px-3" href="index.php">Hotel Management System</a>
-        <button class="navbar-toggler position-absolute d-md-none collapsed" type="button" data-toggle="collapse" data-target="#sidebarMenu" aria-controls="sidebarMenu" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-        <input class="form-control form-control-dark w-100" type="text" placeholder="Search" aria-label="Search">
-        <ul class="navbar-nav px-3">
-            <li class="nav-item text-nowrap">
-                <a class="nav-link" href="logout.php">Sign out</a>
-            </li>
-        </ul>
-    </nav>
-
+<nav class="navbar navbar-dark sticky-top bg-dark flex-md-nowrap p-0 shadow">
+    <a class="navbar-brand col-md-3 col-lg-2 mr-0 px-3" href="index.php">Hotel Management System</a>
+    <button class="navbar-toggler position-absolute d-md-none collapsed" type="button" data-toggle="collapse" data-target="#sidebarMenu" aria-controls="sidebarMenu" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+    <ul class="navbar-nav px-3">
+        <li class="nav-item text-nowrap">
+            <a class="nav-link" href="logout.php">Sign out</a>
+        </li>
+    </ul>
+</nav>
 
 <div class="container-fluid">
     <div class="row">
@@ -91,9 +66,9 @@ while($billtotal = $resultbill->fetch_assoc())
                 <ul class="nav flex-column">
 
                     <li class="nav-item">
-                        <a class="nav-link active" href="index.php">
+                        <a class="nav-link" href="index.php">
                             <span data-feather="home"></span>
-                            Dashboard <span class="sr-only">(current)</span>
+                            Dashboard
                         </a>
                     </li>
                     <h6 class="sidebar-heading d-flex justify-content-between align-items-center px-3 mt-4 mb-1 text-muted">
@@ -146,9 +121,9 @@ while($billtotal = $resultbill->fetch_assoc())
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="bills.php">
+                        <a class="nav-link active" href="bills.php">
                             <span data-feather="file"></span>
-                            Bills
+                            Bills<span class="sr-only">(current)</span>
                         </a>
                     </li>
                 </ul>
@@ -173,66 +148,77 @@ while($billtotal = $resultbill->fetch_assoc())
 
         <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-md-4">
             <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
-                <h1 class="h2">Welcome <b><?php echo $adminname; ?>!</b></h1>
+                <h1 class="h2">Bills</h1>
                 <div class="btn-toolbar mb-2 mb-md-0">
                     <div class="btn-group mr-2">
-                        <button type="button" class="btn btn-sm btn-outline-secondary">Share</button>
-                        <button type="button" class="btn btn-sm btn-outline-secondary">Export</button>
-                    </div>
-                    <button type="button" class="btn btn-sm btn-outline-secondary dropdown-toggle">
-                        <span data-feather="calendar"></span>
-                        This week
-                    </button>
-                </div>
-            </div>
+                        <button onclick="location.href='addbill.php';" type="button" class="btn btn-sm btn-outline-secondary">Go Back</button>
 
-            <div class="card-deck">
-                <div class="card text-white bg-primary mb-3" style="max-width: 18rem;">
-                    <div class="card-header" align="center"><h3>Total Rooms</h3></div>
-                    <div class="card-body">
-                        <h1 class="card-title" align="center"><?php echo $countroom; ?></h1>
-                        </div>
-                </div>
-                <div class="card text-white bg-success mb-3" style="max-width: 18rem;">
-                    <div class="card-header" align="center"><h3>Total Customers</h3></div>
-                    <div class="card-body">
-                        <h1 class="card-title" align="center"><?php echo $countcustomer; ?></h1>
-                    </div>
-                </div>
-                <div class="card text-white bg-danger mb-3" style="max-width: 18rem;">
-                    <div class="card-header" align="center"><h3>Total Reservations</h3></div>
-                    <div class="card-body">
-                        <h1 class="card-title" align="center"><?php echo $countreservation; ?></h1>
                     </div>
                 </div>
             </div>
 
+            <form action="../model/admin/bill/add.php" method="post">
+                <div class="form-row">
+                    <div class="form-group col-md-6">
+                    <label for="name">Customer ID</label>
+                    <input type="text" class="form-control" name="custid" value="<?php echo $fetchcustomer['custID']; ?>" readonly>
+                    </div>
 
-            <div class="card-deck">
+                    <div class="form-group col-md-6">
+                    <label for="name">Customer Name</label>
+                    <input type="text" class="form-control" name="name" value="<?php echo $fetchcustomer['custName']; ?>" readonly>
+                    </div>
 
-                <div class="card text-white bg-warning mb-3" style="max-width: 18rem;">
-                    <div class="card-header" align="center"><h3>Total Employees</h3></div>
-                    <div class="card-body">
-                        <h1 class="card-title" align="center"><?php echo $countemployee; ?></h1>
+                    <div class="form-group col-md-6">
+                    <label for="name">Reservation ID:</label>
+                    <input type="text" class="form-control" name="resID" value="<?php echo $fetchcustomer['resID']; ?>" readonly>
+                    </div>
+
+                    <div class="form-group col-md-6">
+                        <label for="name">Room No:</label>
+                        <input type="text" class="form-control" name="roomid" value="<?php echo $fetchcustomer['roomID']; ?>" readonly>
+                    </div>
+
+                    <div class="form-group col-md-6">
+                    <label for="name">Reservation Start Date:</label>
+                    <input type="date" class="form-control" name="startdate" value="<?php echo $fetchcustomer['resStartDate']; ?>" readonly>
+                    </div>
+
+                    <div class="form-group col-md-6">
+                    <label for="name">Reservation End Date:</label>
+                    <input type="date" class="form-control" name="enddate" value="<?php echo $fetchcustomer['resEndtDate']; ?>" readonly>
                     </div>
                 </div>
 
-                <div class="card text-white bg-info mb-3" style="max-width: 18rem;">
-                    <div class="card-header"  align="center"><h3>Total Earnings</h3></div>
-                    <div class="card-body">
-                        <h1 class="card-title" align="center">Rs.<?php echo $total; ?></h1>
-                    </div>
+                <div class="form-group">
+                    <label for="name">Details:</label>
+                    <input type="text" class="form-control" name="details" value="<?php echo $fetchcustomer['roomDetails']; ?>" readonly>
                 </div>
 
-
-                <div class="card text-white bg-dark mb-3" style="max-width: 18rem;">
-                    <div class="card-header" align="center"><h3>Total Departments</h3></div>
-                    <div class="card-body">
-                        <h1 class="card-title" align="center"><?php echo $countdept; ?></h1>
-                    </div>
+                <div class="form-group">
+                        <label for="name">Total Bill:</label>
+                        <input type="text" class="form-control" name="amount" value="<?php echo $billfetch['Total']; ?>" readonly>
                 </div>
+                <div class="form-group">
+                    <label for="method">Payment Method</label>
+                    <select class="form-control" name="method" required>
 
-            </div>
+                        <option value=""></option>
+                        <option value="Cash">Cash</option>
+                        <option value="Credit Card">Credit Card</option>
+
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="name">Remarks:</label>
+                    <input type="text" class="form-control" name="remarks" placeholder="Remarks" required>
+                </div>
+                <button type=submit" class="btn btn-sm btn-outline-secondary">Add Bill</button>
+
+            </form>
+
+
+        </main>
 
         </main>
     </div>
@@ -242,5 +228,4 @@ while($billtotal = $resultbill->fetch_assoc())
 <script src="https://cdnjs.cloudflare.com/ajax/libs/feather-icons/4.9.0/feather.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.3/Chart.min.js"></script>
 <script src="../js/dashboard.js"></script></body>
-
 </html>

@@ -15,7 +15,7 @@ $queryroom="SELECT
 (
         SELECT reservation.roomID FROM reservation LEFT Outer JOIN
             room ON reservation.roomID = room.roomID 
-        WHERE resStartDate<'$startdate'AND resEndtDate>='$enddate' 
+        WHERE resStartDate<='$startdate'AND resEndtDate>='$enddate' 
 ) AND room.roomStatus='1' AND roomtype.rtypeCapacity>='$capacity'";
 $resultroom = $mysqli->query($queryroom);
 $countroom= $resultroom->num_rows;
