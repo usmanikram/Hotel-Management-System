@@ -17,6 +17,7 @@ if ($row == 1) {
     if (password_verify($password, $arr['empPassword'])) {
 
         $_SESSION['employeename'] = $arr['empName'];
+        $_SESSION['employeedesignation']=$arr['empDesignation'];
 
         header("Location: employee/index.php");
     } else {

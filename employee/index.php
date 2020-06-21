@@ -1,8 +1,10 @@
 <?php
 session_start();
-if(isset($_SESSION['employeename']))
+$employeename=$empdesi="";
+if(isset($_SESSION['employeename']) && isset($_SESSION['employeedesignation']))
 {
     $employeename=$_SESSION['employeename'];
+    $empdesi=$_SESSION['employeedesignation'];
 }
 else
 {
@@ -76,58 +78,30 @@ else
                         </a>
                     </h6>
                     <li class="nav-item">
-                        <a class="nav-link" href="room.php">
-                            <span data-feather="briefcase"></span>
-                            Rooms
+                        <a class="nav-link" href="profile.php">
+                            <span data-feather="user"></span>
+                            My Profile
                         </a>
                     </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="roomtype.php">
-                            <span data-feather="type"></span>
-                            Room Type
-                        </a>
-                    </li>
+                    <?php if(strcmp($empdesi,'Manager') == 0 || strcmp($empdesi,'Receptionist')== 0) {
+                    echo "<li class='nav-item'>";
+                     echo " <a class='nav-link' href='reservations.php'> ";
+                            echo "<span data-feather='trello'></span>";
+                            echo " Reservations";
+                        echo "</a>";
+                    echo "</li>";
+                        ?>
                     <li class="nav-item">
                         <a class="nav-link" href="services.php">
                             <span data-feather="shopping-cart"></span>
                             Services
                         </a>
                     </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="reservations.php">
-                            <span data-feather="trello"></span>
-                            Reservations
-                        </a>
-                    </li>
+
                     <li class="nav-item">
                         <a class="nav-link" href="customers.php">
                             <span data-feather="users"></span>
                             Customers
-                        </a>
-                    </li>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="employees.php">
-                            <span data-feather="users"></span>
-                            Employees
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="departments.php">
-                            <span data-feather="truck"></span>
-                            Departments
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="complaints.php">
-                            <span data-feather="alert-circle"></span>
-                            Complaints
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="feedback.php">
-                            <span data-feather="archive"></span>
-                            Feedback
                         </a>
                     </li>
                     <li class="nav-item">
@@ -136,23 +110,10 @@ else
                             Bills
                         </a>
                     </li>
+                    <?php } ?>
                 </ul>
 
-                <h6 class="sidebar-heading d-flex justify-content-between align-items-center px-3 mt-4 mb-1 text-muted">
-                    <span>Reports</span>
-                    <a class="d-flex align-items-center text-muted" href="#" aria-label="Add a new report">
-                        <span data-feather="plus-circle"></span>
-                    </a>
-                </h6>
-                <ul class="nav flex-column mb-2">
-                    <li class="nav-item">
-                        <a class="nav-link" href="#">
-                            <span data-feather="file-text"></span>
-                            Current month
-                        </a>
-                    </li>
 
-                </ul>
             </div>
         </nav>
 
@@ -161,13 +122,9 @@ else
                 <h1 class="h2">Welcome <b><?php echo $employeename; ?>!</b></h1>
                 <div class="btn-toolbar mb-2 mb-md-0">
                     <div class="btn-group mr-2">
-                        <button type="button" class="btn btn-sm btn-outline-secondary">Share</button>
-                        <button type="button" class="btn btn-sm btn-outline-secondary">Export</button>
-                    </div>
-                    <button type="button" class="btn btn-sm btn-outline-secondary dropdown-toggle">
-                        <span data-feather="calendar"></span>
-                        This week
-                    </button>
+                        <h1 class="h2">Role: <b><?php echo $empdesi; ?></b></h1>
+                       </div>
+
                 </div>
             </div>
 

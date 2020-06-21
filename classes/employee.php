@@ -69,7 +69,7 @@ class employee
     function getempContact(){return $this->empContact;}
     function getempEmail(){return $this->empEmail;}
     function getempPassword(){return $this->empPassword;}
-    function getedepartmentId(){$this->edepartmentId;}
+    function getedepartmentId(){return $this->edepartmentId;}
 
 }
 

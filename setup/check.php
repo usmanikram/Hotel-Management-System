@@ -45,7 +45,7 @@ else {
     $sql = "Create Table admin 
 (
 adminName varchar(20),
-adminEmail varchar(50),
+adminEmail varchar(50) Primary Key,
 adminPassword varchar(100)
 )";
 
@@ -146,8 +146,8 @@ deptID int
     }
 
 
-    $sql = " INSERT INTO `employee`
-(`empID`, `empName`, `empDOB`, `empGender`, `empCNIC`, `empAddress`, `empDOJ`, `empDesignation`, `empSalary`, `empContact`, `empEmail`, `empPassword`, `deptID`, `serviceID`) 
+    $sql = "INSERT INTO `employee`
+(`empID`, `empName`, `empDOB`, `empGender`, `empCNIC`, `empAddress`, `empDOJ`, `empDesignation`, `empSalary`, `empContact`, `empEmail`, `empPassword`, `deptID`) 
 VALUES 
 (NULL,'Kamran Ali','1985-04-07','Male','352021553367','Askari 1, Lahore','2020-04-07','Security Incharge','60000','03210000000','kamaran@gmail.com','kamaran123','5'),
 (NULL,'Kashif Yunus','1990-06-06','Male','352021444647','Samnabad,Lahore','2020-04-07','Chef','30000','03000000000','kashif@gmail.com','kashif123','3'),
@@ -318,7 +318,7 @@ VALUES
     custID int,
     roomID int,
     resStartDate Date,
-    resEndtDate Date
+    resEndDate Date
 )";
 
 
@@ -330,7 +330,7 @@ VALUES
 
     $sql = " 
    INSERT INTO `reservation`
-(`resID`, `custID`, `roomID`, `resStartDate`, `resEndtDate`)
+(`resID`, `custID`, `roomID`, `resStartDate`, `resEndDate`)
 VALUES 
 (NULL,'2','3','2020-06-15','2020-06-18'),
 (NULL,'1','1','2020-07-13','2020-07-18'),

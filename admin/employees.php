@@ -124,6 +124,18 @@ $countemployee = $resultemployee->num_rows;
                             Bills
                         </a>
                     </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="complaints.php">
+                            <span data-feather="alert-circle"></span>
+                            Complaints
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="feedback.php">
+                            <span data-feather="archive"></span>
+                            Feedback
+                        </a>
+                    </li>
                 </ul>
 
                 <h6 class="sidebar-heading d-flex justify-content-between align-items-center px-3 mt-4 mb-1 text-muted">

@@ -1,9 +1,3 @@
-<?php
-require_once ("../config/config.php");
-$querytype="SELECT * FROM roomtype";
-$resulttype = $mysqli->query($querytype);
-$counttype = $resulttype->num_rows;
-?>
 <!doctype html>
 <html lang="en">
 <head>
@@ -12,11 +6,10 @@ $counttype = $resulttype->num_rows;
     <meta name="description" content="">
     <meta name="author" content="Mark Otto, Jacob Thornton, and Bootstrap contributors">
     <meta name="generator" content="Jekyll v4.0.1">
-    <title>Room Type · Admin Panel · HMS</title>
+    <title>Feedback · Admin Panel · HMS</title>
 
     <!-- Bootstrap core CSS -->
     <link href="../css/bootstrap.css" rel="stylesheet">
-
 
     <style>
         .bd-placeholder-img {
@@ -34,7 +27,6 @@ $counttype = $resulttype->num_rows;
             }
         }
     </style>
-
     <script>
         function printContent(el){
             var restorepage = $('body').html();
@@ -44,7 +36,6 @@ $counttype = $resulttype->num_rows;
             $('body').html(restorepage);
         }
     </script>
-    <!-- Custom styles for this template -->
     <link href="../css/dashboard.css" rel="stylesheet">
 </head>
 <body>
@@ -85,9 +76,9 @@ $counttype = $resulttype->num_rows;
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link active" href="roomtype.php">
+                        <a class="nav-link" href="roomtype.php">
                             <span data-feather="type"></span>
-                            Room Type <span class="sr-only">(current)</span>
+                            Room Type
                         </a>
                     </li>
                     <li class="nav-item">
@@ -134,9 +125,9 @@ $counttype = $resulttype->num_rows;
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="feedback.php">
+                        <a class="nav-link active" href="feedback.php">
                             <span data-feather="archive"></span>
-                            Feedback
+                            Feedback<span class="sr-only">(current)</span>
                         </a>
                     </li>
                 </ul>
@@ -161,60 +152,14 @@ $counttype = $resulttype->num_rows;
 
         <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-md-4">
             <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
-                <h1 class="h2">Room Types</h1>
+                <h1 class="h2">Feedback</h1>
                 <div class="btn-toolbar mb-2 mb-md-0">
                     <div class="btn-group mr-2">
-                        <button onclick="location.href='addroomtype.php';" type="button" class="btn btn-sm btn-outline-secondary">Add New Room Type</button>
                         <button id="print" type="button" onclick="printContent('table');" class="btn btn-sm btn-outline-secondary">Print</button>
                     </div>
                 </div>
             </div>
-            <?php
-            if(isset($_GET["message"]))
-            {
-                $msg = $_GET["message"];
-                echo "<b><p style='color: red'>$msg</p></b>";
-            }
-            ?>
-            <table class='table table-light table-bordered table-striped' id="table">
-                <thead>
-                <tr>
-                    <th>ID</th>
-                    <th>Type</th>
-                    <th>Details</th>
-                    <th>Price</th>
-                    <th>Capacity</th>
-                    <th>Actions</th>
-                </tr>
-                </thead>
-                <tbody>
-                <?php
-                if($counttype==0)
-                {
-                    echo '<option value="">No Datas have been created Yet</option>';
-                }
-                else
-                {
-                while($fetchtype= $resulttype->fetch_assoc())
-                {
-                ?>
-                <tr>
-                    <td> <?php echo $fetchtype['rtypeID']; ?></td>
-                    <td> <?php echo $fetchtype['rtypeName']; ?></td>
-                    <td> <?php echo $fetchtype['rtypeDetails']; ?></td>
-                    <td> <?php echo $fetchtype['rtypePrice']; ?></td>
-                    <td> <?php echo $fetchtype['rtypeCapacity']; ?></td>
-                    <td>
-                        <a href='viewroomtype.php?id=<?php echo $fetchtype['rtypeID']; ?>' title="view record" data-toggle='tooltip'>View/Update</a>
-                        <a href='deleteroomtype.php?id=<?php echo $fetchtype['rtypeID']; ?>' title='Delete Record' data-toggle='tooltip'>Delete</a>
-                    </td>
-                    <?php
-                    }
-                    }
-                    ?>
-                </tr>
-                </tbody>
-            </table>
+
 
         </main>
     </div>

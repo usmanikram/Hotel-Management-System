@@ -18,7 +18,7 @@ function total($amount,$tax)
     return $total;
 }
 $start=date_create($fetchbill['resStartDate']);
-$end=date_create($fetchbill['resEndtDate']);
+$end=date_create($fetchbill['resEndDate']);
 $diff=date_diff($start,$end);
 
 
@@ -71,7 +71,7 @@ $diff=date_diff($start,$end);
                     <address>
                         <strong><u>Reservation Details:</u></strong><br>
                         <strong>Start Date: </strong><?php echo $fetchbill['resStartDate'] ?><br>
-                        <strong>End Date: </strong><?php echo $fetchbill['resEndtDate'] ?><br>
+                        <strong>End Date: </strong><?php echo $fetchbill['resEndDate'] ?><br>
                     </address>
                 </div>
                 <div class="col-xs-6 text-right">

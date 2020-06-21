@@ -16,6 +16,7 @@ if ($row == 1) {
     if (password_verify($password, $arr['custPassword'])) {
 
         $_SESSION['customername'] = $arr['custName'];
+        $_SESSION['customerid']=$arr['custID'];
 
         header("Location: customer/index.php");
     } else {

@@ -1,5 +1,5 @@
 <?php
-session_start();
+require_once ("../model/customer/profile/view.php");
 $customername=$customerid="";
 if(isset($_SESSION['customername']))
 {
@@ -12,6 +12,7 @@ else
     $msg= "Login First";
     header("Location: ../customerlogin.php?message=$msg");
 }
+$customer=$_SESSION['custview'];
 ?>
 <!doctype html>
 <html lang="en">
@@ -21,7 +22,7 @@ else
     <meta name="description" content="">
     <meta name="author" content="Mark Otto, Jacob Thornton, and Bootstrap contributors">
     <meta name="generator" content="Jekyll v4.0.1">
-    <title>Customer Panel · HMS</title>
+    <title>Profile · Customer Panel · HMS</title>
 
 
 
@@ -71,9 +72,9 @@ else
                 <ul class="nav flex-column">
 
                     <li class="nav-item">
-                        <a class="nav-link active" href="index.php">
+                        <a class="nav-link" href="index.php">
                             <span data-feather="home"></span>
-                            Dashboard <span class="sr-only">(current)</span>
+                            Dashboard
                         </a>
                     </li>
                     <h6 class="sidebar-heading d-flex justify-content-between align-items-center px-3 mt-4 mb-1 text-muted">
@@ -115,9 +116,9 @@ else
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="profile.php">
+                        <a class="nav-link active" href="profile.php">
                             <span data-feather="user"></span>
-                            My Profile
+                            My Profile<span class="sr-only">(current)</span>
                         </a>
                     </li>
                 </ul>
@@ -128,21 +129,84 @@ else
 
         <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-md-4">
             <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
-                <h1 class="h2">Welcome <b><?php echo $customername; ?>!</b></h1>
+                <h1 class="h2">My Profile</b></h1>
 
                 <div class="btn-toolbar mb-2 mb-md-0">
                     <div class="btn-group mr-2">
-                        <button type="button" class="btn btn-sm btn-outline-secondary">Share</button>
-                        <button type="button" class="btn btn-sm btn-outline-secondary">Export</button>
-                    </div>
-                    <button type="button" class="btn btn-sm btn-outline-secondary dropdown-toggle">
-                        <span data-feather="calendar"></span>
-                        This week
-                    </button>
+                      </div>
                 </div>
             </div>
+            <?php
+            if(isset($_GET["message"]))
+            {
+                $msg = $_GET["message"];
+                echo "<b><p style='color: red'>$msg</p></b>";
+            }
+            ?>
+            <form action="../model/customer/profile/update.php" method="post">
+                <div class="form-row">
+                    <div class="form-group col-md-6">
+                        <label for="id">ID</label>
+                        <input type="text" class="form-control" name="id" value="<?php echo $customer->getcustID(); ?>" readonly>
+                    </div>
 
-
+                </div>
+                <div class="form-row">
+                    <div class="form-group col-md-6">
+                        <label for="name">Name</label>
+                        <input type="text" class="form-control" name="name" value="<?php echo $customer->getcustName(); ?>">
+                    </div>
+                    <div class="form-group col-md-6">
+                        <label for="dob">DOB</label>
+                        <input type="date"  class="form-control" name="dob" value="<?php echo $customer->getcustDOB(); ?>">
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group col-md-6">
+                        <label for="gender">Gender</label>
+                        <select class="form-control" name="gender" required>
+                            <option value=""></option>
+                            <option value="Male">Male</option>
+                            <option value="Female">Female</option>
+                        </select>
+                    </div>
+                    <div class="form-group col-md-6">
+                        <label for="cnic">CNIC</label>
+                        <input type="text" class="form-control" name="cnic" value="<?php echo $customer->getcustCNIC(); ?>" required>
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group col-md-6">
+                        <label for="contact">Contact</label>
+                        <input type="text" class="form-control" name="contact" value="<?php echo $customer->getcustContact(); ?>" required>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="address">Address</label>
+                    <input type="text" class="form-control" name="address" value="<?php echo $customer->getcustAddress(); ?>">
+                </div>
+                <div class="form-row">
+                    <div class="form-group col-md-6">
+                        <label for="email">Email</label>
+                        <input type="email" class="form-control" name="email" value="<?php echo $customer->getcustEmail(); ?>">
+                    </div>
+                    <div class="form-group col-md-6">
+                        <label for="password">Password</label>
+                        <input type="password" class="form-control" name="password" value="<?php echo $customer->getcustPassword(); ?>">
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group col-md-6">
+                        <label for="ccno">Credit Card Number</label>
+                        <input type="text" class="form-control" name="ccno" value="<?php echo $customer->getcustCCNO(); ?>">
+                    </div>
+                    <div class="form-group col-md-6">
+                        <label for="ccexpiry">Credit Card Expiry</label>
+                        <input type="date"  class="form-control" name="ccexpiry" value="<?php echo $customer->getcustCCExpiry(); ?>">
+                    </div>
+                </div>
+                <button type=submit" class="btn btn-sm btn-outline-secondary">Update My Profile</button>
+            </form>
 
         </main>
     </div>

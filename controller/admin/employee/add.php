@@ -1,4 +1,5 @@
 <?php
+session_start();
 require_once "../../../classes/employee.php";
 
 $name=$dob=$gender=$cnic=$address=$doj=$designation=$salary=$contact=
@@ -19,13 +20,11 @@ if(isset($_POST['name']) && isset($_POST['dob']) && isset($_POST['gender']) && i
     $contact = $_POST["contact"];
     $email = $_POST["email"];
     $password = $_POST["password"];
-    $departmentid = $_POST['department'];
+    $departmentid = $_POST["department"];
 }
 
 $employee = new employee(NULL,$name,$dob,$gender,$cnic,$address,$doj,$designation
     ,$salary,$contact,$email,$password,$departmentid);
-
-session_start();
 
 
 $_SESSION['employee'] = $employee;

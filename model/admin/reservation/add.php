@@ -6,7 +6,7 @@ $reservation = $_SESSION['reservation'];
 
 
 
-$sql = "INSERT INTO reservation (resID,custID,roomID,resStartDate,resEndtDate) 
+$sql = "INSERT INTO reservation (resID,custID,roomID,resStartDate,resEndDate) 
 VALUES (?,?,?,?,?)";
 
 if($stmt = $mysqli->prepare($sql)) {

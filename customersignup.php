@@ -37,10 +37,10 @@
     <link href="css/floating-labels.css" rel="stylesheet">
 </head>
 <body>
-<form class="form-signin" action="verifycustomer.php" method="post" name="customersignup" onsubmit="return check(customersignup)">
+<form class="form-signin" action="model/customer/signup/add.php" method="post">
     <div class="text-center mb-4">
         <h1>Customer Sign Up</h1>
-        <h4>Fill Out The Form To Sign Up</h4>
+        <h4>Fill Out The  Form To Sign Up</h4>
         <p style='color: red'>* Fields are required</p>
     </div>
     <?php

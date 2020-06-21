@@ -12,11 +12,6 @@
 
     <!-- Bootstrap core CSS -->
     <link href="css/bootstrap.css" rel="stylesheet">
-    <script>
-        function goBack() {
-            window.history.back();
-        }
-    </script>
     <style>
         .bd-placeholder-img {
             font-size: 1.125rem;
@@ -63,7 +58,7 @@
 
     <button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
     <button class="btn btn-lg btn-primary btn-block" type="button" onclick="location.href='customersignup.php';">Register</button>
-    <button class="btn btn-lg btn-primary btn-block" type="button" onclick="goBack();">Go Back</button>
+    <button class="btn btn-lg btn-primary btn-block" type="button" onclick="location.href='index.php';">Go Back</button>
     <p class="mt-5 mb-3 text-muted text-center">&copy; Copyright 2020, Hotel Management System.</p>
 </form>
 </body>

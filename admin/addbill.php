@@ -1,4 +1,4 @@
-<?php
+﻿<?php
 require_once ("../config/config.php");
 $querycustomer="SELECT DISTINCT c.custID, c.custName FROM customer c join reservation res on c.custID=res.custID";
 $resultcustomer = $mysqli->query($querycustomer);
@@ -113,6 +113,18 @@ $countcustomer = $resultcustomer->num_rows;
                             Bills<span class="sr-only">(current)</span>
                         </a>
                     </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="complaints.php">
+                            <span data-feather="alert-circle"></span>
+                            Complaints
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="feedback.php">
+                            <span data-feather="archive"></span>
+                            Feedback
+                        </a>
+                    </li>
                 </ul>
 
                 <h6 class="sidebar-heading d-flex justify-content-between align-items-center px-3 mt-4 mb-1 text-muted">
@@ -138,8 +150,9 @@ $countcustomer = $resultcustomer->num_rows;
                 <h1 class="h2">Bills</h1>
                 <div class="btn-toolbar mb-2 mb-md-0">
                     <div class="btn-group mr-2">
-                        <button type="button" class="btn btn-sm btn-outline-secondary">Add New Bill</button>
-                        <button type="button" class="btn btn-sm btn-outline-secondary">Download PDF</button>
+                         <button onclick="location.href='bills.php';" type="button" class="btn btn-sm btn-outline-secondary">Go Back</button>
+
+                       
                     </div>
                 </div>
             </div>

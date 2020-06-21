@@ -1,4 +1,4 @@
-<?php
+﻿<?php
 session_start();
 if(!isset($_SERVER['HTTP_REFERER'])){
     // redirect them to your desired location
@@ -21,13 +21,26 @@ if(isset($_POST['startdate'])&&isset($_POST['enddate'])&&isset($_POST['capacity'
     $enddate=$_POST['enddate'];
     $capacity=$_POST['capacity'];
 }
-$queryroom="SELECT
-    * FROM room join roomtype on room.roomType=roomtype.rtypeID WHERE roomID   NOT IN 
-(
-        SELECT reservation.roomID FROM reservation LEFT Outer JOIN
-            room ON reservation.roomID = room.roomID 
-        WHERE resStartDate<'$startdate'AND resEndtDate>='$enddate' 
-) AND room.roomStatus='1' AND roomtype.rtypeCapacity>='$capacity'
+$queryroom="
+SELECT * FROM room join roomtype 
+on 
+room.roomType=roomtype.rtypeID 
+WHERE roomID NOT IN 
+( 
+SELECT reservation.roomID FROM reservation 
+LEFT OUTER JOIN 
+room 
+ON 
+reservation.roomID = room.roomID 
+WHERE 
+resStartDate>='$startdate'
+AND 
+resEndDate<'$enddate' 
+) 
+AND 
+room.roomStatus='1' 
+AND 
+roomtype.rtypeCapacity>='$capacity'
 
 ";
 $resultroom = $mysqli->query($queryroom);

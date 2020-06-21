@@ -125,6 +125,18 @@ $countreservation = $resultreservation->num_rows;
                             Bills
                         </a>
                     </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="complaints.php">
+                            <span data-feather="alert-circle"></span>
+                            Complaints
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="feedback.php">
+                            <span data-feather="archive"></span>
+                            Feedback
+                        </a>
+                    </li>
                 </ul>
 
                 <h6 class="sidebar-heading d-flex justify-content-between align-items-center px-3 mt-4 mb-1 text-muted">
@@ -189,7 +201,7 @@ $countreservation = $resultreservation->num_rows;
                     <td> <?php echo $fetchreservation['custName']; ?></td>
                     <td> <?php echo $fetchreservation['roomID']; ?></td>
                     <td> <?php echo $fetchreservation['resStartDate']; ?></td>
-                    <td> <?php echo $fetchreservation['resEndtDate']; ?></td>
+                    <td> <?php echo $fetchreservation['resEndDate']; ?></td>
                     <td>
                         <a href='deletereservation.php?id=<?php echo $fetchreservation['resID']; ?>' title='Delete Record' data-toggle='tooltip'>Delete</a>
                     </td>

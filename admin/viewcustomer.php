@@ -1,5 +1,5 @@
 <?php
-require_once "../model/admin/customer/view.php";
+require_once "../model/customer/profile/view.php";
 $customer= $_SESSION['custview'];
 ?>
 <!doctype html>
@@ -114,6 +114,18 @@ $customer= $_SESSION['custview'];
                         <a class="nav-link" href="bills.php">
                             <span data-feather="file"></span>
                             Bills
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="complaints.php">
+                            <span data-feather="alert-circle"></span>
+                            Complaints
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="feedback.php">
+                            <span data-feather="archive"></span>
+                            Feedback
                         </a>
                     </li>
                 </ul>
