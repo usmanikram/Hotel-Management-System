@@ -8,7 +8,7 @@ $sql = "DELETE FROM complaint WHERE compID=$id";
 
 if ($mysqli->query($sql) === TRUE) {
 
-    $msg="Department Deleted Successfully";
+    $msg="Complaint Deleted Successfully";
     header("Location: ../../../customer/complaints.php?message=$msg");
 
 } else {

@@ -11,7 +11,7 @@ class feedback
 
 // Member Functions
 // Constructor
-    function __construct($fbID=NULL,$fbDate=NULL,$fbType=NULL,$fbDetail=NULL,$rating=NULL,$custID=NULL)
+    function __construct($fbID=NULL,$fbDate=NULL,$fbDetail=NULL,$rating=NULL,$custID=NULL)
     {
         $this->setfbID($fbID);
         $this->setfbDate($fbDate);

@@ -1,3 +1,9 @@
+<?php
+require_once ("../config/config.php");
+$queryfb="SELECT * FROM feedback join customer on feedback.custID=customer.custID";
+$resultfb = $mysqli->query($queryfb);
+$countfb = $resultfb->num_rows;
+?>
 <!doctype html>
 <html lang="en">
 <head>
@@ -160,6 +166,40 @@
                 </div>
             </div>
 
+            <table class='table table-light table-bordered table-striped' id="table">
+                <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Date</th>
+                    <th>Customer Name</th>
+                    <th>Details</th>
+                    <th>Rating</th>
+                </tr>
+                </thead>
+                <tbody>
+                <?php
+                if($countfb==0)
+                {
+                    echo '<option value="">No Feedback Found</option>';
+                }
+                else
+                {
+                while($fetchfb = $resultfb->fetch_assoc())
+                {
+                ?>
+                <tr>
+                    <td> <?php echo $fetchfb['fbID']; ?></td>
+                    <td> <?php echo $fetchfb['fbDate']; ?></td>
+                    <td> <?php echo $fetchfb['custName']; ?></td>
+                    <td> <?php echo $fetchfb['fbDetail']; ?></td>
+                    <td> <?php echo $fetchfb['rating']; ?></td>
+                    <?php
+                    }
+                    }
+                    ?>
+                </tr>
+                </tbody>
+            </table>
 
         </main>
     </div>
