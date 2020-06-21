@@ -1,21 +1,6 @@
 <?php
-session_start();
-$customername=$customerid="";
-if(isset($_SESSION['customername']))
-{
-    $customername=$_SESSION['customername'];
-    $customerid=$_SESSION['customerid'];
-
-    require_once ("../config/config.php");
-    $querycomp="SELECT * FROM complaint where custID='$customerid'";
-    $resultcomp = $mysqli->query($querycomp);
-    $countcomp = $resultcomp->num_rows;
-}
-else
-{
-    $msg= "Login First";
-    header("Location: ../customerlogin.php?message=$msg");
-}
+require_once ('../model/admin/complaint/view.php');
+$complaint =$_SESSION['compview'];
 ?>
 <!doctype html>
 <html lang="en">
@@ -25,9 +10,7 @@ else
     <meta name="description" content="">
     <meta name="author" content="Mark Otto, Jacob Thornton, and Bootstrap contributors">
     <meta name="generator" content="Jekyll v4.0.1">
-    <title>Complaints· Customer Panel · HMS</title>
-
-
+    <title>Complaints · Admin Panel · HMS</title>
 
     <!-- Bootstrap core CSS -->
     <link href="../css/bootstrap.css" rel="stylesheet">
@@ -48,25 +31,29 @@ else
             }
         }
     </style>
-    <!-- Custom styles for this template -->
+    <script>
+        function printContent(el){
+            var restorepage = $('body').html();
+            var printcontent = $('#' + el).clone();
+            $('body').empty().html(printcontent);
+            window.print();
+            $('body').html(restorepage);
+        }
+    </script>
     <link href="../css/dashboard.css" rel="stylesheet">
 </head>
 <body>
-
-
 <nav class="navbar navbar-dark sticky-top bg-dark flex-md-nowrap p-0 shadow">
     <a class="navbar-brand col-md-3 col-lg-2 mr-0 px-3" href="index.php">Hotel Management System</a>
     <button class="navbar-toggler position-absolute d-md-none collapsed" type="button" data-toggle="collapse" data-target="#sidebarMenu" aria-controls="sidebarMenu" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
     </button>
-    <input class="form-control form-control-dark w-100" type="text" placeholder="Search" aria-label="Search">
     <ul class="navbar-nav px-3">
         <li class="nav-item text-nowrap">
             <a class="nav-link" href="logout.php">Sign out</a>
         </li>
     </ul>
 </nav>
-
 
 <div class="container-fluid">
     <div class="row">
@@ -87,9 +74,15 @@ else
                         </a>
                     </h6>
                     <li class="nav-item">
-                        <a class="nav-link" href="reservations.php">
-                            <span data-feather="trello"></span>
-                            Reservations
+                        <a class="nav-link" href="room.php">
+                            <span data-feather="briefcase"></span>
+                            Rooms
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="roomtype.php">
+                            <span data-feather="type"></span>
+                            Room Type
                         </a>
                     </li>
                     <li class="nav-item">
@@ -98,8 +91,37 @@ else
                             Services
                         </a>
                     </li>
-
-
+                    <li class="nav-item">
+                        <a class="nav-link" href="reservations.php">
+                            <span data-feather="trello"></span>
+                            Reservations
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="customers.php">
+                            <span data-feather="users"></span>
+                            Customers
+                        </a>
+                    </li>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="employees.php">
+                            <span data-feather="users"></span>
+                            Employees
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="departments.php">
+                            <span data-feather="truck"></span>
+                            Departments
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="bills.php">
+                            <span data-feather="file"></span>
+                            Bills
+                        </a>
+                    </li>
                     <li class="nav-item">
                         <a class="nav-link active" href="complaints.php">
                             <span data-feather="alert-circle"></span>
@@ -112,34 +134,36 @@ else
                             Feedback
                         </a>
                     </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="bills.php">
-                            <span data-feather="file"></span>
-                            Bills
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="profile.php">
-                            <span data-feather="user"></span>
-                            My Profile
-                        </a>
-                    </li>
                 </ul>
 
+                <h6 class="sidebar-heading d-flex justify-content-between align-items-center px-3 mt-4 mb-1 text-muted">
+                    <span>Reports</span>
+                    <a class="d-flex align-items-center text-muted" href="#" aria-label="Add a new report">
+                        <span data-feather="plus-circle"></span>
+                    </a>
+                </h6>
+                <ul class="nav flex-column mb-2">
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">
+                            <span data-feather="file-text"></span>
+                            Current month
+                        </a>
+                    </li>
 
+                </ul>
             </div>
         </nav>
 
         <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-md-4">
             <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
-                <h1 class="h2">My Complaints</b></h1>
-
+                <h1 class="h2">Complaints</h1>
                 <div class="btn-toolbar mb-2 mb-md-0">
                     <div class="btn-group mr-2">
                         <button id="print" type="button" onclick="printContent('table');" class="btn btn-sm btn-outline-secondary">Print</button>
                     </div>
                 </div>
             </div>
+
             <?php
             if(isset($_GET["message"]))
             {
@@ -148,42 +172,37 @@ else
             }
             ?>
 
-            <table class='table table-light table-bordered table-striped' id="table">
-                <thead>
-                <tr>
-                    <th>ID</th>
-                    <th>Date</th>
-                    <th>Details</th>
-                    <th>Remarks</th>
-                    <th>Actions</th>
-                </tr>
-                </thead>
-                <tbody>
-                <?php
-                if($countcomp==0)
-                {
-                    echo '<option value="">No Complaints Found</option>';
-                }
-                else
-                {
-                while($fetchcomp = $resultcomp->fetch_assoc())
-                {
-                ?>
-                <tr>
-                    <td> <?php echo $fetchcomp['compID']; ?></td>
-                    <td> <?php echo $fetchcomp['compDate']; ?></td>
-                    <td> <?php echo $fetchcomp['compDetail']; ?></td>
-                    <td> <?php echo $fetchcomp['remarks']; ?></td>
-                    <td>
-                        <a href='deletecomplaint.php?id=<?php echo $fetchcomp['compID']; ?>' title='Delete Record' data-toggle='tooltip'>Delete</a>
-                    </td>
-                    <?php
-                    }
-                    }
-                    ?>
-                </tr>
-                </tbody>
-            </table>
+            <form action="../model/admin/complaint/update.php" method="post">
+                <div class="form-row">
+                    <div class="form-group col-md-6">
+                        <label for="date">ID:</label>
+                        <input type="text" class="form-control" name="id" value="<?php echo $complaint->getcompID(); ?>" readonly>
+                    </div>
+                    <div class="form-group col-md-6">
+                        <label for="date">Customer ID:</label>
+                        <input type="text" class="form-control" name="custid" value="<?php echo $complaint->getcustID(); ?>" readonly>
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group col-md-6">
+                        <label for="date">Date:</label>
+                        <input type="date" class="form-control" name="date" value="<?php echo $complaint->getcompDate(); ?>" readonly>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="details">Details</label>
+                    <textarea class="form-control" name="detail" rows="3" readonly><?php echo $complaint->getcompDetail(); ?></textarea>
+                </div>
+
+                <div class="form-group">
+                    <label for="details">Remarks</label>
+                    <textarea class="form-control" name="remarks" rows="3"><?php echo $complaint->getremarks(); ?></textarea>
+                </div>
+
+
+                <button type=submit" class="btn btn-sm btn-outline-secondary">Update</button>
+            </form>
+
 
 
         </main>
@@ -194,5 +213,4 @@ else
 <script src="https://cdnjs.cloudflare.com/ajax/libs/feather-icons/4.9.0/feather.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.3/Chart.min.js"></script>
 <script src="../js/dashboard.js"></script></body>
-
 </html>

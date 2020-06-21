@@ -5,11 +5,7 @@ if(isset($_SESSION['customername']))
 {
     $customername=$_SESSION['customername'];
     $customerid=$_SESSION['customerid'];
-
-    require_once ("../config/config.php");
-    $querycomp="SELECT * FROM complaint where custID='$customerid'";
-    $resultcomp = $mysqli->query($querycomp);
-    $countcomp = $resultcomp->num_rows;
+$id=$_GET['id'];
 }
 else
 {
@@ -25,7 +21,7 @@ else
     <meta name="description" content="">
     <meta name="author" content="Mark Otto, Jacob Thornton, and Bootstrap contributors">
     <meta name="generator" content="Jekyll v4.0.1">
-    <title>Complaints· Customer Panel · HMS</title>
+    <title>Add Complaint · Customer Panel · HMS</title>
 
 
 
@@ -132,58 +128,19 @@ else
 
         <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-md-4">
             <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
-                <h1 class="h2">My Complaints</b></h1>
+                <h1 class="h2">Delete Complaint</b></h1>
 
                 <div class="btn-toolbar mb-2 mb-md-0">
                     <div class="btn-group mr-2">
-                        <button id="print" type="button" onclick="printContent('table');" class="btn btn-sm btn-outline-secondary">Print</button>
+                        <button onclick="location.href='complaints.php';" type="button" class="btn btn-sm btn-outline-secondary">Go Back</button>
+
                     </div>
                 </div>
             </div>
-            <?php
-            if(isset($_GET["message"]))
-            {
-                $msg = $_GET["message"];
-                echo "<b><p style='color: red'>$msg</p></b>";
-            }
-            ?>
 
-            <table class='table table-light table-bordered table-striped' id="table">
-                <thead>
-                <tr>
-                    <th>ID</th>
-                    <th>Date</th>
-                    <th>Details</th>
-                    <th>Remarks</th>
-                    <th>Actions</th>
-                </tr>
-                </thead>
-                <tbody>
-                <?php
-                if($countcomp==0)
-                {
-                    echo '<option value="">No Complaints Found</option>';
-                }
-                else
-                {
-                while($fetchcomp = $resultcomp->fetch_assoc())
-                {
-                ?>
-                <tr>
-                    <td> <?php echo $fetchcomp['compID']; ?></td>
-                    <td> <?php echo $fetchcomp['compDate']; ?></td>
-                    <td> <?php echo $fetchcomp['compDetail']; ?></td>
-                    <td> <?php echo $fetchcomp['remarks']; ?></td>
-                    <td>
-                        <a href='deletecomplaint.php?id=<?php echo $fetchcomp['compID']; ?>' title='Delete Record' data-toggle='tooltip'>Delete</a>
-                    </td>
-                    <?php
-                    }
-                    }
-                    ?>
-                </tr>
-                </tbody>
-            </table>
+            <h3>Are You Sure Want To Delete ?</h3>
+            <a href="../model/customer/complaint/delete.php?id=<?php echo $id; ?>" class="btn btn-sm btn-outline-secondary"><h2>Yes</h2></a>
+            <a href="complaints.php" class="btn btn-sm btn-outline-secondary"><h2>No</h2></a>
 
 
         </main>

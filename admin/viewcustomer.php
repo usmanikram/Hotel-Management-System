@@ -1,5 +1,5 @@
 <?php
-require_once "../model/customer/profile/view.php";
+require_once "../model/admin/customer/view.php";
 $customer= $_SESSION['custview'];
 ?>
 <!doctype html>

@@ -1,3 +1,9 @@
+<?php
+require_once ("../config/config.php");
+$querycomp="SELECT * FROM complaint join customer where complaint.custID=customer.custID";
+$resultcomp = $mysqli->query($querycomp);
+$countcomp = $resultcomp->num_rows;
+?>
 <!doctype html>
 <html lang="en">
 <head>
@@ -159,6 +165,53 @@
                     </div>
                 </div>
             </div>
+
+            <?php
+            if(isset($_GET["message"]))
+            {
+                $msg = $_GET["message"];
+                echo "<b><p style='color: red'>$msg</p></b>";
+            }
+            ?>
+
+            <table class='table table-light table-bordered table-striped' id="table">
+                <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Date</th>
+                    <th>Customer Name</th>
+                    <th>Details</th>
+                    <th>Remarks</th>
+                    <th>Actions</th>
+                </tr>
+                </thead>
+                <tbody>
+                <?php
+                if($countcomp==0)
+                {
+                    echo '<option value="">No Complaints Found</option>';
+                }
+                else
+                {
+                while($fetchcomp = $resultcomp->fetch_assoc())
+                {
+                ?>
+                <tr>
+                    <td> <?php echo $fetchcomp['compID']; ?></td>
+                    <td> <?php echo $fetchcomp['compDate']; ?></td>
+                    <td> <?php echo $fetchcomp['custName']; ?></td>
+                    <td> <?php echo $fetchcomp['compDetail']; ?></td>
+                    <td> <?php echo $fetchcomp['remarks']; ?></td>
+                    <td>
+                        <a href='viewcomplaint.php?id=<?php echo $fetchcomp['compID']; ?>' title='Update' data-toggle='tooltip'>View/Update</a>
+                    </td>
+                    <?php
+                    }
+                    }
+                    ?>
+                </tr>
+                </tbody>
+            </table>
 
 
         </main>

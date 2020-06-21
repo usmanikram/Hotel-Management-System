@@ -14,7 +14,7 @@ class complaint
     {
         $this->setcompID($compID);
         $this->setcompDate($compDate);
-        $this->setcompDetails($compDetail);
+        $this->setcompDetail($compDetail);
         $this->setcustID($custID);
         $this->setremarks($remarks);
     }
@@ -22,7 +22,7 @@ class complaint
 //Setter
     function setcompID($compID){$this->compID=$compID;}
     function setcompDate($compDate){$this->compDate=$compDate;}
-    function setcompDetails($compDetail){$this->compDetail=$compDetail;}
+    function setcompDetail($compDetail){$this->compDetail=$compDetail;}
     function setcustID($custID){$this->custID=$custID;}
     function setremarks($remarks){$this->remarks=$remarks;}
 
