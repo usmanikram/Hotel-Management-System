@@ -1,8 +1,14 @@
 <?php
 require_once ("../../config/config.php");
-$querytype="SELECT * FROM roomtype";
-$resulttype = $mysqli->query($querytype);
-$counttype = $resulttype->num_rows;
+
+$querybill="SELECT * FROM bill b join reservation r join customer c join room ro on 
+b.custID=c.custID and b.resID=r.resID and r.roomID=ro.roomID";
+$resultbill = $mysqli->query($querybill);
+$countbill = $resultbill->num_rows;
+
+$sumquery="SELECT sum(amount) as Total FROM bill";
+$sumresult=$mysqli->query($sumquery);
+$fetchsum = $sumresult->fetch_assoc()
 ?>
 <!doctype html>
 <html lang="en">
@@ -12,12 +18,9 @@ $counttype = $resulttype->num_rows;
     <meta name="description" content="">
     <meta name="author" content="Mark Otto, Jacob Thornton, and Bootstrap contributors">
     <meta name="generator" content="Jekyll v4.0.1">
-    <title>Room Types Report · Admin Panel · HMS</title>
+    <title>Income Report · Admin Panel · HMS</title>
 
-    <!-- Bootstrap core CSS -->
     <link href="../../css/bootstrap.css" rel="stylesheet">
-
-
     <style>
         .bd-placeholder-img {
             font-size: 1.125rem;
@@ -34,17 +37,6 @@ $counttype = $resulttype->num_rows;
             }
         }
     </style>
-
-    <script>
-        function printContent(el){
-            var restorepage = $('body').html();
-            var printcontent = $('#' + el).clone();
-            $('body').empty().html(printcontent);
-            window.print();
-            $('body').html(restorepage);
-        }
-    </script>
-    <!-- Custom styles for this template -->
     <link href="../../css/dashboard.css" rel="stylesheet">
 </head>
 <body>
@@ -116,7 +108,7 @@ $counttype = $resulttype->num_rows;
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="departments.php">
+                        <a class="nav-link" href="../departments.php">
                             <span data-feather="truck"></span>
                             Departments
                         </a>
@@ -161,9 +153,9 @@ $counttype = $resulttype->num_rows;
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link active" href="roomtype.php">
+                        <a class="nav-link" href="roomtype.php">
                             <span data-feather="type"></span>
-                            Room Type<span class="sr-only">(current)</span>
+                            Room Type
                         </a>
                     </li>
                     <li class="nav-item">
@@ -179,9 +171,9 @@ $counttype = $resulttype->num_rows;
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="income.php">
+                        <a class="nav-link active" href="income.php">
                             <span data-feather="dollar-sign"></span>
-                            Income
+                            Income<span class="sr-only">(current)</span>
                         </a>
                     </li>
                     <li class="nav-item">
@@ -209,7 +201,7 @@ $counttype = $resulttype->num_rows;
 
         <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-md-4">
             <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
-                <h1 class="h2">Room Types Report</h1>
+                <h1 class="h2">Income Report</h1>
                 <div class="btn-toolbar mb-2 mb-md-0">
                     <div class="btn-group mr-2">
                         <button id="print" type="button" onclick="printContent('table');" class="btn btn-sm btn-outline-secondary">Print</button>
@@ -223,38 +215,53 @@ $counttype = $resulttype->num_rows;
                 echo "<b><p style='color: red'>$msg</p></b>";
             }
             ?>
+
             <table class='table table-light table-bordered table-striped' id="table">
                 <thead>
                 <tr align="center">
-                    <th>Room Type ID</th>
-                    <th>Room Type Name</th>
-                    <th>Details</th>
-                    <th>Price (Rs.)</th>
-                    <th>Capacity (Persons)</th>
+                    <th>Bill ID</th>
+                    <th>Bill Date</th>
+                    <th>Received From</th>
+                    <th>Against Reservation ID</th>
+                    <th>Room No</th>
+                    <th>Payment Method</th>
+                    <th>Amount</th>
                 </tr>
                 </thead>
                 <tbody>
                 <?php
-                if($counttype==0)
+                if($countbill==0)
                 {
                     echo '<option value="">No Datas have been created Yet</option>';
                 }
                 else
                 {
-                while($fetchtype= $resulttype->fetch_assoc())
+                while($fetchbill = $resultbill->fetch_assoc())
                 {
                 ?>
                 <tr align="center">
-                    <td> <?php echo $fetchtype['rtypeID']; ?></td>
-                    <td> <?php echo $fetchtype['rtypeName']; ?></td>
-                    <td> <?php echo $fetchtype['rtypeDetails']; ?></td>
-                    <td> <?php echo $fetchtype['rtypePrice']; ?></td>
-                    <td> <?php echo $fetchtype['rtypeCapacity']; ?></td>
+                    <td> <?php echo $fetchbill['billID']; ?></td>
+                    <td> <?php echo $fetchbill['billDate']; ?></td>
+                    <td> <?php echo $fetchbill['custName']; ?></td>
+                    <td> <?php echo $fetchbill['resID']; ?></td>
+                    <td> <?php echo $fetchbill['roomID']; ?></td>
+                    <td> <?php echo $fetchbill['paymentmethod']; ?></td>
+                    <td> <?php echo $fetchbill['amount']; ?></td>
+
 
                     <?php
                     }
                     }
                     ?>
+
+                </tr>
+                <tr class="table-success"><td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td align="center"><b>Total: </b></td>
+                    <td align="center"><b><?php echo $fetchsum['Total']; ?></b></td>
                 </tr>
                 </tbody>
             </table>

@@ -48,7 +48,7 @@ $countroom = $resultroom->num_rows;
 </head>
 <body>
 <nav class="navbar navbar-dark sticky-top bg-dark flex-md-nowrap p-0 shadow">
-    <a class="navbar-brand col-md-3 col-lg-2 mr-0 px-3" href="index.php">Hotel Management System</a>
+    <a class="navbar-brand col-md-3 col-lg-2 mr-0 px-3" href="../index.php">Hotel Management System</a>
     <button class="navbar-toggler position-absolute d-md-none collapsed" type="button" data-toggle="collapse" data-target="#sidebarMenu" aria-controls="sidebarMenu" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
     </button>
@@ -154,9 +154,9 @@ $countroom = $resultroom->num_rows;
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link  active" href="room.php">
+                        <a class="nav-link active" href="room.php">
                             <span data-feather="briefcase"></span>
-                            Rooms <span class="sr-only">(current)</span>
+                            Rooms<span class="sr-only">(current)</span>
                         </a>
                     </li>
                     <li class="nav-item">
@@ -165,6 +165,43 @@ $countroom = $resultroom->num_rows;
                             Room Type
                         </a>
                     </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="customer.php">
+                            <span data-feather="users"></span>
+                            Customers
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="employee.php">
+                            <span data-feather="users"></span>
+                            Employees
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="income.php">
+                            <span data-feather="dollar-sign"></span>
+                            Income
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="expense.php">
+                            <span data-feather="dollar-sign"></span>
+                            Expense
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="department.php">
+                            <span data-feather="truck"></span>
+                            Departments
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="complaint.php">
+                            <span data-feather="alert-circle"></span>
+                            Complaints
+                        </a>
+                    </li>
+
 
                 </ul>
             </div>

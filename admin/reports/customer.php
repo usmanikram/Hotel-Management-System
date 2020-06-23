@@ -1,8 +1,8 @@
 <?php
 require_once ("../../config/config.php");
-$querytype="SELECT * FROM roomtype";
-$resulttype = $mysqli->query($querytype);
-$counttype = $resulttype->num_rows;
+$querycustomer="SELECT * FROM customer";
+$resultcustomer = $mysqli->query($querycustomer);
+$countcustomer = $resultcustomer->num_rows;
 ?>
 <!doctype html>
 <html lang="en">
@@ -12,12 +12,9 @@ $counttype = $resulttype->num_rows;
     <meta name="description" content="">
     <meta name="author" content="Mark Otto, Jacob Thornton, and Bootstrap contributors">
     <meta name="generator" content="Jekyll v4.0.1">
-    <title>Room Types Report · Admin Panel · HMS</title>
+    <title>Customer Report · Admin Panel · HMS</title>
 
-    <!-- Bootstrap core CSS -->
     <link href="../../css/bootstrap.css" rel="stylesheet">
-
-
     <style>
         .bd-placeholder-img {
             font-size: 1.125rem;
@@ -34,7 +31,6 @@ $counttype = $resulttype->num_rows;
             }
         }
     </style>
-
     <script>
         function printContent(el){
             var restorepage = $('body').html();
@@ -44,7 +40,6 @@ $counttype = $resulttype->num_rows;
             $('body').html(restorepage);
         }
     </script>
-    <!-- Custom styles for this template -->
     <link href="../../css/dashboard.css" rel="stylesheet">
 </head>
 <body>
@@ -116,7 +111,7 @@ $counttype = $resulttype->num_rows;
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="departments.php">
+                        <a class="nav-link" href="../departments.php">
                             <span data-feather="truck"></span>
                             Departments
                         </a>
@@ -161,15 +156,15 @@ $counttype = $resulttype->num_rows;
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link active" href="roomtype.php">
+                        <a class="nav-link" href="roomtype.php">
                             <span data-feather="type"></span>
-                            Room Type<span class="sr-only">(current)</span>
+                            Room Type
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="customer.php">
+                        <a class="nav-link active" href="customer.php">
                             <span data-feather="users"></span>
-                            Customers
+                            Customers<span class="sr-only">(current)</span>
                         </a>
                     </li>
                     <li class="nav-item">
@@ -209,10 +204,10 @@ $counttype = $resulttype->num_rows;
 
         <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-md-4">
             <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
-                <h1 class="h2">Room Types Report</h1>
+                <h1 class="h2">Customer Report</h1>
                 <div class="btn-toolbar mb-2 mb-md-0">
                     <div class="btn-group mr-2">
-                        <button id="print" type="button" onclick="printContent('table');" class="btn btn-sm btn-outline-secondary">Print</button>
+                       <button id="print" type="button" onclick="printContent('table');" class="btn btn-sm btn-outline-secondary">Print</button>
                     </div>
                 </div>
             </div>
@@ -223,41 +218,56 @@ $counttype = $resulttype->num_rows;
                 echo "<b><p style='color: red'>$msg</p></b>";
             }
             ?>
-            <table class='table table-light table-bordered table-striped' id="table">
-                <thead>
-                <tr align="center">
-                    <th>Room Type ID</th>
-                    <th>Room Type Name</th>
-                    <th>Details</th>
-                    <th>Price (Rs.)</th>
-                    <th>Capacity (Persons)</th>
-                </tr>
-                </thead>
-                <tbody>
-                <?php
-                if($counttype==0)
-                {
-                    echo '<option value="">No Datas have been created Yet</option>';
-                }
-                else
-                {
-                while($fetchtype= $resulttype->fetch_assoc())
-                {
-                ?>
-                <tr align="center">
-                    <td> <?php echo $fetchtype['rtypeID']; ?></td>
-                    <td> <?php echo $fetchtype['rtypeName']; ?></td>
-                    <td> <?php echo $fetchtype['rtypeDetails']; ?></td>
-                    <td> <?php echo $fetchtype['rtypePrice']; ?></td>
-                    <td> <?php echo $fetchtype['rtypeCapacity']; ?></td>
 
+            <div class="table-responsive">
+
+                <table class='table table-light table-bordered table-striped' id="table">
+                    <thead>
+                    <tr align="center">
+                        <th>ID</th>
+                        <th>Name</th>
+                        <th>DOB</th>
+                        <th>Gender</th>
+                        <th>CNIC</th>
+                        <th>Contact</th>
+                        <th>Address</th>
+                        <th>Email</th>
+                        <th>Credit Card No</th>
+                        <th>Credit Card Expiry</th>
+                    </tr>
+                    </thead>
+                    <tbody>
                     <?php
+                    if($countcustomer==0)
+                    {
+                        echo '<option value="">No Datas have been created Yet</option>';
                     }
-                    }
+                    else
+                    {
+                    while($fetchcustomer = $resultcustomer->fetch_assoc())
+                    {
                     ?>
-                </tr>
-                </tbody>
-            </table>
+                    <tr align="center">
+                        <td> <?php echo $fetchcustomer['custID']; ?></td>
+                        <td> <?php echo $fetchcustomer['custName']; ?></td>
+                        <td> <?php echo $fetchcustomer['custDOB']; ?></td>
+                        <td> <?php echo $fetchcustomer['custGender']; ?></td>
+                        <td> <?php echo $fetchcustomer['custCNIC']; ?></td>
+                        <td> <?php echo $fetchcustomer['custContact']; ?></td>
+                        <td> <?php echo $fetchcustomer['custAddress']; ?></td>
+                        <td> <?php echo $fetchcustomer['custEmail']; ?></td>
+                        <td> <?php echo $fetchcustomer['custCCNO']; ?></td>
+                        <td> <?php echo $fetchcustomer['custCCExpiry']; ?></td>
+
+                        <?php
+                        }
+                        }
+                        ?>
+                    </tr>
+                    </tbody>
+                </table>
+
+            </div>
 
         </main>
     </div>

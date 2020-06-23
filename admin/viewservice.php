@@ -189,7 +189,6 @@ $service= $_SESSION['serviceview'];
                             Complaints
                         </a>
                     </li>
-
                 </ul>
             </div>
         </nav>
