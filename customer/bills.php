@@ -5,7 +5,12 @@ if(isset($_SESSION['customername']))
 {
     $customername=$_SESSION['customername'];
     $customerid=$_SESSION['customerid'];
+    require_once ("../config/config.php");
 
+    $querybill="SELECT * FROM bill b join customer c join reservation r on 
+                b.custID='$customerid' and c.custID='$customerid' and r.custID='$customerid'";
+    $resultbill = $mysqli->query($querybill);
+    $countbill = $resultbill->num_rows;
 }
 else
 {
@@ -135,6 +140,52 @@ else
 
                 </div>
             </div>
+            </div>
+            <table class='table table-light table-bordered table-striped' id="table">
+                <thead>
+                <tr>
+                    <th>Bill ID</th>
+                    <th>Bill Date</th>
+                    <th>Customer Name</th>
+                    <th>Room No</th>
+                    <th>Reservation ID</th>
+                    <th>Amount</th>
+                    <th>Payment Method</th>
+                    <th>Remarks</th>
+                    <th>Actions</th>
+                </tr>
+                </thead>
+                <tbody>
+                <?php
+                if($countbill==0)
+                {
+                    echo '<option value="">No Datas have been created Yet</option>';
+                }
+                else
+                {
+                while($fetchbill = $resultbill->fetch_assoc())
+                {
+                ?>
+                <tr>
+                    <td> <?php echo $fetchbill['billID']; ?></td>
+                    <td> <?php echo $fetchbill['billDate']; ?></td>
+                    <td> <?php echo $fetchbill['custName']; ?></td>
+                    <td> <?php echo $fetchbill['roomID']; ?></td>
+                    <td> <?php echo $fetchbill['resID']; ?></td>
+                    <td> <?php echo $fetchbill['amount']; ?></td>
+                    <td> <?php echo $fetchbill['paymentmethod']; ?></td>
+                    <td> <?php echo $fetchbill['remarks']; ?></td>
+
+                    <td>
+                        <a href='viewinvoice.php?id=<?php echo $fetchbill['custID']; ?>' title="view record" data-toggle='tooltip'>View Invoice</a>
+                        </td>
+                    <?php
+                    }
+                    }
+                    ?>
+                </tr>
+                </tbody>
+            </table>
 
 
 

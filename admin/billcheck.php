@@ -10,7 +10,7 @@ $resultcustomer = $mysqli->query($querycustomer);
 $countcustomer= $resultcustomer->num_rows;
 $fetchcustomer = $resultcustomer->fetch_assoc();
 
-$billquery="SELECT DATEDIFF(resEndtDate,resStartDate)*rt.rtypePrice as 
+$billquery="SELECT DATEDIFF(resEndDate,resStartDate)*rt.rtypePrice as 
 Total FROM reservation r JOIN room ro JOIN roomtype rt on 
 r.custID=$id and r.roomID=ro.roomID and ro.roomType=rt.rtypeID";
 $billresult=$mysqli->query($billquery);
@@ -198,7 +198,7 @@ $billfetch=$billresult->fetch_assoc();
 
                     <div class="form-group col-md-6">
                     <label for="name">Reservation End Date:</label>
-                    <input type="date" class="form-control" name="enddate" value="<?php echo $fetchcustomer['resEndtDate']; ?>" readonly>
+                    <input type="date" class="form-control" name="enddate" value="<?php echo $fetchcustomer['resEndDate']; ?>" readonly>
                     </div>
                 </div>
 
