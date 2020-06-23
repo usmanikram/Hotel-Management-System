@@ -6,9 +6,26 @@ if(isset($_SESSION['customername']))
     $customername=$_SESSION['customername'];
     $customerid=$_SESSION['customerid'];
     require_once ("../config/config.php");
-    $queryreservation="SELECT * FROM reservation r join customer c on r.custID=c.custID where c.custID='$customerid'";
-    $resultreservation = $mysqli->query($queryreservation);
-    $countreservation = $resultreservation->num_rows;
+    $startdate=$enddate=$capacity="";
+
+    if(isset($_POST['startdate'])&&isset($_POST['enddate'])&&isset($_POST['capacity']))
+    {
+        $startdate=$_POST['startdate'];
+        $enddate=$_POST['enddate'];
+        $capacity=$_POST['capacity'];
+    }
+    $querycustomer="SELECT * FROM customer where custID='$customerid'";
+    $resultcustomer = $mysqli->query($querycustomer);
+    $fetchcustomer = $resultcustomer->fetch_assoc();
+    $queryroom="SELECT
+    * FROM room join roomtype on room.roomType=roomtype.rtypeID WHERE roomID   NOT IN 
+(
+        SELECT reservation.roomID FROM reservation LEFT Outer JOIN
+            room ON reservation.roomID = room.roomID 
+        WHERE resStartDate<='$startdate'AND resEndDate>='$enddate' 
+) AND room.roomStatus='1' AND roomtype.rtypeCapacity>='$capacity'";
+    $resultroom = $mysqli->query($queryroom);
+    $countroom= $resultroom->num_rows;
 }
 else
 {
@@ -24,7 +41,7 @@ else
     <meta name="description" content="">
     <meta name="author" content="Mark Otto, Jacob Thornton, and Bootstrap contributors">
     <meta name="generator" content="Jekyll v4.0.1">
-    <title>Reservations · Customer Panel · HMS</title>
+    <title>Add Reservation · Customer Panel · HMS</title>
 
 
 
@@ -131,61 +148,74 @@ else
 
         <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-md-4">
             <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
-                <h1 class="h2">My Reservations</b></h1>
+                <h1 class="h2">Add Reservations</b></h1>
 
                 <div class="btn-toolbar mb-2 mb-md-0">
                     <div class="btn-group mr-2">
-                        <button onclick="location.href='addreservation.php';" type="button" class="btn btn-sm btn-outline-secondary">Add New Reservation</button>
-                        <button id="print" type="button" onclick="printContent('table');" class="btn btn-sm btn-outline-secondary">Print</button>
-
+                        <button onclick="location.href='reservations.php';" type="button" class="btn btn-sm btn-outline-secondary">Go Back</button>
                     </div>
+                </div>
             </div>
-            </div>
-                <?php
-                if(isset($_GET["message"]))
-                {
-                    $msg = $_GET["message"];
-                    echo "<b><p style='color: red'>$msg</p></b>";
-                }
-                ?>
-                <table class='table table-light table-bordered table-striped' id="table">
-                    <thead>
-                    <tr>
-                        <th>ID</th>
-                        <th>Customer Name</th>
-                        <th>Room Number</th>
-                        <th>Start Date</th>
-                        <th>End Date</th>
-                        <th>Actions</th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    <?php
-                    if($countreservation==0)
-                    {
-                        echo '<option value="">No Datas have been created Yet</option>';
-                    }
-                    else
-                    {
-                    while($fetchreservation = $resultreservation->fetch_assoc())
-                    {
-                    ?>
-                    <tr>
-                        <td> <?php echo $fetchreservation['resID']; ?></td>
-                        <td> <?php echo $fetchreservation['custName']; ?></td>
-                        <td> <?php echo $fetchreservation['roomID']; ?></td>
-                        <td> <?php echo $fetchreservation['resStartDate']; ?></td>
-                        <td> <?php echo $fetchreservation['resEndDate']; ?></td>
-                        <td>
-                            <a href='deletereservation.php?id=<?php echo $fetchreservation['resID']; ?>' title='Delete Record' data-toggle='tooltip'>Delete</a>
-                        </td>
+            <?php
+            if(isset($_GET["message"]))
+            {
+                $msg = $_GET["message"];
+                echo "<b><p style='color: red'>$msg</p></b>";
+            }
+            ?>
+
+            <form action="../model/customer/reservation/add.php" method="post">
+                <div class="form-group">
+                    <label for="customer">Customer ID:</label>
+                    <input type="text" class="form-control" name="customerid" value="<?php echo $fetchcustomer['custID']; ?>" readonly>
+                </div>
+                <div class="form-group">
+                    <label for="customer">Customer Name:</label>
+                    <input type="text" class="form-control" name="customername" value="<?php echo $fetchcustomer['custName'] ?>" readonly>
+                </div>
+                <div class="form-group">
+                    <label for="room">Room</label>
+                    <select class="form-control" name="roomid">
                         <?php
+                        if($countroom==0)
+                        {
+                            echo '<option value="">No Datas have been created Yet</option>';
                         }
+                        else
+                        {
+                            while($fetchroom = $resultroom->fetch_assoc())
+                            {
+                                ?>
+                                <option value="<?php echo $fetchroom['roomID']; ?>">
+                                    Room No:<?php echo $fetchroom['roomID']; ?>
+                                    Price:<?php echo $fetchroom['rtypePrice']; ?>
+                                    TypeName:<?php echo $fetchroom['rtypeName']; ?>
+                                    Capacity:<?php echo $fetchroom['rtypeCapacity']; ?>
+                                </option>
+                                <?php
+                            }
                         }
                         ?>
-                    </tr>
-                    </tbody>
-                </table>
+                    </select>
+                </div>
+                <div class="form-row">
+                    <div class="form-group col-md-6">
+                        <label for="name">Reservation Start Date:</label>
+                        <input type="date" class="form-control" name="startdate" value="<?php echo $startdate; ?>" readonly>
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group col-md-6">
+                        <label for="name">Reservation End Date:</label>
+                        <input type="date" class="form-control" name="enddate" value="<?php echo $enddate; ?>" readonly>
+                    </div>
+                </div>
+
+
+                <button type=submit" class="btn btn-sm btn-outline-secondary">Confirm Reservation</button>
+            </form>
+
+
 
         </main>
     </div>
