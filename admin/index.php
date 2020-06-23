@@ -173,12 +173,59 @@ while($billtotal = $resultbill->fetch_assoc())
                 </h6>
                 <ul class="nav flex-column mb-2">
                     <li class="nav-item">
-                        <a class="nav-link" href="#">
-                            <span data-feather="file-text"></span>
-                            Current month
+                        <a class="nav-link" href="reports/reservation.php">
+                            <span data-feather="trello"></span>
+                            Reservations
                         </a>
                     </li>
-
+                    <li class="nav-item">
+                        <a class="nav-link" href="reports/room.php">
+                            <span data-feather="briefcase"></span>
+                            Rooms
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="reports/roomtype.php">
+                            <span data-feather="type"></span>
+                            Room Type
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="reports/customer.php">
+                            <span data-feather="users"></span>
+                            Customers
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="reports/employee.php">
+                            <span data-feather="users"></span>
+                            Employees
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="reports/income.php">
+                            <span data-feather="dollar-sign"></span>
+                            Income
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="reports/expense.php">
+                            <span data-feather="dollar-sign"></span>
+                            Expense
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="reports/department.php">
+                            <span data-feather="truck"></span>
+                            Departments
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="reports/complaint.php">
+                            <span data-feather="alert-circle"></span>
+                            Complaints
+                        </a>
+                    </li>
                 </ul>
             </div>
         </nav>
