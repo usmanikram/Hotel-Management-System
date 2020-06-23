@@ -1,6 +1,17 @@
 <?php
-require_once "../model/admin/customer/view.php";
-$customer= $_SESSION['custview'];
+session_start();
+$adminname="";
+if(isset($_SESSION['name']))
+{
+    $adminname=$_SESSION['name'];
+    require_once "../model/admin/customer/view.php";
+    $customer= $_SESSION['custview'];
+}
+else
+{
+    $msg= "Login First";
+    header("Location: ../adminlogin.php?message=$msg");
+}
 ?>
 <!doctype html>
 <html lang="en">

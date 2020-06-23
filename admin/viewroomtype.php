@@ -1,6 +1,17 @@
 <?php
-require_once "../model/admin/roomtype/view.php";
-$roomtype= $_SESSION['roomtypeview'];
+session_start();
+$adminname="";
+if(isset($_SESSION['name']))
+{
+    $adminname=$_SESSION['name'];
+    require_once "../model/admin/roomtype/view.php";
+    $roomtype= $_SESSION['roomtypeview'];
+}
+else
+{
+    $msg= "Login First";
+    header("Location: ../adminlogin.php?message=$msg");
+}
 ?>
 <!doctype html>
 <html lang="en">

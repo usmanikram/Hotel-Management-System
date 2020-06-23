@@ -1,37 +1,40 @@
 <?php
 session_start();
+$adminname="";
 if(isset($_SESSION['name']))
     {
     $adminname=$_SESSION['name'];
+
+        require_once ("../config/config.php");
+        $queryroom="SELECT * FROM room";
+        $resultroom = $mysqli->query($queryroom);
+        $countroom = $resultroom->num_rows;
+        $querycustomer="SELECT * FROM customer";
+        $resultcustomer = $mysqli->query($querycustomer);
+        $countcustomer = $resultcustomer->num_rows;
+        $queryreservation="SELECT * FROM reservation";
+        $resultreservation = $mysqli->query($queryreservation);
+        $countreservation = $resultreservation->num_rows;
+        $queryemployee="SELECT * FROM employee";
+        $resultemployee = $mysqli->query($queryemployee);
+        $countemployee = $resultemployee->num_rows;
+        $querydept="SELECT * FROM department";
+        $resultdept = $mysqli->query($querydept);
+        $countdept = $resultdept->num_rows;
+        $querybill="SELECT * FROM bill";
+        $total=0;
+        $resultbill = $mysqli->query($querybill);
+        while($billtotal = $resultbill->fetch_assoc())
+        {
+            $total=$total+$billtotal['amount'];
+        }
     }
 else
     {
         $msg= "Login First";
-        header("Location: ../employeelogin.php?message=$msg");
+        header("Location: ../adminlogin.php?message=$msg");
     }
-require_once ("../config/config.php");
-$queryroom="SELECT * FROM room";
-$resultroom = $mysqli->query($queryroom);
-$countroom = $resultroom->num_rows;
-$querycustomer="SELECT * FROM customer";
-$resultcustomer = $mysqli->query($querycustomer);
-$countcustomer = $resultcustomer->num_rows;
-$queryreservation="SELECT * FROM reservation";
-$resultreservation = $mysqli->query($queryreservation);
-$countreservation = $resultreservation->num_rows;
-$queryemployee="SELECT * FROM employee";
-$resultemployee = $mysqli->query($queryemployee);
-$countemployee = $resultemployee->num_rows;
-$querydept="SELECT * FROM department";
-$resultdept = $mysqli->query($querydept);
-$countdept = $resultdept->num_rows;
-$querybill="SELECT * FROM bill";
-$total=0;
-$resultbill = $mysqli->query($querybill);
-while($billtotal = $resultbill->fetch_assoc())
-{
-    $total=$total+$billtotal['amount'];
-}
+
 ?>
 <!doctype html>
 <html lang="en">

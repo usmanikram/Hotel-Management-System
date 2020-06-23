@@ -21,8 +21,6 @@ if($result=$mysqli->query($sql)) {
     }
 }
 
-session_start();
-
 $_SESSION['employeeview'] =$employee;
 
 ?>

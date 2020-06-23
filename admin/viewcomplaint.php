@@ -1,6 +1,17 @@
 <?php
-require_once ('../model/admin/complaint/view.php');
-$complaint =$_SESSION['compview'];
+session_start();
+$adminname="";
+if(isset($_SESSION['name']))
+{
+    $adminname=$_SESSION['name'];
+    require_once ('../model/admin/complaint/view.php');
+    $complaint =$_SESSION['compview'];
+}
+else
+{
+    $msg= "Login First";
+    header("Location: ../adminlogin.php?message=$msg");
+}
 ?>
 <!doctype html>
 <html lang="en">

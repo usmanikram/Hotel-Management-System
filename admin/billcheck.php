@@ -1,21 +1,32 @@
 <?php
-require_once("../config/config.php");
-$id="";
-if(isset($_POST['id']))
+session_start();
+$adminname="";
+if(isset($_SESSION['name']))
 {
-    $id=$_POST['id'];
-}
-$querycustomer = "SELECT * FROM customer c join reservation res join room r  on c.custID=$id and c.custID=res.custID and r.roomID=res.roomID";
-$resultcustomer = $mysqli->query($querycustomer);
-$countcustomer= $resultcustomer->num_rows;
-$fetchcustomer = $resultcustomer->fetch_assoc();
+    $adminname=$_SESSION['name'];
+    require_once("../config/config.php");
+    $id="";
+    if(isset($_POST['id']))
+    {
+        $id=$_POST['id'];
+    }
+    $querycustomer = "SELECT * FROM customer c join reservation res join room r  on c.custID=$id and c.custID=res.custID and r.roomID=res.roomID";
+    $resultcustomer = $mysqli->query($querycustomer);
+    $countcustomer= $resultcustomer->num_rows;
+    $fetchcustomer = $resultcustomer->fetch_assoc();
 
-$billquery="SELECT DATEDIFF(resEndDate,resStartDate)*rt.rtypePrice as 
+    $billquery="SELECT DATEDIFF(resEndDate,resStartDate)*rt.rtypePrice as 
 Total FROM reservation r JOIN room ro JOIN roomtype rt on 
 r.custID=$id and r.roomID=ro.roomID and ro.roomType=rt.rtypeID";
-$billresult=$mysqli->query($billquery);
-$billfetch=$billresult->fetch_assoc();
+    $billresult=$mysqli->query($billquery);
+    $billfetch=$billresult->fetch_assoc();
 
+}
+else
+{
+    $msg= "Login First";
+    header("Location: ../adminlogin.php?message=$msg");
+}
 ?>
 <!doctype html>
 <html lang="en">

@@ -37,6 +37,8 @@
     <div class="text-center mb-4">
         <h1 >Admin Login</h1>
         <h4>Enter Your Credentials</h4>
+        <p><b>For Testing Use Following Credentials</b></p>
+        <p>Email: <b>admin@hms.com</b> and Password: <b>admin123</b></p>
     </div>
     <?php
     if(isset($_GET["message"]))

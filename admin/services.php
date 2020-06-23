@@ -1,8 +1,19 @@
 <?php
-require_once ("../config/config.php");
-$queryservice="SELECT * FROM service";
-$resultservice = $mysqli->query($queryservice);
-$countservice = $resultservice->num_rows;
+session_start();
+$adminname="";
+if(isset($_SESSION['name']))
+{
+    $adminname=$_SESSION['name'];
+    require_once ("../config/config.php");
+    $queryservice="SELECT * FROM service";
+    $resultservice = $mysqli->query($queryservice);
+    $countservice = $resultservice->num_rows;
+}
+else
+{
+    $msg= "Login First";
+    header("Location: ../adminlogin.php?message=$msg");
+}
 ?>
 <!doctype html>
 <html lang="en">

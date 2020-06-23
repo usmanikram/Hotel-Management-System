@@ -1,8 +1,19 @@
 <?php
-require_once ("../config/config.php");
-$queryreservation="SELECT * FROM reservation r join customer c where r.custID=c.custID";
-$resultreservation = $mysqli->query($queryreservation);
-$countreservation = $resultreservation->num_rows;
+session_start();
+$adminname="";
+if(isset($_SESSION['name']))
+{
+    $adminname=$_SESSION['name'];
+    require_once ("../config/config.php");
+    $queryreservation="SELECT * FROM reservation r join customer c where r.custID=c.custID";
+    $resultreservation = $mysqli->query($queryreservation);
+    $countreservation = $resultreservation->num_rows;
+}
+else
+{
+    $msg= "Login First";
+    header("Location: ../adminlogin.php?message=$msg");
+}
 ?>
 <!doctype html>
 <html lang="en">

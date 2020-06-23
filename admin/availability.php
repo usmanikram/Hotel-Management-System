@@ -1,24 +1,36 @@
 <?php
-require_once ("../config/config.php");
-$startdate=$enddate=$capacity="";
-if(isset($_POST['startdate'])&&isset($_POST['enddate'])&&isset($_POST['capacity']))
+session_start();
+$adminname="";
+if(isset($_SESSION['name']))
 {
-    $startdate=$_POST['startdate'];
-    $enddate=$_POST['enddate'];
-    $capacity=$_POST['capacity'];
-}
-$querycustomer="SELECT * FROM customer";
-$resultcustomer = $mysqli->query($querycustomer);
-$countcustomer = $resultcustomer->num_rows;
-$queryroom="SELECT
+    $adminname=$_SESSION['name'];
+    require_once ("../config/config.php");
+    $startdate=$enddate=$capacity="";
+    if(isset($_POST['startdate'])&&isset($_POST['enddate'])&&isset($_POST['capacity']))
+    {
+        $startdate=$_POST['startdate'];
+        $enddate=$_POST['enddate'];
+        $capacity=$_POST['capacity'];
+    }
+    $querycustomer="SELECT * FROM customer";
+    $resultcustomer = $mysqli->query($querycustomer);
+    $countcustomer = $resultcustomer->num_rows;
+    $queryroom="SELECT
     * FROM room join roomtype on room.roomType=roomtype.rtypeID WHERE roomID   NOT IN 
 (
         SELECT reservation.roomID FROM reservation LEFT Outer JOIN
             room ON reservation.roomID = room.roomID 
         WHERE resStartDate<='$startdate'AND resEndDate>='$enddate' 
 ) AND room.roomStatus='1' AND roomtype.rtypeCapacity>='$capacity'";
-$resultroom = $mysqli->query($queryroom);
-$countroom= $resultroom->num_rows;
+    $resultroom = $mysqli->query($queryroom);
+    $countroom= $resultroom->num_rows;
+
+}
+else
+{
+    $msg= "Login First";
+    header("Location: ../adminlogin.php?message=$msg");
+}
 ?>
 <!doctype html>
 <html lang="en">

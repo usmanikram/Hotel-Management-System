@@ -1,3 +1,16 @@
+<?php
+session_start();
+$adminname="";
+if(isset($_SESSION['name']))
+{
+    $adminname=$_SESSION['name'];
+}
+else
+{
+    $msg= "Login First";
+    header("Location: ../adminlogin.php?message=$msg");
+}
+?>
 <!doctype html>
 <html lang="en">
 <head>

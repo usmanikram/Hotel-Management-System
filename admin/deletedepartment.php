@@ -1,8 +1,19 @@
 <?php
-$id="";
-if(isset($_GET['id']))
+session_start();
+$adminname="";
+if(isset($_SESSION['name']))
 {
-    $id=$_GET['id'];
+    $adminname=$_SESSION['name'];
+    $id="";
+    if(isset($_GET['id']))
+    {
+        $id=$_GET['id'];
+    }
+}
+else
+{
+    $msg= "Login First";
+    header("Location: ../adminlogin.php?message=$msg");
 }
 ?>
 <!doctype html>

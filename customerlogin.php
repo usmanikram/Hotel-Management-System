@@ -37,6 +37,11 @@
     <div class="text-center mb-4">
         <h1 >Customer Login</h1>
         <h4>Enter Your Credentials</h4>
+        <p><b>For Testing Use Following Credentials</b></p>
+        <p>Email: <b>bilalahmad@gmail.com</b></p><p>Password: <b>bilal123</b></p>
+        <p>Or</p>
+        <p><b>Register To Create Your Own Credentials</b></p>
+
     </div>
     <?php
     if(isset($_GET["message"]))

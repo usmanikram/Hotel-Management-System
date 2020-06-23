@@ -121,8 +121,8 @@ VALUES
 
 
 
-    $sql = " Create Table employee
-    (
+    $sql = "Create Table employee
+(
 empID int AUTO_INCREMENT Primary Key,
 empName varchar(30),
 empDOB date,
@@ -135,7 +135,8 @@ empSalary varchar(10),
 empContact varchar(11),
 empEmail varchar(30),
 empPassword varchar(100),
-deptID int
+deptID int,
+FOREIGN KEY (deptID) REFERENCES department(deptID)
 )";
 
 
@@ -168,20 +169,20 @@ VALUES
 
 
     $sql = " 
-    Create Table customer 
-    (
-    custID int AUTO_INCREMENT Primary Key, 
-    custName varchar(30), 
-    custDOB date, 
-    custGender varchar(10), 
-    custCNIC varchar(13), 
-    custContact varchar(11), 
-    custAddress varchar(100), 
-    custEmail varchar(20), 
-    custPassword varchar(100), 
-    custCCNO varchar(20), 
-    custCCExpiry date 
-    ) ";
+   Create Table customer 
+(
+custID int AUTO_INCREMENT Primary Key, 
+custName varchar(30), 
+custDOB date, 
+custGender varchar(10), 
+custCNIC varchar(13), 
+custContact varchar(11), 
+custAddress varchar(100), 
+custEmail varchar(20), 
+custPassword varchar(100), 
+custCCNO varchar(20), 
+custCCExpiry date 
+)";
 
 
     if ($mysqli->query($sql) === TRUE) {
@@ -211,13 +212,14 @@ VALUES
 
 
     $sql = " 
-    Create Table roomtype (
-    rtypeID int AUTO_INCREMENT Primary Key,
-    rtypeName varchar(15),
-    rtypeDetails varchar(200),
-    rtypePrice varchar(10),
-    rtypeCapacity int
-    )";
+   Create Table roomtype 
+(
+rtypeID int AUTO_INCREMENT Primary Key,
+rtypeName varchar(15),
+rtypeDetails varchar(200),
+rtypePrice varchar(10),
+rtypeCapacity int
+)";
 
 
     if ($mysqli->query($sql) === TRUE) {
@@ -247,10 +249,11 @@ VALUES
 
 
     $sql = "
-    CREATE TABLE status (
-    id int AUTO_INCREMENT Primary Key,
-    name varchar(15)
-    )";
+CREATE TABLE status 
+(
+id int AUTO_INCREMENT Primary Key,
+name varchar(15)
+)";
 
 
     if ($mysqli->query($sql) === TRUE) {
@@ -273,13 +276,16 @@ VALUES
     }
 
     $sql = " 
-    Create Table room (
-    roomID int AUTO_INCREMENT Primary Key,
-    roomDetails varchar(200),
-    roomType int,
-    roomStatus varchar(15),
-    roomImage varchar(100)
-    )";
+   Create Table room 
+(
+roomID int AUTO_INCREMENT Primary Key,
+roomDetails varchar(200),
+roomType int,
+roomStatus int,
+roomImage varchar(100),
+FOREIGN KEY (roomStatus) REFERENCES status(id),
+FOREIGN KEY (roomType) REFERENCES roomtype(rtypeID)
+)";
 
 
     if ($mysqli->query($sql) === TRUE) {
@@ -312,13 +318,15 @@ VALUES
     }
 
 
-    $sql = " 
-    Create Table reservation (
-    resID int AUTO_INCREMENT Primary Key,
-    custID int,
-    roomID int,
-    resStartDate Date,
-    resEndDate Date
+    $sql = "Create Table reservation 
+(
+resID int AUTO_INCREMENT Primary Key,
+custID int,
+roomID int,
+resStartDate Date,
+resEndDate Date,
+FOREIGN KEY (custID) REFERENCES customer(custID),
+FOREIGN KEY (roomID) REFERENCES room(roomID)
 )";
 
 
@@ -328,25 +336,7 @@ VALUES
         echo "Error creating table: " . $mysqli->error;
     }
 
-    $sql = " 
-   INSERT INTO `reservation`
-(`resID`, `custID`, `roomID`, `resStartDate`, `resEndDate`)
-VALUES 
-(NULL,'2','3','2020-06-15','2020-06-18'),
-(NULL,'1','1','2020-07-13','2020-07-18'),
-(NULL,'3','2','2020-06-11','2020-06-20'),
-(NULL,'4','5','2020-06-12','2020-06-29'),
-(NULL,'5','4','2020-06-14','2020-06-15'),
-(NULL,'10','7','2020-06-20','2020-06-21'),
-(NULL,'7','6','2020-06-30','2020-07-15')
-";
 
-
-    if ($mysqli->query($sql) === TRUE) {
-        echo "Table created successfully";
-    } else {
-        echo "Error creating table: " . $mysqli->error;
-    }
 
 
     $sql = "Create Table bill 
@@ -357,7 +347,27 @@ custID int,
 resID int,
 amount varchar(10),
 paymentmethod varchar(15),
-remarks varchar(150)
+remarks varchar(10),
+FOREIGN KEY (custID) REFERENCES customer(custID),
+FOREIGN KEY (resID) REFERENCES reservation(resID)
+)
+";
+
+
+    if ($mysqli->query($sql) === TRUE) {
+        echo "Table created successfully";
+    } else {
+        echo "Error creating table: " . $mysqli->error;
+    }
+
+
+    $sql = "Create Table reservice 
+(
+resID int,
+serviceID int,
+Primary Key (resID,serviceID),
+FOREIGN KEY (resID) REFERENCES reservation(resID),
+FOREIGN KEY (serviceID) REFERENCES service(serviceID)
 )";
 
 
@@ -367,6 +377,41 @@ remarks varchar(150)
         echo "Error creating table: " . $mysqli->error;
     }
 
+
+
+    $sql = "Create Table complaint 
+(
+compID int AUTO_INCREMENT Primary Key,
+compDate Date,
+compDetail varchar(100),
+custID int,
+remarks varchar(500),
+FOREIGN KEY (custID) REFERENCES customer(custID)
+)";
+
+
+    if ($mysqli->query($sql) === TRUE) {
+        echo "Table created successfully";
+    } else {
+        echo "Error creating table: " . $mysqli->error;
+    }
+
+    $sql = "Create Table feedback 
+(
+fbID int AUTO_INCREMENT Primary Key,
+fbDate Date,
+fbDetail varchar(100),
+rating varchar(10),
+custID int,
+FOREIGN KEY (custID) REFERENCES customer(custID)
+)";
+
+
+    if ($mysqli->query($sql) === TRUE) {
+        echo "Table created successfully";
+    } else {
+        echo "Error creating table: " . $mysqli->error;
+    }
 
 
     $msg= "Database Connection Successful.Tables Created.";

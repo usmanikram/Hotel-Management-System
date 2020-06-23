@@ -1,8 +1,19 @@
 <?php
-require_once ("../config/config.php");
-$queryemployee="SELECT * FROM employee e join department d where e.deptID=d.deptID";
-$resultemployee = $mysqli->query($queryemployee);
-$countemployee = $resultemployee->num_rows;
+session_start();
+$adminname="";
+if(isset($_SESSION['name']))
+{
+    $adminname=$_SESSION['name'];
+    require_once ("../config/config.php");
+    $queryemployee="SELECT * FROM employee e join department d where e.deptID=d.deptID";
+    $resultemployee = $mysqli->query($queryemployee);
+    $countemployee = $resultemployee->num_rows;
+}
+else
+{
+    $msg= "Login First";
+    header("Location: ../adminlogin.php?message=$msg");
+}
 ?>
 <!doctype html>
 <html lang="en">

@@ -1,28 +1,36 @@
 <?php
-require_once "../config/config.php";
-require_once "../classes/bill.php";
-$id=$_GET['id'];
-$querybill="SELECT * FROM bill b join reservation r join customer c join room ro join roomtype rt on 
+session_start();
+$adminname="";
+if(isset($_SESSION['name']))
+{
+    $adminname=$_SESSION['name'];
+    require_once "../config/config.php";
+    require_once "../classes/bill.php";
+    $id=$_GET['id'];
+    $querybill="SELECT * FROM bill b join reservation r join customer c join room ro join roomtype rt on 
 b.custID='$id' and b.custID=c.custID and b.resID=r.resID and r.roomID=ro.roomID and ro.roomType=rt.rtypeID";
-$resultbill = $mysqli->query($querybill);
-$fetchbill = $resultbill->fetch_assoc();
-function taxcalculator($amount)
-{
-    $total = $amount * 15 /100;
-    return $total;
+    $resultbill = $mysqli->query($querybill);
+    $fetchbill = $resultbill->fetch_assoc();
+    function taxcalculator($amount)
+    {
+        $total = $amount * 15 /100;
+        return $total;
+    }
+
+    function total($amount,$tax)
+    {
+        $total=$amount+$tax;
+        return $total;
+    }
+    $start=date_create($fetchbill['resStartDate']);
+    $end=date_create($fetchbill['resEndDate']);
+    $diff=date_diff($start,$end);
 }
-
-function total($amount,$tax)
+else
 {
-    $total=$amount+$tax;
-    return $total;
+    $msg= "Login First";
+    header("Location: ../adminlogin.php?message=$msg");
 }
-$start=date_create($fetchbill['resStartDate']);
-$end=date_create($fetchbill['resEndDate']);
-$diff=date_diff($start,$end);
-
-
-
 ?>
 <html>
 <head>

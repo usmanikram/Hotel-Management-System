@@ -136,6 +136,7 @@ else
 
                 <div class="btn-toolbar mb-2 mb-md-0">
                     <div class="btn-group mr-2">
+                        <button onclick="location.href='addcomplaint.php';" type="button" class="btn btn-sm btn-outline-secondary">Add New Complaint</button>
                         <button id="print" type="button" onclick="printContent('table');" class="btn btn-sm btn-outline-secondary">Print</button>
                     </div>
                 </div>

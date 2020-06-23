@@ -1,6 +1,17 @@
 <?php
-require_once "../model/admin/service/view.php";
-$service= $_SESSION['serviceview'];
+session_start();
+$adminname="";
+if(isset($_SESSION['name']))
+{
+    $adminname=$_SESSION['name'];
+    require_once "../model/admin/service/view.php";
+    $service= $_SESSION['serviceview'];
+}
+else
+{
+    $msg= "Login First";
+    header("Location: ../adminlogin.php?message=$msg");
+}
 ?>
 <!doctype html>
 <html lang="en">

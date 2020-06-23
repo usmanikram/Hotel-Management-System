@@ -1,10 +1,20 @@
 <?php
-require_once ("../config/config.php");
-
-$querybill="SELECT * FROM bill b join reservation r join customer c join room ro on 
+session_start();
+$adminname="";
+if(isset($_SESSION['name']))
+{
+    $adminname=$_SESSION['name'];
+    require_once ("../config/config.php");
+    $querybill="SELECT * FROM bill b join reservation r join customer c join room ro on 
 b.custID=c.custID and b.resID=r.resID and r.roomID=ro.roomID";
-$resultbill = $mysqli->query($querybill);
-$countbill = $resultbill->num_rows;
+    $resultbill = $mysqli->query($querybill);
+    $countbill = $resultbill->num_rows;
+}
+else
+{
+    $msg= "Login First";
+    header("Location: ../adminlogin.php?message=$msg");
+}
 ?>
 <!doctype html>
 <html lang="en">

@@ -1,13 +1,24 @@
 <?php
-require_once ("../config/config.php");
-require_once "../model/admin/room/view.php";
-$room= $_SESSION['roomview'];
-$querytype="SELECT * FROM roomtype";
-$resulttype = $mysqli->query($querytype);
-$counttype = $resulttype->num_rows;
-$querystatus="SELECT * FROM status";
-$resultstatus = $mysqli->query($querystatus);
-$countstatus= $resultstatus->num_rows;
+session_start();
+$adminname="";
+if(isset($_SESSION['name']))
+{
+    $adminname=$_SESSION['name'];
+    require_once ("../config/config.php");
+    require_once "../model/admin/room/view.php";
+    $room= $_SESSION['roomview'];
+    $querytype="SELECT * FROM roomtype";
+    $resulttype = $mysqli->query($querytype);
+    $counttype = $resulttype->num_rows;
+    $querystatus="SELECT * FROM status";
+    $resultstatus = $mysqli->query($querystatus);
+    $countstatus= $resultstatus->num_rows;
+}
+else
+{
+    $msg= "Login First";
+    header("Location: ../adminlogin.php?message=$msg");
+}
 ?>
 <!doctype html>
 <html lang="en">

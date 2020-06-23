@@ -1,8 +1,19 @@
 <?php
-require_once ("../config/config.php");
-$queryroom="SELECT * FROM room r join roomtype rt join status s where r.roomType=rt.rtypeID and r.roomStatus=s.id";
-$resultroom = $mysqli->query($queryroom);
-$countroom = $resultroom->num_rows;
+session_start();
+$adminname="";
+if(isset($_SESSION['name']))
+{
+    $adminname=$_SESSION['name'];
+    require_once ("../config/config.php");
+    $queryroom="SELECT * FROM room r join roomtype rt join status s where r.roomType=rt.rtypeID and r.roomStatus=s.id";
+    $resultroom = $mysqli->query($queryroom);
+    $countroom = $resultroom->num_rows;
+}
+else
+{
+    $msg= "Login First";
+    header("Location: ../adminlogin.php?message=$msg");
+}
 ?>
 <!doctype html>
 <html lang="en">
